@@ -1,6 +1,12 @@
 import { PrismaClient } from '@prisma/client'
 import Category from './components/Category'
 import './globals.css'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: 'Home',
+}
+
 
 interface category {
     id: number
