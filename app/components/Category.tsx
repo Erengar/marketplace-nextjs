@@ -1,14 +1,9 @@
 'use client'
 import { Suspense } from 'react'
-import Loading from './Loading'
+import Loading from '../Loading'
 
-interface category {
-    id: number
-    name: string
-    description: string | null
-}
 
-export default function Category(props: {category: category}): JSX.Element {
+export default function Category(props: {category: any}): JSX.Element {
     return (
         <li className="dark:bg-slate-950 dark:hover:bg-slate-900 dark:hover:scale-110
         dark:active:outline-1 dark:active:outline-slate-700 dark:active:scale-110
