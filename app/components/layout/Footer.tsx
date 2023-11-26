@@ -1,4 +1,4 @@
-export default function Footer(): JSX.Element {
+export default function Footer(){
     return (
     <footer className="absolute w-screen h-32 bottom-0 flex flex-row justify-center content-center
     dark:bg-gray-800 dark:text-white

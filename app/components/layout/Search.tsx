@@ -1,4 +1,4 @@
-export default function Search(): JSX.Element {
+export default function Search() {
     return (
         <div>
             <h1>Search</h1>

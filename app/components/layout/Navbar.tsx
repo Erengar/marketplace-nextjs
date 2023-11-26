@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import Search from './Search'
 
-const navbarItems = ['Home', 'About', 'Contact']
+const navbarItems = ['Home']
 
-export default function Navbar(): JSX.Element{
+export default function Navbar() {
     return (
-        <nav className="h-14 w-screen mb-4 md:mb-10 pt-3
+        <nav className="h-14 w-screen pt-3
         dark:bg-slate-700
         bg-slate-100">
             <ul className="flex flex-row justify-center gap-10">
