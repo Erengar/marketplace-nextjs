@@ -10,12 +10,10 @@ export default function RootLayout({children,} : {children: React.ReactNode}) {
         <body>
             <main>
                 <Navbar />
-                <section>
-                    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-                        <ThemeSwitcher />
-                        {children}
-                    </ThemeProvider>
-                </section>
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                    <ThemeSwitcher />
+                    {children}
+                </ThemeProvider>
                 <Footer />
             </main>
         </body>

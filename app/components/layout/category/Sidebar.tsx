@@ -5,7 +5,9 @@ export default function Sidebar(props: { category: CategoryType, selectedCategor
     if ( props.category.name.toLowerCase() == props.selectedCategory ) {
         return (
         <Link href={`${props.category.name.toLowerCase()}`}>
-            <li className="bg-slate-600 h-12 flex justify-center">
+            <li className="h-12 flex justify-center
+            dark: bg-slate-500
+            bg-slate-600 ">
                 {props.category.name}
             </li>
         </Link>
@@ -13,7 +15,9 @@ export default function Sidebar(props: { category: CategoryType, selectedCategor
     } else {
         return(
         <Link href={`${props.category.name.toLowerCase()}`}>
-            <li className="bg-slate-200 hover:bg-slate-400 h-12 flex justify-center">
+            <li className="h-12 flex justify-center
+            dark:bg-slate-700 dark:hover:bg-slate-600
+            bg-slate-200 hover:bg-slate-400">
                 {props.category.name}
             </li>
         </Link>
