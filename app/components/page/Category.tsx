@@ -2,9 +2,14 @@
 import { Suspense } from 'react'
 import Loading from '../errors/Loading'
 import Link from 'next/link'
+import { CategoryType } from '@/app/schemas'
 
-
-export default function Category(props: {category: any}) {
+/**
+ * This component is used to display a category in a title.
+ * @param props category: CategoryType
+ * @returns JSX Element
+ */
+export default function Category(props: {category: CategoryType}) {
     return (
         <Link href={`${props.category.name.toLowerCase()}`}>
             <li className="dark:bg-slate-950 dark:hover:bg-slate-900 dark:hover:scale-110

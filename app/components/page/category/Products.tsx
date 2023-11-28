@@ -3,25 +3,27 @@ import { useState, useEffect } from "react";
 import { ProductType } from "../../../schemas";
 import Product from "./Product";
 
-export default function Products(props: { category: string }) {
+export default function Products({params} : {params : { category : string }} | any) {
     const [products, setProducts] = useState<ProductType[]>([])
     const [loading, setLoading] = useState(true)
 
+    console.log('RENDERING UP')
     async function getProducts(category: string) {
         await fetch(`/api/products/${category}`)
         .then(res => res.json())
         .then(data => {
-            setProducts((prev) => prev = data.data)
+            setProducts(data.data)
             })
         .catch(err => console.log(err))
         .finally( () => {
-            setLoading((prev) => prev = false);
+            setLoading(false);
         })
     }
 
     useEffect(() => {
-        getProducts(props.category)
-    }, [props.category])
+        console.log('RENDERING DOWN')
+        getProducts(params.category)
+    },[params.category])
 
     return (
         <ul>

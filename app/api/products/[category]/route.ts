@@ -1,14 +1,15 @@
-import { db } from "@vercel/postgres";
+import { db, sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 import { capitalize } from "lodash";
 
 export async function GET(
     request: Request,
     { params }: { params: { category: string } }) {
-    const client = await db.connect();
+
+    console.log('API call')
     let products
     try {
-        products = await client.query(`SELECT * FROM products where category = '${capitalize(params.category)}'`);
+        products = await sql`SELECT * FROM products where category = ${capitalize(params.category)}`;
     } catch (error) {
         return NextResponse.json({error})
     }

@@ -16,7 +16,7 @@ export default function Page({params} : {params : { category : string }}){
     return (
         <section>
             {capitalize(params.category)}
-            <Products category={params.category} />
+            <Products />
         </section>
     );
 }

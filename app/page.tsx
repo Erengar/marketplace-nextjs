@@ -2,7 +2,7 @@ import Category from './components/page/Category'
 import './globals.css'
 import { Metadata } from 'next'
 import { CategoryType } from './schemas'
-import getCategories from "./helperfunctions/getCategories"
+import {sql} from "@vercel/postgres"
 
 export const metadata: Metadata = {
     title: 'Home',
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
 
-    const rows: CategoryType[] = await getCategories()
+    const {rows}: {rows: CategoryType[]} = await sql`SELECT * FROM categories`
     return (
     <ul className="flex flex-row flex-wrap gap-6 m-auto mx-2 xl:mx-80 mt-12">
         {rows.map((category) => (
