@@ -6,7 +6,6 @@ export async function GET(
     request: Request,
     { params }: { params: { category: string } }) {
 
-    console.log('API call')
     let products
     try {
         products = await sql`SELECT * FROM products where category = ${capitalize(params.category)}`;

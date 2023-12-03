@@ -8,14 +8,12 @@ export default function RootLayout({children,} : {children: React.ReactNode}) {
     return (
     <html lang='en'>
         <body>
-            <main>
-                <Navbar />
-                <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-                    <ThemeSwitcher />
-                    {children}
-                </ThemeProvider>
-                <Footer />
-            </main>
+            <Navbar />
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                <ThemeSwitcher />
+                {children}
+            </ThemeProvider>
+            <Footer />
         </body>
     </html>
     )

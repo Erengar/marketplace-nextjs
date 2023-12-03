@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { ProductType } from "../../schemas";
 import Product from "./Product";
+import LoadingProducts from "./LoadingProducts";
 
 export default function Products(props: { category: string }) {
     const [products, setProducts] = useState<ProductType[]>([])
@@ -25,9 +26,14 @@ export default function Products(props: { category: string }) {
         getProducts(props.category);
     },[props.category]);
 
+    let loadingProducts = []
+    for (let i = 0; i < 15; i++) {
+        loadingProducts.push(<LoadingProducts key={i}/>)
+    }
+
     return (
-        <ul>
-            {loading && <p>Loading...</p>}
+        <ul className="flex gap-3 flex-wrap">
+            {loading && loadingProducts}
             {products.map((product: ProductType) => (
             <Product key={product.id} product={product} loading={loading}/>
             ))}

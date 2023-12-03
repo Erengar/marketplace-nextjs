@@ -14,8 +14,12 @@ export async function generateMetadata({params, searchParams}:
 
 export default function Page({params} : {params : { category : string }}){
     return (
-        <section>
-            {capitalize(params.category)}
+        <section className="w-full">
+            <h1 className="flex justify-center text-xl antialiased font-semibold
+            text-blue-900
+            md:text-4xl">
+                {capitalize(params.category)}
+            </h1>
             <Products category={params.category} />
         </section>
     );
