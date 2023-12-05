@@ -35,7 +35,7 @@ export default function Products(props: { category: string }) {
         <ul className="flex gap-3 flex-wrap">
             {loading && loadingProducts}
             {products.map((product: ProductType) => (
-            <Product key={product.id} product={product} loading={loading}/>
+            <Product key={product.id} product={product}/>
             ))}
         </ul>
     )

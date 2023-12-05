@@ -14,7 +14,7 @@ export async function generateMetadata({params, searchParams}:
 
 export default function Page({params} : {params : { category : string }}){
     return (
-        <section className="w-full">
+        <section className="w-full px-2">
             <h1 className="flex justify-center text-xl antialiased font-semibold
             text-blue-900
             md:text-4xl">

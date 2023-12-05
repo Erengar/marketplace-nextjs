@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Search from './Search'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const navbarItems = ['Home']
 
@@ -24,6 +25,11 @@ export default function Navbar() {
                 ))}
                 <li>
                     <Search />
+                </li>
+                <li>
+                    <Link href="/shoppingcart">
+                        <ShoppingCartIcon/>
+                    </Link>
                 </li>
             </ul>
         </nav>
