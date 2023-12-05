@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.sidebar-slide-in {
+  animation: slide-in 0.5s forwards;
+}
+
+.sidebar-slide-out {
+  animation: slide-out 0.5s forwards;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-80%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(80%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

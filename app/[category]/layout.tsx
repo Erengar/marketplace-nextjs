@@ -8,8 +8,8 @@ export default async function Layout({params, children} : {params : { category :
     const {rows}: {rows: CategoryType[]} = await sql`SELECT * FROM categories`
     return (
         <main className="flex gap-2">
-            <div className='absolute md:static'>
-                <section id="sidebar" className="hidden md:flex flex-col
+            <div id="sidebar" className='absolute -left-32 flex flex-row md:static'>
+                <section className="flex flex-col
                 w-32 bg-slate-300 max-w-xl divide-y divide-black divide
                 border-solid border-r-2 border-slate-700">
                     {rows.map((category) => 

@@ -8,14 +8,22 @@ export default function ExpandableSidebar(){
 
     function unrollSidebar(){
         const sidebar = document.querySelector('#sidebar') as HTMLElement
-        sidebar.classList.toggle('hidden')
+        sidebar.classList.toggle('-left-32')
+        if (isExpanded) {
+            sidebar.classList.remove('sidebar-slide-in')
+            sidebar.classList.add('sidebar-slide-out')
+        } else {
+            sidebar.classList.remove('sidebar-slide-out')
+            sidebar.classList.add('sidebar-slide-in')
+        }
         setIsExpanded(!isExpanded)
     }
 
     return (
         <button
-        className="md:hidden absolute
-        animate-bounce h-8 w-8 border-solid border-2 border-slate-700 rounded-full"
+        className="md:hidden self-center
+        animate-bounce h-8 w-8 border-solid border-2 border-slate-700 rounded-full
+        bg-slate-200 hover:bg-slate-400"
         onClick={unrollSidebar}>
             <ArrowForwardIosIcon className={`text-slate-700 ${isExpanded ? 'rotate-180': ''}`} />
         </button>
