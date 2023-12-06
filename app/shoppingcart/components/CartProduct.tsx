@@ -36,7 +36,7 @@ export default function CartProduct(props: { product: CartItemType }) {
     return (
         <li className="border-4 border-black border-solid rounded w-4/5 h-30 flex flex-row items-center place-content-between p-2">
             <div className="flex flex-row gap-6 w-6/12">
-                <Image src={props.product.product.image ? props.product.product.image : defaultProduct} alt="product image" width="100" height="100"/>
+                <Image src={defaultProduct} alt="product image" width="100" height="100"/>
                 <h2 className="text-lg antialiased font-semibold line-clamp-1 self-center">{props.product.product.name}</h2>
             </div>
             <h3 className="text-base antialiased font-bold text-red-600">{props.product.product.price}€</h3>
