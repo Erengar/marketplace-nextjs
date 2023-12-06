@@ -31,6 +31,7 @@ export default function Products(props: { category: string }) {
         loadingProducts.push(<LoadingProducts key={i}/>)
     }
 
+
     return (
         <ul className="flex gap-3 flex-wrap">
             {loading && loadingProducts}

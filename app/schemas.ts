@@ -9,3 +9,8 @@ export interface ProductType {
     amount: number;
     category: CategoryType;
 }
+
+export interface CartItemType {
+    product: ProductType;
+    orderedAmount: number;
+}
