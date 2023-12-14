@@ -3,13 +3,14 @@
 import Link from 'next/link'
 import Search from './Search'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import {ProductType} from '../../schemas'
+import {ProductType, CartItemType} from '../../schemas'
 import { useState,useEffect } from 'react';
 
 const navbarItems = ['Home']
 
 export default function Navbar() {
-    const [items, setItems] = useState<ProductType[]>([]);
+    const [items, setItems] = useState<CartItemType[]>([]);
+    const [total, setTotal] = useState<number>(0);
 
     useEffect(() => {
         const handleStorageChange = () => {
@@ -24,6 +25,14 @@ export default function Navbar() {
             window.removeEventListener('storage', handleStorageChange);
         };
     }, []);
+
+    useEffect(()=> {
+        let tempTotal = 0;
+        for (let i = 0; i < items.length; i++) {
+            tempTotal += items[i].orderedAmount;
+        }
+        setTotal(tempTotal);
+    })
     return (
         <nav className="h-14 w-screen pt-3
         dark:bg-slate-700
@@ -47,11 +56,11 @@ export default function Navbar() {
                 </li>
                 <li>
                     <Link href="/shoppingcart" className='relative'>
-                        {items.length > 0 ? 
+                        {total > 0 ? 
                         <span className="text-xxs text-semibold antialiased text-white inline-flex justify-center items-center
                         h-3 w-3 bg-blue-900 rounded-full
                         absolute left-3">
-                        {items.length}</span>:
+                        {total}</span>:
                          null}
                         <ShoppingCartIcon/>
                     </Link>
