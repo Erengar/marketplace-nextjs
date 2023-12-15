@@ -7,7 +7,7 @@ export default function Sidebar(props: { category: CategoryType, selectedCategor
         <Link href={`${props.category.name.toLowerCase()}`}>
             <li className="h-12 flex justify-center
             dark: bg-slate-500
-            bg-slate-600 ">
+            bg-white ">
                 {props.category.name}
             </li>
         </Link>

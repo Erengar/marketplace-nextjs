@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Search from './Search'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import {ProductType, CartItemType} from '../../schemas'
+import {CartItemType} from '../../schemas'
 import { useState,useEffect } from 'react';
 
 const navbarItems = ['Home']
@@ -32,7 +32,7 @@ export default function Navbar() {
             tempTotal += items[i].orderedAmount;
         }
         setTotal(tempTotal);
-    })
+    }, [items])
     return (
         <nav className="h-14 w-screen pt-3
         dark:bg-slate-700
