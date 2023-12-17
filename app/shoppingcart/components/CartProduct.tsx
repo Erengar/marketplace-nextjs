@@ -50,8 +50,8 @@ export default function CartProduct(props: { product: CartItemType, setRemovingI
             <div className="flex gap-2 md:gap-6">
                 <h3 className="text-xs md:text-base antialiased font-bold text-sky-600 col-span1 self-center">{props.product.orderedAmount}x</h3>
                 <div className="flex flex-col bg-slate-200 w-fit rounded border-solid border-black border-2 divide-y-2 divide-black">
-                    <button className="antialiased font-semibold" onClick={addItem}><AddIcon /></button>
-                    <button className="antialiased font-semibold" onClick={removeItem}><RemoveIcon /></button>
+                    <button className="antialiased font-semibold hover:bg-slate-400" onClick={addItem}><AddIcon /></button>
+                    <button className="antialiased font-semibold hover:bg-slate-400" onClick={removeItem}><RemoveIcon /></button>
                 </div>
             </div>
         </li>

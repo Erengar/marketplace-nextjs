@@ -27,20 +27,22 @@ export default function Product(props: { product: ProductType}) {
     }
 
     return (
-        <li className="border-4 border-black border-solid rounded w-80 h-70">
+        <li className="border-4 border-black border-solid rounded w-80 h-70 grow md:grow-0">
             <Image src={defaultProduct} alt="Product image"/>
             <h2 className="text-lg antialiased font-semibold line-clamp-1">{props.product.name}</h2>
-            <h3 className="text-base antialiased font-bold text-sky-950">{props.product.price}€</h3>
-            <div>
-                <button onClick={addItem} className="transition-transform duration-150 ease-in delay-200 hover:scale-125">
-                    <AddShoppingCartIcon className="text-sky-600"/>
-                </button>
-                <h4 className="text-xs antialised font-normal text-sky-600">
-                {props.product.amount > 0 ?
-                "In stock":
-                "Out of stock"
+            <div className='flex content-center justify-between px-0.5'>
+                <h3 className="text-base antialiased font-bold text-sky-950">{props.product.price}€</h3>
+                <div className="flex flex-col">
+                    <button onClick={addItem} className="transition-transform duration-150 ease-in delay-200 hover:scale-125">
+                        <AddShoppingCartIcon className="text-sky-600"/>
+                    </button>
+                    <h4 className="text-xs antialised font-normal text-sky-600">
+                    {props.product.amount > 0 ?
+                    "In stock":
+                    "Out of stock"
                 }
-                </h4>
+                    </h4>
+                </div>
             </div>
         </li>
     )
