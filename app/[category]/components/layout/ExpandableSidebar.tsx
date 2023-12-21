@@ -1,7 +1,8 @@
 "use client";
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 export default function ExpandableSidebar(){
     const [isExpanded, setIsExpanded] = useState(false)
@@ -19,13 +20,17 @@ export default function ExpandableSidebar(){
         setIsExpanded(!isExpanded)
     }
 
+
     return (
-        <button
+        <motion.button
+        initial={{opacity: 1}}
+        animate={isExpanded ? {opacity: 1} : {opacity: [0, 1, 0]}}
+        transition={isExpanded ? {duration: 2} : {repeat: Infinity, duration: 2}}
         className="md:hidden self-center
-        animate-bounce h-8 w-8 border-solid border-2 border-slate-700 rounded-full
+        h-8 w-8 border-solid border-2 border-slate-700 rounded-full
         bg-slate-200 hover:bg-slate-400"
         onClick={unrollSidebar}>
             <ArrowForwardIosIcon className={`text-slate-700 ${isExpanded ? 'rotate-180': ''}`} />
-        </button>
+        </motion.button>
     )
 }

@@ -5,6 +5,7 @@ import Search from './Search'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {CartItemType} from '../../schemas'
 import { useState,useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const navbarItems = ['Home']
 
@@ -57,11 +58,17 @@ export default function Navbar() {
                 <li>
                     <Link href="/shoppingcart" className='relative'>
                         {total > 0 ? 
-                        <span className="text-xxs text-semibold antialiased text-white inline-flex justify-center items-center
+                        <motion.div
+                        className="text-xxs text-semibold antialiased text-white inline-flex justify-center items-center
                         h-3 w-3 bg-blue-900 rounded-full
-                        absolute left-3">
-                        {total}</span>:
-                         null}
+                        absolute left-3"
+                        key={total}
+                        initial={{scale: 0}}
+                        animate={{scale: [1, 1.5, 1]}}
+                        transition={{duration: 0.5}}
+                        >
+                        {total}</motion.div>:
+                        null}
                         <ShoppingCartIcon/>
                     </Link>
                 </li>
