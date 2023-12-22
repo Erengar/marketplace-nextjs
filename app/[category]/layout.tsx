@@ -10,7 +10,7 @@ export default async function Layout({params, children} : {params : { category :
         <main className="flex gap-2">
             <div id="sidebar" className='absolute -left-32 flex flex-row md:static'>
                 <section className="flex flex-col
-                w-32 bg-slate-300 max-w-xl divide-y divide-black divide">
+                w-32 bg-slate-300 max-w-xl divide-y divide-black divide font-semibold">
                     {rows.map((category) => 
                     <Sidebar key={`${category.name}`} category={category} selectedCategory={params.category} />)}
                 </section>

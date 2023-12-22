@@ -38,7 +38,7 @@ export default function Navbar() {
         <nav className="h-14 w-screen pt-3
         dark:bg-slate-700
         bg-slate-100">
-            <ul className="flex flex-row justify-center gap-10">
+            <ul className="flex flex-row justify-center gap-10 font-bold text-sky-900">
                 {navbarItems.map((item: string): JSX.Element => (
                     item === 'Home' ? 
                     <li key={item}>
@@ -60,7 +60,7 @@ export default function Navbar() {
                         {total > 0 ? 
                         <motion.div
                         className="text-xxs text-semibold antialiased text-white inline-flex justify-center items-center
-                        h-3 w-3 bg-blue-900 rounded-full
+                        h-4 w-4 bg-blue-900 rounded-full
                         absolute left-3"
                         key={total}
                         initial={{scale: 0}}

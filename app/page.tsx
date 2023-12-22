@@ -1,5 +1,4 @@
 import Category from './components/page/Category'
-import './globals.css'
 import { Metadata } from 'next'
 import { CategoryType } from './schemas'
 import {sql} from "@vercel/postgres"
