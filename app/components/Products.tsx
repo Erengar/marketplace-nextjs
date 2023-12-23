@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
-import { ProductType } from "../../schemas";
+import { ProductType } from "../schemas";
 import Product from "./Product";
 import LoadingProducts from "./LoadingProducts";
 

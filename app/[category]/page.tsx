@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { capitalize } from 'lodash';
-import Products from './components/Products';
+import Products from '../components/Products';
 import { Suspense } from 'react';
 
 export async function generateMetadata({params, searchParams}:

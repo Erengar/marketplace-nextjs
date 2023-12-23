@@ -1,5 +1,5 @@
 "use client";
-import { ProductType, CartItemType } from "../../schemas";
+import { ProductType, CartItemType } from "../schemas";
 import Image from "next/image";
 import defaultProduct from "../../../public/defaultProduct.jpg";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -27,7 +27,7 @@ export default function Product(props: { product: ProductType}) {
     }
 
     return (
-        <li className="border-4 border-black border-solid rounded w-80 h-70 grow md:grow-0">
+        <li className="border-2 border-black border-solid rounded w-80 h-70 grow md:grow-0">
             <Image src={defaultProduct} alt="Product image"/>
             <h2 className="text-lg antialiased font-semibold line-clamp-1">{props.product.name}</h2>
             <div className='flex content-center justify-between px-0.5'>

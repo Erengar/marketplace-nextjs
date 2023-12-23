@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import CartProduct from "./CartProduct";
-import {ProductType, CartItemType} from "../../schemas"
+import {ProductType, CartItemType} from "../schemas"
 import { Remove } from "@mui/icons-material";
 import RemoveItemModal from "./RemoveItemModal";
 

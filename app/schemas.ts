@@ -7,6 +7,8 @@ export interface ProductType {
     name: string;
     price: number;
     amount: number;
+    image: string;
+    description: string;
     category: CategoryType;
 }
 

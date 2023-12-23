@@ -12,6 +12,7 @@ const navbarItems = ['Home']
 export default function Navbar() {
     const [items, setItems] = useState<CartItemType[]>([]);
     const [total, setTotal] = useState<number>(0);
+    const [addingItem, setAddingItem] = useState<boolean>(true);
 
     useEffect(() => {
         const handleStorageChange = () => {
@@ -32,12 +33,18 @@ export default function Navbar() {
         for (let i = 0; i < items.length; i++) {
             tempTotal += items[i].orderedAmount;
         }
+        // If the total amount of items in the cart increases, the animation is triggered
+        if (tempTotal > total) {
+            setAddingItem(true);
+        } else {
+            setAddingItem(false);
+        }
         setTotal(tempTotal);
     }, [items])
     return (
         <nav className="h-14 w-screen pt-3
         dark:bg-slate-700
-        bg-slate-100">
+        bg-slate-300">
             <ul className="flex flex-row justify-center gap-10 font-bold text-sky-900">
                 {navbarItems.map((item: string): JSX.Element => (
                     item === 'Home' ? 
@@ -60,11 +67,10 @@ export default function Navbar() {
                         {total > 0 ? 
                         <motion.div
                         className="text-xxs text-semibold antialiased text-white inline-flex justify-center items-center
-                        h-4 w-4 bg-blue-900 rounded-full
+                        h-4 w-4 bg-blue-500 rounded-full
                         absolute left-3"
                         key={total}
-                        initial={{scale: 0}}
-                        animate={{scale: [1, 1.5, 1]}}
+                        animate={addingItem?{scale: [1, 1.5, 1]}:{scale: [1]}}
                         transition={{duration: 0.5}}
                         >
                         {total}</motion.div>:
