@@ -1,7 +1,7 @@
 "use client";
 import { ProductType, CartItemType } from "../schemas";
 import Image from "next/image";
-import defaultProduct from "../../../public/defaultProduct.jpg";
+import defaultProduct from "../../public/defaultProduct.jpg";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 export default function Product(props: { product: ProductType}) {

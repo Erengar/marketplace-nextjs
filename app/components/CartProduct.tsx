@@ -1,7 +1,7 @@
 "use client";
 import { ProductType, CartItemType } from "../schemas";
 import Image from "next/image";
-import defaultProduct from "../../../public/defaultProduct.jpg";
+import defaultProduct from "../../public/defaultProduct.jpg";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 

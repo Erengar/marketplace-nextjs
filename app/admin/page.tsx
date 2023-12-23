@@ -1,12 +1,14 @@
-import {sql} from '@vercel/postgres';
+import AddCategory from "../components/AddCategory"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: 'Admin',
+}
 
 export default async function Admin() {
-
     return (
-        <div>
-            <h1>Products</h1>
-            <form action="">
-            </form>
-        </div>
+        <main>
+            <AddCategory />
+        </main>
     )
 }

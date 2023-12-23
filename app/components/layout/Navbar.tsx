@@ -60,7 +60,7 @@ export default function Navbar() {
                     </li>
                 ))}
                 <li>
-                    <Search />
+                    <Link href="/admin">Admin</Link>
                 </li>
                 <li>
                     <Link href="/shoppingcart" className='relative'>
