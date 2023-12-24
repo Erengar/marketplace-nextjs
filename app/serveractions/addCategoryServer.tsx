@@ -1,7 +1,7 @@
 "use server";
 import { z } from 'zod';
 import {sql} from "@vercel/postgres"
-import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache';
 
 const category = z.object({
     name: z.string({invalid_type_error: "Invalid name"}).min(3).max(50),
@@ -9,12 +9,10 @@ const category = z.object({
 
 
 export async function addCategoryServer(formData: FormData) {
-    console.log(formData)
     const data = category.safeParse({
         name: formData.get('name'),
     });
     if (!data.success) {
-        console.log('NO')
         return {
             message: data.error.flatten().fieldErrors,
         };
@@ -22,5 +20,6 @@ export async function addCategoryServer(formData: FormData) {
         const {name} = data.data;
         await sql`INSERT INTO categories (name) VALUES (${name})`;
     }
-    redirect("/")
+    revalidatePath("/admin")
+    revalidatePath("/")
 }

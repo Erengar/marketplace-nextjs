@@ -1,4 +1,4 @@
-import AddCategory from "../components/AddCategory"
+import AdminSection from "../components/AdminSection"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default async function Admin() {
     return (
         <main>
-            <AddCategory />
+            <AdminSection />
         </main>
     )
 }
