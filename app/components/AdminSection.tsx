@@ -9,13 +9,13 @@ export default function AdminSection() {
     const router = useRouter();
     const [selectedTable, setSelectedTable] = useState("Category");
     useEffect(() => {
-        router.push(`/admin?table=${selectedTable.toLocaleLowerCase}`)
+        router.push(`/admin?table=${selectedTable.toLocaleLowerCase()}`)
     }, [selectedTable])
     return (
         <>
             <SelectTable selectedTable={selectedTable} setSelectedTable={setSelectedTable}/>
             {selectedTable === "Category" && <AddCategory/>}
-            {selectedTable === "Product" && <AddProduct/>}
+            {selectedTable === "Products" && <AddProduct/>}
         </>
     )
 }
