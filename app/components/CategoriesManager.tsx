@@ -4,7 +4,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { useState } from "react";
 import LoadingModal from "./LoadingModal";
 
-export default function CategoriesManager({category, needRerender, setNeedRerender}: {category: CategoryType, needRerender: boolean, setNeedRerender: (value: boolean) => void}) {
+export default function CategoriesManager({category, setNeedRerender}: {category: CategoryType, setNeedRerender: React.Dispatch<React.SetStateAction<boolean>>}) {
     const [isDeleting, setIsDeleting] = useState(false);
 
     async function deleteCategory() {
@@ -13,11 +13,11 @@ export default function CategoriesManager({category, needRerender, setNeedRerend
             method: 'DELETE',
         })
         setIsDeleting(false);
-        setNeedRerender(!needRerender);
+        setNeedRerender((prev) => !prev);
     }
     return (
         <li className="border-black flex justify-between">
-            {isDeleting && <LoadingModal text="Deleting"/>}
+            {isDeleting && <LoadingModal text="Deleting Category"/>}
             <span>{category.name}</span>
             <button onClick={deleteCategory} className='text-red-600 hover:text-red-800'><CancelIcon/></button>
         </li>

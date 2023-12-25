@@ -11,7 +11,7 @@ export default function Products(props: { category: string }) {
 
     useEffect(() => {
         async function getProducts(category: string) {
-            await fetch(`/api/products/${category}`)
+            await fetch(`/api/products/category/${category}`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data.data)
