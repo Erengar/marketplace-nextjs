@@ -13,7 +13,7 @@ export default function SubmitButton(props : {text: string, needRerender: boolea
 
     return (
         <>
-            {status.pending && <LoadingModal text="Adding"/>}
+            {status.pending && <LoadingModal text="Adding Product"/>}
             <button type="submit" className="h-10 w-fit p-1 text-base antialiased font-bold text-sky-950 border border-black border-solid rounded bg-slate-200 hover:bg-slate-400 mt-8">{props.text}</button>
         </>
     )

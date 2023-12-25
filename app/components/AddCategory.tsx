@@ -2,11 +2,10 @@
 import { addCategoryServer } from '../serveractions/addCategoryServer';
 import { useEffect, useState } from 'react';
 import CategoriesManager from './CategoriesManager';
-import { CategoryType, ProductType } from '../schemas';
+import { CategoryType } from '../schemas';
 import SubmitButton from './SubmitButton';
 
 export default function AddCategory({categories, setCategories}: {categories: CategoryType[] | null, setCategories: React.Dispatch<React.SetStateAction<CategoryType[] | null>>}) {
-    //This is the state that will hold the categories fetched from useEffect
     //This is the state that will be used to refetch categories and rerender the CategoriesManager component
     const [needRerender, setNeedRerender] = useState(false);
 

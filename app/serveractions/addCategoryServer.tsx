@@ -1,7 +1,7 @@
 "use server";
 import { z } from 'zod';
 import {sql} from "@vercel/postgres"
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 const category = z.object({
     name: z.string({invalid_type_error: "Invalid name"}).min(3).max(50),
@@ -22,4 +22,5 @@ export async function addCategoryServer(formData: FormData) {
     }
     revalidatePath("/admin")
     revalidatePath("/")
+    revalidateTag('categories')
 }

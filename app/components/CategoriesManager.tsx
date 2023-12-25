@@ -3,15 +3,15 @@ import {CategoryType} from "../schemas"
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useState } from "react";
 import LoadingModal from "./LoadingModal";
+import {deleteCategoryServer} from "../serveractions/deleteCategoryServer";
+
 
 export default function CategoriesManager({category, setNeedRerender}: {category: CategoryType, setNeedRerender: React.Dispatch<React.SetStateAction<boolean>>}) {
     const [isDeleting, setIsDeleting] = useState(false);
 
     async function deleteCategory() {
         setIsDeleting(true);
-        await fetch(`/api/categories/${category.name}`, {
-            method: 'DELETE',
-        })
+        await deleteCategoryServer(category);
         setIsDeleting(false);
         setNeedRerender((prev) => !prev);
     }
