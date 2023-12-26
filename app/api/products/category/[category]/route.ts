@@ -8,7 +8,7 @@ export async function GET(
 
     let products
     try {
-        products = await sql`SELECT * FROM products where category = ${capitalize(params.category)}`;
+        products = await sql`SELECT * FROM products WHERE category = ${capitalize(params.category)}`;
     } catch (error) {
         return NextResponse.json({error})
     }

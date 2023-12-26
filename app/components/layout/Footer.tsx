@@ -1,6 +1,6 @@
 export default function Footer(){
     return (
-    <footer className="absolute w-screen h-32 bottom-0 flex flex-row justify-center content-center
+    <footer className="relative w-screen h-32 bottom-0 flex flex-row justify-center content-center
     dark:bg-gray-800 dark:text-white
     bg-slate-300">
         <div className='mt-10'>

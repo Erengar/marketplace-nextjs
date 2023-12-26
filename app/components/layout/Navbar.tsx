@@ -42,7 +42,7 @@ export default function Navbar() {
         setTotal(tempTotal);
     }, [items])
     return (
-        <nav className="h-14 w-screen pt-3
+        <nav className="h-14 pt-3
         dark:bg-slate-700
         bg-slate-300">
             <ul className="flex flex-row justify-center gap-10 font-bold text-sky-900">

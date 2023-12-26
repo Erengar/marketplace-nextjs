@@ -1,12 +1,14 @@
 "use client";
 
 import SubmitButton from "./SubmitButton";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { CategoryType } from "../schemas";
 import { addProductServer } from "../serveractions/addProductServer";
 import { ProductType } from "../schemas";
 import ProductManager from "./ProductManager";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import { useFormState } from "react-dom";
+import AdminErrorMessage from "./AdminErrorMessage";
+import AdminSkeletonProduct from "./AdminSkeletonProduct";
 
 export default function Addproduct({categories}: {categories: CategoryType[] | null}){
     //This is the state that will be used to refetch categories and rerender the CategoriesManager component
@@ -14,13 +16,16 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
     //This is the state that will hold the products
     const [products, setProducts] = useState<ProductType[] | null>(null);
 
+    const [message, formAction] = useFormState(addProductServer, null);
+
     useEffect(()=>{
         fetch('/api/products', {cache: 'no-store'}).then((res) => res.json()).then((data) => setProducts(data.data));
     }, [needRerender])
     return (
         <section className="bg-slate-100">
-            <form action={addProductServer}className="flex flex-col items-center">
+            <form action={formAction}className="flex flex-col items-center">
                 <h1 className="font-semibold text-lg antialiased mb-4">Products</h1>
+                {message && <AdminErrorMessage message={message.message}/>}
                 <label htmlFor="product-name" className="">Name:</label>
                 <input id="product-name" type="text" name='name' required className="border-2 border-black rounded md:w-3/12 w-60"/>
                 <label htmlFor="product-price" className="">Price:</label>
@@ -50,10 +55,14 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
                 <span>Stock</span>
                 <span>Category</span>
             </div>
-            <ul className="flex flex-col divide-y ml-4 md:ml-20 ">
-                {products && products.map((product) => (
+            <ul className="flex flex-col divide-y ml-4 md:ml-20">
+                <Suspense fallback={<p>Loading...</p>}>
+                {products
+                ? products.map((product) => (
                     <ProductManager key={product.id} product={product} setNeedRerender={setNeedRerender}/>
-                ))}
+                    ))
+                : <AdminSkeletonProduct/>}
+                </Suspense>
             </ul>
         </section>
     )

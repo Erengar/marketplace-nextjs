@@ -26,6 +26,7 @@
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-loading-icons": "^1.1.0",
     "react-swipeable": "^7.0.1",
     "zod": "^3.22.4"
   },
