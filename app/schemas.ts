@@ -9,7 +9,7 @@ export interface ProductType {
     amount: number;
     image: string;
     description: string;
-    category: CategoryType;
+    category: string;
 }
 
 export interface CartItemType {
