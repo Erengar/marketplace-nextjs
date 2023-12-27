@@ -9,6 +9,7 @@ import ProductManager from "./ProductManager";
 import { useFormState } from "react-dom";
 import AdminErrorMessage from "./AdminErrorMessage";
 import AdminSkeletonProduct from "./AdminSkeletonProduct";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Addproduct({categories}: {categories: CategoryType[] | null}){
     //This is the state that will be used to refetch categories and rerender the CategoriesManager component
@@ -22,48 +23,49 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
         fetch('/api/products', {cache: 'no-store'}).then((res) => res.json()).then((data) => setProducts(data.data));
     }, [needRerender])
     return (
-        <section className="bg-slate-100">
+        <motion.section className="bg-slate-100"
+        initial={{opacity:0}}
+        animate={{opacity:1}}>
             <form action={formAction}className="flex flex-col items-center">
-                <h1 className="font-semibold text-lg antialiased mb-4">Products</h1>
+                <h1 className="font-semibold md:text-lg antialiased mb-2">Products</h1>
                 {message && <AdminErrorMessage message={message.message}/>}
-                <label htmlFor="product-name" className="">Name:</label>
-                <input id="product-name" type="text" name='name' required className="border-2 border-black rounded md:w-3/12 w-60"/>
-                <label htmlFor="product-price" className="">Price:</label>
-                <input id="product-price" type="number" step="any" name='price' required className="border-2 border-black rounded md:w-3/12 w-60"/>
-                <label htmlFor="product-amount" className="">Stock:</label>
-                <input id="product-amount" type="number" name='amount' required className="border-2 border-black rounded md:w-3/12 w-60"/>
-                <label htmlFor="product-category" className="">Category:</label>
-                <select id="product-category" name='category' required className="border-2 border-black rounded md:w-3/12 w-60">
+                <label htmlFor="product-name" className="text-sm md:text-base">Name:</label>
+                <input id="product-name" type="text" name='name' required className="border-2 border-black rounded md:w-3/12 w-60 md:h-8"/>
+                <label htmlFor="product-price" className="text-sm md:text-base">Price:</label>
+                <input id="product-price" type="number" step="any" name='price' required className="border-2 border-black rounded md:w-3/12 w-60 md:h-8"/>
+                <label htmlFor="product-amount" className="text-sm md:text-base">Stock:</label>
+                <input id="product-amount" type="number" name='amount' required className="border-2 border-black rounded md:w-3/12 w-60 md:h-8"/>
+                <label htmlFor="product-category" className="text-sm md:text-base">Category:</label>
+                <select id="product-category" name='category' required className="border-2 border-black rounded md:w-3/12 w-60 md:h-8">
                     {categories && categories.map((category) => (
                         <option key={category.name} value={category.name}>{category.name}</option>
                         ))}
                 </select>
-                <label htmlFor="product-description" className="">Description:</label>
+                <label htmlFor="product-description" className="text-sm md:text-base">Description:</label>
                 <textarea id="product-description" name='description' className="border-2 border-black rounded md:w-3/12 w-60"/>
-                <label htmlFor="product-image" className="">Image:</label>
+                <label htmlFor="product-image" className="text-sm md:text-base">Image:</label>
                 <input
                 id="product-image"
                 type="file"
                 name='image'
-                className="md:w-3/12 w-60 file:p-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-200 file:text-blue-800 hover:file:bg-blue-300 text-blue-800 font-semibold"/>
+                className="w-60 md:w-3/12 text-blue-800 font-semibold text-xs md:text-base
+                file:p-3 file:md:p-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-200 file:text-blue-800 hover:file:bg-blue-300 file:cursor-pointer"/>
                 <SubmitButton text="Add Product" needRerender={needRerender} setNeedRerender={setNeedRerender}/>
             </form>
-            <div className="mt-2 ml-4 md:ml-20 grid grid-cols-6 font-bold">
-                <span>Image</span>
-                <span>Name</span>
-                <span>Price</span>
-                <span>Stock</span>
-                <span>Category</span>
+            <div className="mt-2 ml-4 md:ml-20 grid grid-cols-6 font-bold text-xs md:text-base">
+                <span className="mr-4">Image</span>
+                <span className="mr-4">Name</span>
+                <span className="mr-4">Price</span>
+                <span className="mr-4">Stock</span>
+                <span className="mr-4">Category</span>
             </div>
             <ul className="flex flex-col divide-y ml-4 md:ml-20">
-                <Suspense fallback={<p>Loading...</p>}>
                 {products
                 ? products.map((product) => (
                     <ProductManager key={product.id} product={product} setNeedRerender={setNeedRerender}/>
                     ))
                 : <AdminSkeletonProduct/>}
-                </Suspense>
             </ul>
-        </section>
+        </motion.section>
     )
 }

@@ -22,7 +22,7 @@ export async function addProductServer(prevState:any, formData: FormData) {
     }
     let image = null;
     let imageError  
-    let maxImageSize = 1000000;
+    let maxImageSize = 10000000;
 
     const data = product.safeParse({
         name: formData.get('name'),
@@ -34,7 +34,7 @@ export async function addProductServer(prevState:any, formData: FormData) {
     });
 
     if ((formData.get('image') as File).size > maxImageSize) {
-        imageError = "Image must be less than 1MB";
+        imageError = "Image must be less than 10MB";
     }
 
     if (!data.success) {

@@ -5,7 +5,7 @@ import Search from './Search'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {CartItemType} from '../../schemas'
 import { useState,useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navbarItems = ['Home']
 
@@ -42,10 +42,10 @@ export default function Navbar() {
         setTotal(tempTotal);
     }, [items])
     return (
-        <nav className="h-14 pt-3
+        <nav className="h-7 md:h-14 pt-1 md:pt-3
         dark:bg-slate-700
         bg-slate-300">
-            <ul className="flex flex-row justify-center gap-10 font-bold text-sky-900">
+            <ul className="flex flex-row justify-center gap-10 font-bold text-sky-900 text-xs md:text-base">
                 {navbarItems.map((item: string): JSX.Element => (
                     item === 'Home' ? 
                     <li key={item}>
@@ -59,22 +59,27 @@ export default function Navbar() {
                         </Link>
                     </li>
                 ))}
-                <li>
+                <li key="admin">
                     <Link href="/admin">Admin</Link>
                 </li>
-                <li>
+                <li key="cart">
                     <Link href="/shoppingcart" className='relative'>
+                        <AnimatePresence>
+
                         {total > 0 ? 
                         <motion.div
                         className="text-xxs text-semibold antialiased text-white inline-flex justify-center items-center
                         h-4 w-4 bg-blue-500 rounded-full
                         absolute left-3"
                         key={total}
-                        animate={addingItem?{scale: [1, 1.5, 1]}:{scale: [1]}}
+                        initial={{scale: 0}}
+                        animate={addingItem?{scale: [1,1.5,1]}:{scale: [1]}}
+                        exit={{scale: 0}}
                         transition={{duration: 0.5}}
                         >
                         {total}</motion.div>:
                         null}
+                        </AnimatePresence>
                         <ShoppingCartIcon/>
                     </Link>
                 </li>

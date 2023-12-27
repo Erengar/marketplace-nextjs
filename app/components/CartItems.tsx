@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import CartProduct from "./CartProduct";
 import { CartItemType} from "../schemas"
 import RemoveItemModal from "./RemoveItemModal";
+import { motion } from "framer-motion";
 
-export default function ShoppingCartItems() {
+export default function CartItems() {
     // This is the state of the shopping cart
     const [items, setItems] = useState<CartItemType[]>([]);
     // This is the state of the item being removed
@@ -26,7 +27,11 @@ export default function ShoppingCartItems() {
     }, []);
     return (
         <>
-            <ul className="flex flex-col items-center gap-px divide-y-2">
+            <motion.ul
+            className="flex flex-col items-center gap-px divide-y-2"
+            initial={{opacity:0}}
+            animate={{opacity:1}}
+            transition={{duration:1}}>
                 {items.length === 0 ?
                 <h1>Shopping cart is empty</h1>
                 : items.length === 1 ?
@@ -36,7 +41,7 @@ export default function ShoppingCartItems() {
                     <CartProduct key={item.product.id} product={item} setRemovingItem={setRemovingItem}/>
                     ))
                 }
-            </ul>
+            </motion.ul>
             {removingItem ?
             <RemoveItemModal removingItem={removingItem} setRemovingitem={setRemovingItem}/>
             : null}

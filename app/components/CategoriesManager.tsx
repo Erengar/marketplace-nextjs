@@ -4,6 +4,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { useState } from "react";
 import LoadingModal from "./LoadingModal";
 import {deleteCategoryServer} from "../serveractions/deleteCategoryServer";
+import {motion, AnimatePresence} from "framer-motion";
 
 
 export default function CategoriesManager({category, setNeedRerender}: {category: CategoryType, setNeedRerender: React.Dispatch<React.SetStateAction<boolean>>}) {
@@ -16,10 +17,17 @@ export default function CategoriesManager({category, setNeedRerender}: {category
         setNeedRerender((prev) => !prev);
     }
     return (
-        <li className="border-black flex justify-between">
+        <motion.li
+        className="border-black flex justify-between"
+        initial={{opacity:0}}
+        animate={{opacity:1}}
+        exit={{opacity:0}}
+        transition={{duration:0.5}}>
+            <AnimatePresence>
             {isDeleting && <LoadingModal text="Deleting Category"/>}
+            </AnimatePresence>
             <span>{category.name}</span>
             <button onClick={deleteCategory} className='text-red-600 hover:text-red-800'><CancelIcon/></button>
-        </li>
+        </motion.li>
     );
 }
