@@ -3,7 +3,7 @@ export PATH=$PATH:/C/"Program Files"/PostgreSQL/16/bin
 queries=("DROP TABLE products;"
         "DROP TABLE categories;"
         "CREATE TABLE categories (
-        name varchar(50) PRIMARY KEY NOT NULL
+        name varchar(50) PRIMARY KEY NOT NULL UNIQUE
         );"
         "CREATE TABLE products (
         id serial PRIMARY KEY NOT NULL,

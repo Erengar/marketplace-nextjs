@@ -14,5 +14,6 @@ export async function deleteProductServer(product: ProductType) {
     revalidatePath("/admin")
     revalidatePath("/")
     revalidatePath(`/${product.category}`)
+    revalidatePath("/api/products")
     revalidateTag('products')
 }
