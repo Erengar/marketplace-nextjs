@@ -7,5 +7,6 @@ export async function deleteCategoryServer(category: CategoryType) {
     sql`DELETE FROM categories WHERE name = ${category.name}`
     revalidatePath("/admin")
     revalidatePath("/")
+    revalidatePath("/api/categories")
     revalidateTag('categories')
 }
