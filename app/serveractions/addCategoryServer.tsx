@@ -28,7 +28,7 @@ export async function addCategoryServer(prevState: any, formData: FormData) {
             }
         }
     }
-    revalidatePath("/admin")
+    revalidatePath("/admin?table=category")
     revalidatePath("/")
     revalidateTag('categories')
 }

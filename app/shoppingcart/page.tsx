@@ -1,4 +1,4 @@
-import CartItems from "../components/CartItems"
+import CartItems from "../components/client/CartItems"
 
 export default function Page() {
     return (

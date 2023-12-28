@@ -1,8 +1,8 @@
 import { CategoryType } from '../schemas'
-import Sidebar from '../components/layout/Sidebar'
+import Sidebar from '../components/server/Sidebar'
 import React from 'react'
 import { sql } from '@vercel/postgres';
-import ExpandableSidebar from '../components/layout/ExpandableSidebar';
+import ExpandableSidebar from '../components/client/ExpandableSidebar';
 
 export default async function Layout({params, children} : {params : { category : string }, children: React.ReactNode}){
     const {rows}: {rows: CategoryType[]} = await sql`SELECT * FROM categories`

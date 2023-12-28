@@ -1,4 +1,4 @@
-import { CartItemType } from "../schemas";
+import { CartItemType } from "../../schemas";
 
 export default function RemoveItemModal(props: { removingItem: CartItemType, setRemovingitem: (a : CartItemType | null) => void }) {
 

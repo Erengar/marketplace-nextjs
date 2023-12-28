@@ -1,9 +1,9 @@
 "use client";
-import {ProductType} from "../schemas"
+import {ProductType} from "../../schemas"
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useState } from "react";
 import LoadingModal from "./LoadingModal";
-import { deleteProductServer } from "../serveractions/deleteProductServer";
+import { deleteProductServer } from "../../serveractions/deleteProductServer";
 import SetImage from "./SetImage";
 import { motion, AnimatePresence } from "framer-motion";
 

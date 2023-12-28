@@ -1,13 +1,12 @@
 "use client";
-import { addCategoryServer } from '../serveractions/addCategoryServer';
+import { addCategoryServer } from '../../serveractions/addCategoryServer';
 import { useEffect, useState, Suspense } from 'react';
 import CategoriesManager from './CategoriesManager';
-import { CategoryType } from '../schemas';
+import { CategoryType } from '../../schemas';
 import SubmitButton from './SubmitButton';
 import {useFormState} from 'react-dom';
-import AdminErrorMessage from './AdminErrorMessage';
+import AdminErrorMessage from '../server/AdminErrorMessage';
 import AdminCategorySkeleton from './AdminSkeletonCategory';
-import { AnimatePresence } from 'framer-motion';
 import { motion } from 'framer-motion';
 
 export default function AddCategory({categories, setCategories}: {categories: CategoryType[] | null, setCategories: React.Dispatch<React.SetStateAction<CategoryType[] | null>>}) {
@@ -18,6 +17,7 @@ export default function AddCategory({categories, setCategories}: {categories: Ca
 
     useEffect(() => {
         fetch('/api/categories', {cache: 'no-store'}).then((res) => res.json()).then((data) => setCategories(data.data));
+        console.log(categories);
     }, [needRerender])
     return (
         <motion.section className="bg-slate-100"

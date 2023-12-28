@@ -1,5 +1,5 @@
 "use client";
-import { CartItemType } from "../schemas";
+import { CartItemType } from "../../schemas";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import SetImage from "./SetImage";

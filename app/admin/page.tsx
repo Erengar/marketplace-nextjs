@@ -1,4 +1,4 @@
-import AdminSection from "../components/AdminSection"
+import AdminSection from "../components/client/AdminSection"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {

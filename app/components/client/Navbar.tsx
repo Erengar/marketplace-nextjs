@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link'
-import Search from './Search'
+import Search from '../server/Search'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {CartItemType} from '../../schemas'
 import { useState,useEffect } from 'react';
@@ -65,9 +65,8 @@ export default function Navbar() {
                 <li key="cart">
                     <Link href="/shoppingcart" className='relative'>
                         <AnimatePresence>
-
-                        {total > 0 ? 
-                        <motion.div
+                        {total > 0
+                        ?<motion.div
                         className="text-xxs text-semibold antialiased text-white inline-flex justify-center items-center
                         h-4 w-4 bg-blue-500 rounded-full
                         absolute left-3"
@@ -76,9 +75,8 @@ export default function Navbar() {
                         animate={addingItem?{scale: [1,1.5,1]}:{scale: [1]}}
                         exit={{scale: 0}}
                         transition={{duration: 0.5}}
-                        >
-                        {total}</motion.div>:
-                        null}
+                        >{total}</motion.div>
+                        :null}
                         </AnimatePresence>
                         <ShoppingCartIcon/>
                     </Link>

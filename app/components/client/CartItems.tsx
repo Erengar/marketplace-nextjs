@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import CartProduct from "./CartProduct";
-import { CartItemType} from "../schemas"
-import RemoveItemModal from "./RemoveItemModal";
+import { CartItemType} from "../../schemas"
+import RemoveItemModal from "../server/RemoveItemModal";
 import { motion } from "framer-motion";
 
 export default function CartItems() {

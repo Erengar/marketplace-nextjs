@@ -4,7 +4,7 @@ import SelectTable from "./SelectTable";
 import { useState, useEffect } from "react";
 import AddProduct from "./AddProduct";
 import { useRouter } from "next/navigation";
-import { CategoryType } from "../schemas";
+import { CategoryType } from "../../schemas";
 
 export default function AdminSection() {
     const router = useRouter();

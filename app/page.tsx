@@ -1,4 +1,4 @@
-import Category from './components/Category'
+import Category from './components/client/Category'
 import { Metadata } from 'next'
 import { CategoryType } from './schemas'
 import {sql} from "@vercel/postgres"

@@ -1,6 +1,6 @@
 'use client'
 import { Suspense } from 'react'
-import Loading from './errors/Loading'
+import Loading from '../errors/Loading'
 import Link from 'next/link'
 import { CategoryType } from '@/app/schemas'
 import { motion } from 'framer-motion'

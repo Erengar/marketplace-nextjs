@@ -1,13 +1,12 @@
 "use client";
-
 import SubmitButton from "./SubmitButton";
 import { useState, useEffect, Suspense } from "react";
-import { CategoryType } from "../schemas";
-import { addProductServer } from "../serveractions/addProductServer";
-import { ProductType } from "../schemas";
+import { CategoryType } from "../../schemas";
+import { addProductServer } from "../../serveractions/addProductServer";
+import { ProductType } from "../../schemas";
 import ProductManager from "./ProductManager";
 import { useFormState } from "react-dom";
-import AdminErrorMessage from "./AdminErrorMessage";
+import AdminErrorMessage from "../server/AdminErrorMessage";
 import AdminSkeletonProduct from "./AdminSkeletonProduct";
 import { motion, AnimatePresence } from "framer-motion";
 
