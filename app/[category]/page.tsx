@@ -5,6 +5,7 @@ import { sql } from '@vercel/postgres';
 import { ProductType } from '../schemas';
 import { Suspense } from 'react';
 import SkeletonProducts from '../components/SkeletonProducts';
+import { LoremIpsum } from 'react-lorem-ipsum';
 
 export async function generateMetadata({params, searchParams}:
     {params: {category: string}, searchParams: URLSearchParams}):
@@ -15,6 +16,7 @@ export async function generateMetadata({params, searchParams}:
 } 
 
 export default async function Page({params} : {params : { category : string }}){
+    let description
     const {rows} = await sql`SELECT * FROM products WHERE category = ${capitalize(params.category)}`
     return (
         <section className="w-full px-2">
@@ -24,6 +26,9 @@ export default async function Page({params} : {params : { category : string }}){
                 md:text-4xl">
                     {capitalize(params.category)}
                 </h1>
+                <div className='text-xs md:text-base mx-4 lg:mx-32 mt-2 mb-4'>
+                    {description ? description : <LoremIpsum p={1} avgSentencesPerParagraph={10}/>}
+                </div>
                 <Products products={rows as ProductType[]} />
             </Suspense>
         </section>
