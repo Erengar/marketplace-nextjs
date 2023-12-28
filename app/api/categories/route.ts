@@ -1,10 +1,10 @@
 import { sql } from '@vercel/postgres';
 import { CategoryType } from '../../schemas';
 import { NextResponse } from "next/server";
+export const reavalidate = 0
 
 export async function GET(
     request: Request){
     const {rows}  = await sql<CategoryType>`SELECT * FROM categories`
-    console.log(rows)
     return NextResponse.json({data: rows})
 }
