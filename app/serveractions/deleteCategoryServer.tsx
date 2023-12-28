@@ -4,7 +4,7 @@ import { revalidatePath, revalidateTag } from 'next/cache';
 import { CategoryType } from '../schemas';
 
 export async function deleteCategoryServer(category: CategoryType) {
-    sql`DELETE FROM categories WHERE name = ${category.name}`
+    await sql`DELETE FROM categories WHERE name = ${category.name}`
     revalidatePath("/admin")
     revalidatePath("/")
     revalidatePath("/api/categories")

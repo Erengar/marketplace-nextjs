@@ -17,6 +17,7 @@ export default function AddCategory({categories, setCategories}: {categories: Ca
 
     useEffect(() => {
         fetch('/api/categories', {cache: 'no-store'}).then((res) => res.json()).then((data) => setCategories(data.data));
+        console.log(categories)
     }, [needRerender])
     return (
         <motion.section className="bg-slate-100"
