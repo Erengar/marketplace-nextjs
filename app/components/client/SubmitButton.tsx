@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 export default function SubmitButton({text, needRerender, setNeedRerender}: {text: string, needRerender: boolean, setNeedRerender: React.Dispatch<React.SetStateAction<boolean>>}) {
     const status = useFormStatus()
     useEffect(() => {
+        console.log(status.pending)
         if (!status.pending) {
             setNeedRerender(!needRerender)
         }  
