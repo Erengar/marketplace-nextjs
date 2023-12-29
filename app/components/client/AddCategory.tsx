@@ -16,6 +16,7 @@ export default function AddCategory({categories, setCategories}: {categories: Ca
     const [message, formAction] = useFormState(addCategoryServer, null);
 
     useEffect(() => {
+        console.log(categories)
         fetch('/api/categories', {cache: 'no-store'}).then((res) => res.json()).then((data) => setCategories(data.data));
         console.log(categories)
     }, [needRerender])
