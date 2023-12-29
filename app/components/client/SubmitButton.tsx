@@ -10,7 +10,7 @@ export default function SubmitButton({text, needRerender, setNeedRerender}: {tex
         if (!status.pending) {
             setNeedRerender(!needRerender)
         }  
-    }, [status.pending, needRerender, setNeedRerender])
+    }, [status.pending, setNeedRerender])
 
     return (
         <>
