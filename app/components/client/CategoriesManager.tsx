@@ -5,6 +5,7 @@ import { useState } from "react";
 import LoadingModal from "./LoadingModal";
 import {deleteCategoryServer} from "../../serveractions/deleteCategoryServer";
 import {motion, AnimatePresence} from "framer-motion";
+import { useEffect } from "react";
 
 
 export default function CategoriesManager({category, setNeedRerender}: {category: CategoryType, setNeedRerender: React.Dispatch<React.SetStateAction<boolean>>}) {
@@ -16,6 +17,8 @@ export default function CategoriesManager({category, setNeedRerender}: {category
         setIsDeleting(false);
         setNeedRerender((prev) => !prev);
     }
+
+
     return (
         <motion.li
         className="border-black flex justify-between"
