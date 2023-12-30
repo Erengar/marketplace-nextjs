@@ -24,7 +24,6 @@ export async function addCategoryServer(prevState: any, formData: FormData) {
             revalidatePath("/admin")
             revalidatePath("/")
             revalidatePath("/api/categories")
-            revalidateTag('categories')
         } catch (e: any) {
             if (e.code === '23505') {
                 return {
