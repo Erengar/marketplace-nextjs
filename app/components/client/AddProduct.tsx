@@ -49,7 +49,7 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
                 name='image'
                 className="w-60 md:w-3/12 text-blue-800 font-semibold text-xs md:text-base
                 file:p-3 file:md:p-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-200 file:text-blue-800 hover:file:bg-blue-300 file:cursor-pointer"/>
-                <SubmitButton text="Add Product" needRerender={needRerender} setNeedRerender={setNeedRerender}/>
+                <SubmitButton text="Add Product" setNeedRerender={setNeedRerender}/>
             </form>
             <div className="mt-2 ml-4 md:ml-20 grid grid-cols-6 font-bold text-xs md:text-base">
                 <span className="mr-4">Image</span>
