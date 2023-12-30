@@ -8,7 +8,7 @@ export default function SubmitButton({text, needRerender, setNeedRerender}: {tex
     const status = useFormStatus()
     useEffect(() => {
         if (!status.pending) {
-            setNeedRerender(!needRerender)
+            setNeedRerender((prev) => !prev)
         }  
     }, [status.pending])
 
