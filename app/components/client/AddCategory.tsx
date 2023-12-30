@@ -27,7 +27,7 @@ export default function AddCategory({categories, setCategories}: {categories: Ca
                 {message && <AdminErrorMessage message={message.message}/>}
                 <label htmlFor="category-name" className="text-sm md:text-base">Name:</label>
                 <input id="category-name" type="text" name='name' required className="border-2 border-black rounded md:w-3/12 w-60 h-6 md:h-8"/>
-                <SubmitButton text="Add Category" needRerender={needRerender} setNeedRerender={setNeedRerender}/>
+                <SubmitButton text="Add Category" setNeedRerender={setNeedRerender}/>
             </form>
             <ul className="flex flex-col divide-y mx-1 md:mx-20 text-sm md:text-base">
                     {categories
