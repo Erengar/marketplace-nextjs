@@ -20,7 +20,6 @@ export async function addCategoryServer(prevState: any, formData: FormData) {
         try{
             const {name} = data.data;
             await sql`INSERT INTO categories (name) VALUES (${name})`;
-            revalidatePath("/admin?table=category")
             revalidatePath("/admin")
             revalidatePath("/")
             revalidatePath("/api/categories")
