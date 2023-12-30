@@ -16,7 +16,13 @@ export default function AddCategory({categories, setCategories}: {categories: Ca
     const [message, formAction] = useFormState(addCategoryServer, null);
 
     useEffect(() => {
-        fetch('/api/categories').then((res) => res.json()).then((data) => {setCategories(data.data)});
+        const fetchCategories = async () => {
+            const res = await fetch('/api/categories');
+            const data = await res.json();
+            setCategories(data.data);
+        };
+    
+        fetchCategories();
     }, [needRerender, setCategories])
     return (
         <motion.section className="bg-slate-100"
