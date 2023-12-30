@@ -8,6 +8,7 @@ import {useFormState} from 'react-dom';
 import AdminErrorMessage from '../server/AdminErrorMessage';
 import AdminCategorySkeleton from './AdminSkeletonCategory';
 import { motion } from 'framer-motion';
+import NewCategoriesManager from './NewCategoriesManager';
 
 export default function AddCategory({categories, setCategories}: {categories: CategoryType[] | null, setCategories: React.Dispatch<React.SetStateAction<CategoryType[] | null>>}) {
     //This is the state that will be used to refetch categories and rerender the CategoriesManager component
@@ -30,6 +31,8 @@ export default function AddCategory({categories, setCategories}: {categories: Ca
                 <SubmitButton text="Add Category" setNeedRerender={setNeedRerender}/>
             </form>
             <ul className="flex flex-col divide-y mx-1 md:mx-20 text-sm md:text-base">
+                    <NewCategoriesManager categories={categories} setNeedRerender={setNeedRerender}/>
+                    <div>---------------------------</div>
                     {categories
                     ? categories.map((category) => (
                     <CategoriesManager key={category.name} category={category} setNeedRerender={setNeedRerender}/>
