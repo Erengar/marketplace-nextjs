@@ -9,9 +9,6 @@ const category = z.object({
 
 
 export async function addCategoryServer(prevState: any, formData: FormData) {
-    revalidatePath("/admin")
-    revalidatePath("/")
-    revalidatePath("/api/categories")
     const data = category.safeParse({
         name: formData.get('name'),
     });

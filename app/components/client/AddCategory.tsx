@@ -15,9 +15,15 @@ export default function AddCategory({categories, setCategories}: {categories: Ca
     //This hook is used to handle the form state, it holds message returned from the server
     const [message, formAction] = useFormState(addCategoryServer, null);
 
+    async function somethingHere() {
+        const res = await fetch('/api/categories', {cache: 'no-store'});
+        const data = await res.json();
+        setCategories(data.data);
+    }
+
+
     useEffect(() => {
-        console.log('fetching categories');
-        fetch('/api/categories', {cache: 'no-store'}).then((res) => res.json()).then((data) => {setCategories(data.data)});
+        somethingHere();
     }, [needRerender, setCategories])
     return (
         <motion.section className="bg-slate-100"
