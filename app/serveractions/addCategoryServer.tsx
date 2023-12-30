@@ -20,9 +20,6 @@ export async function addCategoryServer(prevState: any, formData: FormData) {
         try{
             const {name} = data.data;
             await sql`INSERT INTO categories (name) VALUES (${name})`;
-            revalidatePath("/admin")
-            revalidatePath("/")
-            revalidatePath("/api/categories")
         } catch (e: any) {
             if (e.code === '23505') {
                 return {
@@ -31,4 +28,10 @@ export async function addCategoryServer(prevState: any, formData: FormData) {
             }
         }
     }
+    await Promise.all([
+        revalidatePath("/admin"),
+        revalidatePath("/"),
+        revalidatePath("/api/categories")
+    ]);
+    return { message: "Category added successfully" };
 }
