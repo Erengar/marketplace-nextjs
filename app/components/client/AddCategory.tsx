@@ -11,7 +11,7 @@ import { motion } from 'framer-motion';
 
 export default function AddCategory({categories, setCategories}: {categories: CategoryType[] | null, setCategories: React.Dispatch<React.SetStateAction<CategoryType[] | null>>}) {
     //This is the state that will be used to refetch categories and rerender the CategoriesManager component
-    const [needRerender, setNeedRerender] = useState(1);
+    const [needRerender, setNeedRerender] = useState(false);
     //This hook is used to handle the form state, it holds message returned from the server
     const [message, formAction] = useFormState(addCategoryServer, null);
 
