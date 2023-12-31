@@ -8,14 +8,14 @@ import {motion, AnimatePresence} from "framer-motion";
 import { useEffect } from "react";
 
 
-export default function CategoriesManager({category, setNeedRerender}: {category: CategoryType, setNeedRerender: React.Dispatch<React.SetStateAction<boolean>>}) {
+export default function CategoriesManager({category, setNeedRerender}: {category: CategoryType, setNeedRerender: React.Dispatch<React.SetStateAction<number>>}) {
     const [isDeleting, setIsDeleting] = useState(false);
 
     async function deleteCategory() {
         setIsDeleting(true);
         await deleteCategoryServer(category);
         setIsDeleting(false);
-        setNeedRerender((prev) => !prev);
+        setNeedRerender((prev) => prev++);
     }
 
 
