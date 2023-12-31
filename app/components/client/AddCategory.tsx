@@ -8,6 +8,7 @@ import {useFormState} from 'react-dom';
 import AdminErrorMessage from '../server/AdminErrorMessage';
 import AdminCategorySkeleton from './AdminSkeletonCategory';
 import { motion } from 'framer-motion';
+import { useQuery } from 'react-query';
 
 export default function AddCategory({categories, setCategories}: {categories: CategoryType[] | null, setCategories: React.Dispatch<React.SetStateAction<CategoryType[] | null>>}) {
     //This is the state that will be used to refetch categories and rerender the CategoriesManager component
@@ -15,9 +16,18 @@ export default function AddCategory({categories, setCategories}: {categories: Ca
     //This hook is used to handle the form state, it holds message returned from the server
     const [message, formAction] = useFormState(addCategoryServer, null);
 
+    const {data, isLoading, isError} = useQuery('categories', () => fetch('/api/categories').then((res) => res.json()).then((data) => data.data));
+
+    useEffect(() => {
+        if (data) {
+            setCategories(data)
+        }
+    }, [data, setCategories])
+
+    /*
     useEffect(() => {
         fetch('/api/categories').then((res) => res.json()).then((data) => {setCategories(data.data)});
-    }, [needRerender, setCategories])
+    }, [needRerender, setCategories])*/
     return (
         <motion.section className="bg-slate-100"
         initial={{opacity:0}}
