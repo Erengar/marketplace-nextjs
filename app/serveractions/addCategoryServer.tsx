@@ -33,5 +33,4 @@ export async function addCategoryServer(prevState: any, formData: FormData) {
         revalidatePath("/", "page"),
         revalidatePath("/api/categories")
     ]);
-    return { message: "Category added successfully" };
 }
