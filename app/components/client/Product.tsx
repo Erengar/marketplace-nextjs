@@ -31,9 +31,9 @@ export default function Product({product}: { product: ProductType}) {
         initial={{opacity:0}}
         animate={{opacity:1}}>
             <SetImage uuid={product.image} name={product.name} width={330} height={220}/>
-            <h2 className="text-lg antialiased font-semibold line-clamp-1">{product.name}</h2>
+            <h2 className="text-lg antialiased font-semibold line-clamp-1 pl-1">{product.name}</h2>
             <div className='flex content-center justify-between px-0.5'>
-                <h3 className="text-base antialiased font-bold text-sky-950">{product.price}€</h3>
+                <h3 className="text-base antialiased font-bold text-sky-950 pl-1">{product.price}€</h3>
                 <div className="flex flex-col">
                     <motion.button
                     onClick={addItem}

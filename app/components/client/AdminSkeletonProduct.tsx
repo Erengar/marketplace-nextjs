@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 
 export default function AdminSkeletonProduct() {
     const numberOfSkeletons = 10;
+
     return (
         <>
         {Array.from({ length: numberOfSkeletons }).map((_, index) => (
