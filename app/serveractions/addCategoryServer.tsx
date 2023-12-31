@@ -29,6 +29,7 @@ export async function addCategoryServer(prevState: any, formData: FormData) {
         }
     }
     await Promise.all([
-        revalidatePath("/api/categories")
+        revalidatePath("/api/categories"),
+        revalidateTag("categories")
     ]);
 }
