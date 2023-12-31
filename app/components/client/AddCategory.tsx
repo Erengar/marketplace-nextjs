@@ -9,6 +9,8 @@ import AdminErrorMessage from '../server/AdminErrorMessage';
 import AdminCategorySkeleton from './AdminSkeletonCategory';
 import { motion } from 'framer-motion';
 
+const dynamic = "force-dynamic";
+
 export default function AddCategory({categories, setCategories}: {categories: CategoryType[] | null, setCategories: React.Dispatch<React.SetStateAction<CategoryType[] | null>>}) {
     //This is the state that will be used to refetch categories and rerender the CategoriesManager component
     const [needRerender, setNeedRerender] = useState(false);
