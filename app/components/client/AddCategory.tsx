@@ -17,9 +17,13 @@ export default function AddCategory({categories, setCategories}: {categories: Ca
     //This hook is used to handle the form state, it holds message returned from the server
     const [message, formAction] = useFormState(addCategoryServer, null);
 
+    const [newCategory, setNewCategory] = useState<CategoryType[] | null>(null);
+
     useEffect(() => {
-        fetch('/api/categories', {next: {tags: ["categories"]}}).then((res) => res.json()).then((data) => {setCategories(data.data)});
-    }, [needRerender, setCategories])
+        fetch('/api/categories', {next: {tags: ["categories"]}}).then((res) => res.json()).then((data) => {
+            setNewCategory(data.data)
+            setCategories(data.data);});
+    }, [needRerender])
     return (
         <motion.section className="bg-slate-100"
         initial={{opacity:0}}
@@ -32,6 +36,12 @@ export default function AddCategory({categories, setCategories}: {categories: Ca
                 <SubmitButton text="Add Category" setNeedRerender={setNeedRerender}/>
             </form>
             <ul className="flex flex-col divide-y mx-1 md:mx-20 text-sm md:text-base">
+                {newCategory
+                    ? newCategory.map((category) => (
+                    <CategoriesManager key={category.name} category={category} setNeedRerender={setNeedRerender}/>
+                    ))
+                    : <AdminCategorySkeleton/>}
+                    <p>---------------------------</p>
                     {categories
                     ? categories.map((category) => (
                     <CategoriesManager key={category.name} category={category} setNeedRerender={setNeedRerender}/>
