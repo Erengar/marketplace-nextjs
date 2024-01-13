@@ -14,10 +14,11 @@ export default function AddCategory({categories, setCategories}: {categories: Ca
     const [needRerender, setNeedRerender] = useState(false);
     //This hook is used to handle the form state, it holds message returned from the server
     const [message, formAction] = useFormState(addCategoryServer, null);
-    console.log(categories);
 
     useEffect(() => {
-        fetch('/api/categories', {next: {tags: ["categories"]}}).then((res) => res.json()).then((data) => setCategories(data.data));
+        fetch('/api/categories', {next: {tags: ["categories"]}}).then((res) => res.json()).then((data) => {
+            console.log(data)
+            setCategories(data.data)});
     }, [needRerender, setCategories])
     return (
         <motion.section className="bg-slate-100"
