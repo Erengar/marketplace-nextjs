@@ -12,7 +12,6 @@ export async function addCategoryServer(prevState: any, formData: FormData) {
     const data = category.safeParse({
         name: formData.get('name'),
     });
-    console.log('IN')
     if (!data.success) {
         return {
             message: data.error.flatten().fieldErrors,
@@ -33,5 +32,4 @@ export async function addCategoryServer(prevState: any, formData: FormData) {
         revalidatePath("/api/categories"),
         revalidateTag("categories")
     ]);
-    console.log('SERVER ACTION FINISHED')
 }
