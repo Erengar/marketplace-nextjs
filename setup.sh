@@ -15,7 +15,7 @@ queries=("DROP TABLE products;"
         category varchar(50),
         CONSTRAINT fk_category
         FOREIGN KEY(category)
-        REFERENCES categories(name)
+        REFERENCES categories(name) ON DELETE SET NULL
         );"
         )
 
