@@ -73,7 +73,7 @@ export default function Navbar() {
                         key={total}
                         initial={{scale: 0}}
                         animate={addingItem?{scale: [1,1.5,1]}:{scale: [1]}}
-                        exit={total==0?{scale:1}:{scale: 0}}
+                        exit={total==1?{scale:0}:{scale: 1}}
                         transition={{duration: 0.5}}
                         >{total}</motion.div>
                         :null}
