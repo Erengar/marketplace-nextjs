@@ -8,15 +8,13 @@ import {useFormState} from 'react-dom';
 import AdminErrorMessage from '../server/AdminErrorMessage';
 import AdminCategorySkeleton from './AdminSkeletonCategory';
 import { motion } from 'framer-motion';
-import { flushSync } from 'react-dom';
-
-const dynamic = "force-dynamic";
 
 export default function AddCategory({categories, setCategories}: {categories: CategoryType[] | null, setCategories: React.Dispatch<React.SetStateAction<CategoryType[] | null>>}) {
     //This is the state that will be used to refetch categories and rerender the CategoriesManager component
     const [needRerender, setNeedRerender] = useState(false);
     //This hook is used to handle the form state, it holds message returned from the server
     const [message, formAction] = useFormState(addCategoryServer, null);
+    console.log(categories);
 
     useEffect(() => {
         fetch('/api/categories', {next: {tags: ["categories"]}}).then((res) => res.json()).then((data) => setCategories(data.data));
