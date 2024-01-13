@@ -8,6 +8,7 @@ import {useFormState} from 'react-dom';
 import AdminErrorMessage from '../server/AdminErrorMessage';
 import AdminCategorySkeleton from './AdminSkeletonCategory';
 import { motion } from 'framer-motion';
+import { flushSync } from 'react-dom';
 
 const dynamic = "force-dynamic";
 
@@ -18,7 +19,7 @@ export default function AddCategory({categories, setCategories}: {categories: Ca
     const [message, formAction] = useFormState(addCategoryServer, null);
 
     useEffect(() => {
-        fetch('/api/categories', {next: {tags: ["categories"]}}).then((res) => res.json()).then((data) => {setCategories(data.data)});
+        fetch('/api/categories', {next: {tags: ["categories"]}}).then((res) => res.json()).then((data) => flushSync(() => {setCategories(data.data)}));
     }, [needRerender, setCategories])
     return (
         <motion.section className="bg-slate-100"
