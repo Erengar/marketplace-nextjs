@@ -9,7 +9,7 @@ import './globals.css'
 export default function RootLayout({children,} : {children: React.ReactNode}) {
     return (
     <html lang='en'>
-        <body className="overflow-y-scroll">
+        <body className='overflow-scroll'>
             <Navbar />
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             
