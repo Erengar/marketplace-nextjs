@@ -1,6 +1,6 @@
 "use client";
 import { addCategoryServer } from '../../serveractions/addCategoryServer';
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import CategoriesManager from './CategoriesManager';
 import { CategoryType } from '../../schemas';
 import SubmitButton from './SubmitButton';

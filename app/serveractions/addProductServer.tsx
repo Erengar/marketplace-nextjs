@@ -76,8 +76,8 @@ export async function addProductServer(prevState:any, formData: FormData) {
             };
         }
     }
-    revalidatePath("/admin?table=products")
-    revalidatePath(`/${data.data.category}`)
+    revalidatePath("/admin")
+    revalidatePath("[category]", 'page'),
     revalidatePath("/api/products")
     revalidateTag('products')
 }
