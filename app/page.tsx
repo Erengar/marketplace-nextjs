@@ -3,12 +3,13 @@ import { Metadata } from 'next'
 import { CategoryType } from './schemas'
 import {sql} from "@vercel/postgres"
 
+// Opt out of caching for all data requests in the route segment
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
     title: 'Home',
 }
 
-// Opt out of caching for all data requests in the route segment
-//export const dynamic = 'force-dynamic'
 
 export default async function Page() {
 
