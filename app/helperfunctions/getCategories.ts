@@ -2,7 +2,14 @@ import { CategoryType } from "../schemas"
 
 
 export default async function getCategories(): Promise<CategoryType[]> {
-    const result = await fetch(process.env.URL + '/api/categories')
-    const data = await result.json()
-    return data.data
+    let domain : string
+    if (process.env.vercel) {
+        domain = "https://marketplace-nextjs-roan.vercel.app"
+    } else {
+        domain = "http://localhost:3000"
+    }
+    const result = await fetch(`${domain}/api/categories`, {next: {tags: ["categories"]}})
+    .then((res) => res.json())
+    .then((data) => data['data'] as CategoryType[])
+    return result
 }
