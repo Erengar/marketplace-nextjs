@@ -3,6 +3,7 @@ import { UploadcareSimpleAuthSchema, deleteFile } from '@uploadcare/rest-client'
 import { sql } from "@vercel/postgres";
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { ProductType } from '../schemas';
+import revalidateProducts from '../helperfunctions/revalidateProducts';
 
 export async function deleteProductServer(product: ProductType) {
     const uploadcareSimpleAuthSchema = new UploadcareSimpleAuthSchema({
@@ -11,9 +12,5 @@ export async function deleteProductServer(product: ProductType) {
     });
     deleteFile({uuid: product.image}, {authSchema:uploadcareSimpleAuthSchema});
     sql`DELETE FROM products WHERE id = ${product.id}`
-    revalidatePath("/admin")
-    revalidatePath("/")
-    revalidatePath(`/${product.category}`)
-    revalidatePath("/api/products")
-    revalidateTag('products')
+    await revalidateProducts()
 }

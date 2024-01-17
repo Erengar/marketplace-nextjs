@@ -4,6 +4,7 @@ import {sql} from "@vercel/postgres"
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { uploadFile } from '@uploadcare/upload-client';
 import { UploadcareSimpleAuthSchema, deleteFile } from '@uploadcare/rest-client';
+import revalidateProducts from '../helperfunctions/revalidateProducts';
 
 const product = z.object({
     name: z.string({invalid_type_error: "Invalid name", required_error: "Name is required"}).min(3, "Name must contain at least 3 character(s)").max(50, "Name must contain at most 50 character(s)"),
@@ -76,8 +77,5 @@ export async function addProductServer(prevState:any, formData: FormData) {
             };
         }
     }
-    revalidatePath("/admin")
-    revalidatePath("[category]", 'page'),
-    revalidatePath("/api/products")
-    revalidateTag('products')
+    await revalidateProducts();
 }
