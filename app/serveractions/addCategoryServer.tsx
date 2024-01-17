@@ -1,7 +1,7 @@
 "use server";
 import { z } from 'zod';
 import {sql} from "@vercel/postgres"
-import { revalidatePath, revalidateTag } from 'next/cache';
+import revalidateCategories from '../helperfunctions/revalidateCategories';
 
 const category = z.object({
     name: z.string({invalid_type_error: "Invalid name", required_error:"Name is required"}).min(3, "Name must contain at least 3 character(s).").max(50, "Name must contain at most 50 character(s)."),
@@ -28,9 +28,6 @@ export async function addCategoryServer(prevState: any, formData: FormData) {
             }
         }
     } 
-    revalidatePath('/', 'page'),
-    revalidatePath("/admin"),
-    revalidatePath("/[category]", 'page'),
-    revalidateTag("categories")
+    await revalidateCategories()
     
 }
