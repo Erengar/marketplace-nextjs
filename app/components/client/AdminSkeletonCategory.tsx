@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 
 export default function AdminSkeletonCategory() {
-    const numberOfSkeletons = 15;
+    const numberOfSkeletons = 20;
     return (
         <>
             {Array.from({ length: numberOfSkeletons }).map((_, index) => (
