@@ -12,7 +12,6 @@ export async function GET(
     let limit = 20
 
     try {
-        throw new Error('Error')
         const res = request.nextUrl.searchParams
         if (res.has('offset')) {
             offset = parseInt(res.get('offset')!);
@@ -30,7 +29,6 @@ export async function GET(
             })
 
     } catch (error: any) {
-        throw new Error(error.message)
         return NextResponse.json(
             {
                 error: error.message
