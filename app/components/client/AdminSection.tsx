@@ -1,7 +1,7 @@
 "use client";
 import AddCategory from "./AddCategory";
 import SelectTable from "./SelectTable";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import AddProduct from "./AddProduct";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CategoryType } from "../../schemas";
@@ -25,6 +25,7 @@ export default function AdminSection() {
     return (
         <>
             <SelectTable selectedTable={selectedTable} setSelectedTable={setSelectedTable}/>
+            <Suspense fallback={<div>Loading...</div>}/>
             {selectedTable === "category" && <AddCategory categories={categories} setCategories={setCategories}/>}
             {selectedTable === "products" && <AddProduct categories={categories}/>}
         </>
