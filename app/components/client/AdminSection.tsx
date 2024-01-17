@@ -25,9 +25,7 @@ export default function AdminSection() {
     return (
         <>
             <SelectTable selectedTable={selectedTable} setSelectedTable={setSelectedTable}/>
-            <Suspense fallback={<div>ERRROROROROROROR</div>}>
             {selectedTable === "category" && <AddCategory categories={categories} setCategories={setCategories}/>}
-            </Suspense>
             {selectedTable === "products" && <AddProduct categories={categories}/>}
         </>
     )
