@@ -1,7 +1,7 @@
 "use client";
 import AddCategory from "./AddCategory";
 import SelectTable from "./SelectTable";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import AddProduct from "./AddProduct";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CategoryType } from "../../schemas";
