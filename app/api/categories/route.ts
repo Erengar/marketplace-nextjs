@@ -11,20 +11,32 @@ export async function GET(
     let offset = 0
     let limit = 20
 
-    const res = request.nextUrl.searchParams
-    if (res.has('offset')) {
-        offset = parseInt(res.get('offset')!);
-    }
-    if (res.has('limit')) {
-        limit = parseInt(res.get('limit')!);
-    }
+    try {
+        throw new Error('Error')
+        const res = request.nextUrl.searchParams
+        if (res.has('offset')) {
+            offset = parseInt(res.get('offset')!);
+        }
+        if (res.has('limit')) {
+            limit = parseInt(res.get('limit')!);
+        }       
+        const {rows}  = await sql<CategoryType>`SELECT * FROM categories LIMIT ${limit} OFFSET ${offset}`
+        return NextResponse.json(
+            {
+                data: rows
+            },
+            {
+                status: 200
+            })
 
-    const {rows}  = await sql<CategoryType>`SELECT * FROM categories LIMIT ${limit} OFFSET ${offset}`
-    return NextResponse.json(
-        {
-            data: rows
-        },
-        {
-            status: 200
-        })
+    } catch (error: any) {
+        throw new Error(error.message)
+        return NextResponse.json(
+            {
+                error: error.message
+            },
+            {
+                status: 500
+            })
+    }
 }
