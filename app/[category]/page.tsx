@@ -1,8 +1,6 @@
 import { Metadata } from 'next';
 import { capitalize } from 'lodash';
 import Products from '../components/client/Products';
-import { sql } from '@vercel/postgres';
-import { ProductType } from '../schemas';
 import { Suspense } from 'react';
 import SkeletonProducts from '../components/server/SkeletonProducts';
 import { LoremIpsum } from 'react-lorem-ipsum';

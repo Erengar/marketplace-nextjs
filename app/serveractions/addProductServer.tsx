@@ -1,7 +1,6 @@
 "use server";
 import { z } from 'zod';
 import {sql} from "@vercel/postgres"
-import { revalidatePath, revalidateTag } from 'next/cache';
 import { uploadFile } from '@uploadcare/upload-client';
 import { UploadcareSimpleAuthSchema, deleteFile } from '@uploadcare/rest-client';
 import revalidateProducts from '../helperfunctions/revalidateProducts';

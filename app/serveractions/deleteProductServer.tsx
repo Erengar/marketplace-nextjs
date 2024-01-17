@@ -1,7 +1,6 @@
 "use server";
 import { UploadcareSimpleAuthSchema, deleteFile } from '@uploadcare/rest-client';
 import { sql } from "@vercel/postgres";
-import { revalidatePath, revalidateTag } from 'next/cache';
 import { ProductType } from '../schemas';
 import revalidateProducts from '../helperfunctions/revalidateProducts';
 
