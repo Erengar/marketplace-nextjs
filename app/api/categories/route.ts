@@ -11,6 +11,7 @@ export async function GET(
     let offset = 0
     let limit = 20
 
+
     try {
         const res = request.nextUrl.searchParams
         if (res.has('offset')) {

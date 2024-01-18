@@ -8,7 +8,7 @@ export default async function getProducts(category: string): Promise<ProductType
     } else {
         domain = "http://localhost:3000"
     }
-    const result = await fetch(`${domain}/api/products/category/${category}`, {next: {tags: ["products"]}})
+    const result = await fetch(`${domain}/api/products/category/${category}/`, {next: {tags: ["products"]}})
     .then(res => res.json())
     .then(data => data['data'] as ProductType[])
     return result

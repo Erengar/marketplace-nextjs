@@ -6,7 +6,7 @@ export default function SelectTable(props: {selectedTable: string, setSelectedTa
 
     function selectTable(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         if (e.currentTarget.textContent){
-            props.setSelectedTable(e.currentTarget.textContent);
+            props.setSelectedTable(e.currentTarget.textContent.toLowerCase());
         }
     }
     return (

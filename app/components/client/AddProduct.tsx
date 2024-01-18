@@ -15,6 +15,8 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
     const [needRerender, setNeedRerender] = useState(false);
     //This is the state that will hold the products
     const [products, setProducts] = useState<ProductType[] | null>(null);
+    //This is the state that will hold the selected category to filter products
+    const [categoriesFilter, setCategoriesFilter] = useState<string | null>(null);
 
     const [message, formAction] = useFormState(addProductServer, null);
 
@@ -51,6 +53,13 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
                 file:p-3 file:md:p-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-200 file:text-blue-800 hover:file:bg-blue-300 file:cursor-pointer"/>
                 <SubmitButton text="Add Product" setNeedRerender={setNeedRerender}/>
             </form>
+            <div className="flex place-content-end">
+                <select onChange={(e) => setCategoriesFilter(e.target.value)} className="border border-black rounded w-fit md:w-20 h-8 text-sky-950 antialised text-sm md:text-base m-2 md:m-4 align-self-end">
+                    {categories && categories.map((category) => (
+                        <option key={category.name} value={category.name}>{category.name}</option>
+                        ))}
+                </select>
+            </div>
             <div className="mt-2 ml-4 md:ml-20 grid grid-cols-6 font-bold text-xs md:text-base">
                 <span className="mr-4">Image</span>
                 <span className="mr-4">Name</span>
@@ -60,7 +69,11 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
             </div>
             <ul className="flex flex-col divide-y ml-4 md:ml-20">
                 {products
-                ? products.map((product) => (
+                ? categoriesFilter
+                    ? products.filter((product) => product.category === categoriesFilter).map((product) => (
+                        <ProductManager key={product.id} product={product} setNeedRerender={setNeedRerender}/>
+                        ))
+                    :products.map((product) => (
                     <ProductManager key={product.id} product={product} setNeedRerender={setNeedRerender}/>
                     ))
                 : <AdminSkeletonProduct/>}
