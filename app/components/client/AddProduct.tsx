@@ -21,7 +21,7 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
     const [message, formAction] = useFormState(addProductServer, null);
 
     useEffect(()=>{
-        fetch('/api/products', {cache: 'no-store'}).then((res) => res.json()).then((data) => setProducts(data.data));
+        fetch('/api/products/', {cache: 'no-store'}).then((res) => res.json()).then((data) => setProducts(data.data));
     }, [needRerender])
     return (
         <motion.section className="bg-slate-100"
