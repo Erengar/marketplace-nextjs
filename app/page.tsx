@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 export default async function Page() {
     const categories: CategoryType[] = await getCategories()
     const {rows}  = await sql<CategoryType>`SELECT * FROM categories`
+    console.log(categories)
 
     return (
     <main>
