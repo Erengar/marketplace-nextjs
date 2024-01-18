@@ -3,8 +3,11 @@ import { ProductType, CartItemType } from "../../schemas";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import SetImage from "./SetImage";
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { CurrencyContext } from "../context/CurrencyProvider";
 
 export default function Product({product}: { product: ProductType}) {
+    const currency = useContext(CurrencyContext)
     
     const addItem = () => {
         let shoppingCart : any = localStorage.getItem('shoppingCart')
@@ -33,7 +36,7 @@ export default function Product({product}: { product: ProductType}) {
             <SetImage uuid={product.image} name={product.name} width={330} height={220}/>
             <h2 className="text-lg antialiased font-semibold line-clamp-1 pl-1">{product.name}</h2>
             <div className='flex content-center justify-between px-0.5'>
-                <h3 className="text-base antialiased font-bold text-sky-950 pl-1">{product.price}€</h3>
+                <h3 className="text-base antialiased font-bold text-sky-950 pl-1">{product.price}{currency}</h3>
                 <div className="flex flex-col">
                     <motion.button
                     onClick={addItem}

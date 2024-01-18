@@ -1,9 +1,7 @@
-import CartItems from "../components/client/CartItems"
+import ShoppingCart from "../components/server/ShoppingCart"
 
 export default function Page() {
     return (
-        <section className="mt-5">
-            <CartItems/>
-        </section>
+        <ShoppingCart/>
     )
 }

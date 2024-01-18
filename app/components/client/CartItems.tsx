@@ -5,11 +5,9 @@ import { CartItemType} from "../../schemas"
 import RemoveItemModal from "../server/RemoveItemModal";
 import { motion } from "framer-motion";
 
-export default function CartItems() {
-    // This is the state of the shopping cart
-    const [items, setItems] = useState<CartItemType[]>([]);
+export default function CartItems({items, setItems}: {items: CartItemType[], setItems: (items: CartItemType[]) => void}) {
     // This is the state of the item being removed
-    const [removingItem, setRemovingItem] = useState(null as CartItemType | null);
+    const [removingItem, setRemovingItem] = useState<CartItemType | null>(null);
 
     useEffect(() => {
         // This function is called whenever the shopping cart is updated
@@ -28,7 +26,7 @@ export default function CartItems() {
     return (
         <>
             <motion.ul
-            className="flex flex-col items-center gap-px divide-y-2"
+            className="flex flex-col items-center gap-px divide-y-2 col-span-8 xl:col-span-10"
             initial={{opacity:0}}
             animate={{opacity:1}}
             transition={{duration:1}}>

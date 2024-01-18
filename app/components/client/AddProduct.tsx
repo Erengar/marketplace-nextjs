@@ -1,6 +1,6 @@
 "use client";
 import SubmitButton from "./SubmitButton";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useContext} from "react";
 import { CategoryType } from "../../schemas";
 import { addProductServer } from "../../serveractions/addProductServer";
 import { ProductType } from "../../schemas";
@@ -8,9 +8,12 @@ import ProductManager from "./ProductManager";
 import { useFormState } from "react-dom";
 import AdminErrorMessage from "../server/AdminErrorMessage";
 import AdminSkeletonProduct from "./AdminSkeletonProduct";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion} from "framer-motion";
+import { CurrencyContext } from "../context/CurrencyProvider";
 
 export default function Addproduct({categories}: {categories: CategoryType[] | null}){
+    const currency = useContext(CurrencyContext)
+    const [price, setPrice] = useState(`0${currency}`);
     //This is the state that will be used to refetch categories and rerender the CategoriesManager component
     const [needRerender, setNeedRerender] = useState(false);
     //This is the state that will hold the products
@@ -33,7 +36,7 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
                 <label htmlFor="product-name" className="text-sm md:text-base">Name:</label>
                 <input id="product-name" type="text" name='name' required className="border-2 border-black rounded md:w-3/12 w-60 md:h-8"/>
                 <label htmlFor="product-price" className="text-sm md:text-base">Price:</label>
-                <input id="product-price" type="number" step="any" name='price' required className="border-2 border-black rounded md:w-3/12 w-60 md:h-8"/>
+                <input value={price} onChange={(e) => {setPrice(e.target.value.replace("€",'') + "€")}} id="product-price" type="" step="any" name='price' required className="border-2 border-black rounded md:w-3/12 w-60 md:h-8"/>
                 <label htmlFor="product-amount" className="text-sm md:text-base">Stock:</label>
                 <input id="product-amount" type="number" name='amount' required className="border-2 border-black rounded md:w-3/12 w-60 md:h-8"/>
                 <label htmlFor="product-category" className="text-sm md:text-base">Category:</label>
