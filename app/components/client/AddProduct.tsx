@@ -71,7 +71,7 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
                 <label htmlFor="product-name" className="text-sm md:text-base">Name:</label>
                 <input id="product-name" type="text" name='name' required className="border-2 border-black rounded md:w-3/12 w-60 md:h-8"/>
                 <label htmlFor="product-price" className="text-sm md:text-base">Price:</label>
-                <input value={price} onChange={(e) => {setPrice(e.target.value.replace("€",'') + "€")}} id="product-price" type="" step="any" name='price' required className="border-2 border-black rounded md:w-3/12 w-60 md:h-8"/>
+                <input id="product-price" type="number" step="any" name='price' required className="border-2 border-black rounded md:w-3/12 w-60 md:h-8"/>
                 <label htmlFor="product-amount" className="text-sm md:text-base">Stock:</label>
                 <input id="product-amount" type="number" name='amount' required className="border-2 border-black rounded md:w-3/12 w-60 md:h-8"/>
                 <label htmlFor="product-category" className="text-sm md:text-base">Category:</label>
