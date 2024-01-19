@@ -18,35 +18,6 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
 
     //This is the state that holds information how to sort the products
     const [sortSignal, setSortSignal] = useState('name');
-    //This is the function that holds sort callback function
-    const sort = useCallback((a: ProductType, b: ProductType) => {
-        if ('-' === sortSignal.charAt(0)) {
-            if (sortSignal.includes('name')) {
-                return b.name.localeCompare(a.name)
-            } else if (sortSignal.includes('price')) {
-                return b.price - a.price
-            } else if (sortSignal.includes('stock')) {
-                return b.amount - a.amount
-            } else if (sortSignal.includes('category')) {
-                return b.category.localeCompare(a.category)
-            } else {
-                return b.name.localeCompare(a.name)
-            }
-        } else {
-            if (sortSignal === 'name') {
-                return a.name.localeCompare(b.name)
-            } else if (sortSignal === 'price') {
-                return a.price - b.price
-            } else if (sortSignal === 'stock') {
-                return a.amount - b.amount
-            } else if (sortSignal === 'category') {
-                return a.category.localeCompare(b.category)
-            } else {
-                return a.name.localeCompare(b.name)
-            }
-        }
-    }, [sortSignal])
-
 
 
     //This is the state that will be used to refetch categories and rerender the CategoriesManager component
@@ -54,13 +25,16 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
     //This is the state that will hold the products
     const [products, setProducts] = useState<ProductType[] | null>(null);
     //This is the state that will hold the selected category to filter products
-    const [categoriesFilter, setCategoriesFilter] = useState<string | null>(null);
+    const [categoriesFilter, setCategoriesFilter] = useState<string | null>('All');
 
     const [message, formAction] = useFormState(addProductServer, null);
 
+
+    const productLimit = 20;
+
     useEffect(()=>{
-        fetch('/api/products/', {cache: 'no-store'}).then((res) => res.json()).then((data) => setProducts(data.data));
-    }, [needRerender])
+        fetch(`/api/products/?currentpage=1&limit=${productLimit}&category=${categoriesFilter}&sort=${sortSignal}`, {cache: 'no-store'}).then((res) => res.json()).then((data) => setProducts(data.data));
+    }, [needRerender, categoriesFilter, sortSignal])
     return (
         <motion.section className="bg-slate-100"
         initial={{opacity:0}}
@@ -93,7 +67,7 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
             </form>
             <div className="flex place-content-end">
                 <select onChange={(e) => setCategoriesFilter(e.target.value)} className="border border-black rounded w-fit md:w-20 h-8 text-sky-950 antialised text-sm md:text-base m-2 md:m-4 align-self-end">
-                    <option value={''}>All</option>
+                    <option value='All'>All</option>
                     {categories && categories.map((category) => (
                         <option key={category.name} value={category.name}>{category.name}</option>
                         ))}
@@ -102,11 +76,7 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
             <ProductTableHead sortSignal={sortSignal} setSortSignal={setSortSignal}/>
             <ul className="flex flex-col divide-y ml-4 md:ml-20">
                 {products
-                ? categoriesFilter
-                    ? products.filter((product) => product.category === categoriesFilter).sort(sort).map((product) => (
-                        <ProductManager key={product.id} product={product} setNeedRerender={setNeedRerender}/>
-                        ))
-                    :products.sort(sort).map((product) => (
+                ? products.map((product) => (
                     <ProductManager key={product.id} product={product} setNeedRerender={setNeedRerender}/>
                     ))
                 : <AdminSkeletonProduct/>}
