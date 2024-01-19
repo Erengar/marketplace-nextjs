@@ -1,6 +1,6 @@
 "use client";
 import SubmitButton from "./SubmitButton";
-import { useState, useEffect, useContext} from "react";
+import { useState, useEffect, useContext, useCallback} from "react";
 import { CategoryType } from "../../schemas";
 import { addProductServer } from "../../serveractions/addProductServer";
 import { ProductType } from "../../schemas";
@@ -10,10 +10,45 @@ import AdminErrorMessage from "../server/AdminErrorMessage";
 import AdminSkeletonProduct from "./AdminSkeletonProduct";
 import { motion} from "framer-motion";
 import { CurrencyContext } from "../context/CurrencyProvider";
+import ProductTableHead from "./ProductTableHead";
 
 export default function Addproduct({categories}: {categories: CategoryType[] | null}){
     const currency = useContext(CurrencyContext)
     const [price, setPrice] = useState(`0${currency}`);
+
+    //This is the state that holds information how to sort the products
+    const [sortSignal, setSortSignal] = useState('name');
+    //This is the function that holds sort callback function
+    const sort = useCallback((a: ProductType, b: ProductType) => {
+        if ('-' === sortSignal.charAt(0)) {
+            if (sortSignal.includes('name')) {
+                return b.name.localeCompare(a.name)
+            } else if (sortSignal.includes('price')) {
+                return b.price - a.price
+            } else if (sortSignal.includes('stock')) {
+                return b.amount - a.amount
+            } else if (sortSignal.includes('category')) {
+                return b.category.localeCompare(a.category)
+            } else {
+                return b.name.localeCompare(a.name)
+            }
+        } else {
+            if (sortSignal === 'name') {
+                return a.name.localeCompare(b.name)
+            } else if (sortSignal === 'price') {
+                return a.price - b.price
+            } else if (sortSignal === 'stock') {
+                return a.amount - b.amount
+            } else if (sortSignal === 'category') {
+                return a.category.localeCompare(b.category)
+            } else {
+                return a.name.localeCompare(b.name)
+            }
+        }
+    }, [sortSignal])
+
+
+
     //This is the state that will be used to refetch categories and rerender the CategoriesManager component
     const [needRerender, setNeedRerender] = useState(false);
     //This is the state that will hold the products
@@ -58,25 +93,20 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
             </form>
             <div className="flex place-content-end">
                 <select onChange={(e) => setCategoriesFilter(e.target.value)} className="border border-black rounded w-fit md:w-20 h-8 text-sky-950 antialised text-sm md:text-base m-2 md:m-4 align-self-end">
+                    <option value={''}>All</option>
                     {categories && categories.map((category) => (
                         <option key={category.name} value={category.name}>{category.name}</option>
                         ))}
                 </select>
             </div>
-            <div className="mt-2 ml-4 md:ml-20 grid grid-cols-6 font-bold text-xs md:text-base">
-                <span className="mr-4">Image</span>
-                <span className="mr-4">Name</span>
-                <span className="mr-4">Price</span>
-                <span className="mr-4">Stock</span>
-                <span className="mr-4">Category</span>
-            </div>
+            <ProductTableHead sortSignal={sortSignal} setSortSignal={setSortSignal}/>
             <ul className="flex flex-col divide-y ml-4 md:ml-20">
                 {products
                 ? categoriesFilter
-                    ? products.filter((product) => product.category === categoriesFilter).map((product) => (
+                    ? products.filter((product) => product.category === categoriesFilter).sort(sort).map((product) => (
                         <ProductManager key={product.id} product={product} setNeedRerender={setNeedRerender}/>
                         ))
-                    :products.map((product) => (
+                    :products.sort(sort).map((product) => (
                     <ProductManager key={product.id} product={product} setNeedRerender={setNeedRerender}/>
                     ))
                 : <AdminSkeletonProduct/>}
