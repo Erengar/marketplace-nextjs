@@ -1,8 +1,8 @@
 "use client";
 import { TailSpin } from 'react-loading-icons'
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-export default function LoadingModal(props: {text: string}) {
+export default function LoadingModal({text}: {text: string}) {
     return (
         <div className="fixed top-0 right-0 left-0 flex justify-center items-center w-full h-full max-h-full bg-gray-500 bg-opacity-50 z-10">
             <motion.div
@@ -12,7 +12,7 @@ export default function LoadingModal(props: {text: string}) {
             exit={{scale:0}}
             transition={{duration:0.1}}>
                 <TailSpin stroke="rgb(8 47 73)"/>
-                <h2 className="text-base antialiased font-bold text-sky-950">{props.text}...</h2>
+                <h2 className="text-base antialiased font-bold text-sky-950">{text}...</h2>
             </motion.div>
         </div>
     )

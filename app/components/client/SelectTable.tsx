@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/router";
 
 
 export default function SelectTable(props: {selectedTable: string, setSelectedTable: (value: string) => void}){

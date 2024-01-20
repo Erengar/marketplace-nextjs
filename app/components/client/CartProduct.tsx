@@ -54,7 +54,7 @@ export default function CartProduct({product, setRemovingItem}: { product: CartI
     return (
         <li className="border-black w-full xl:w-4/5 h-30 flex flex-row items-center place-content-between p-2">
             <div className="flex flex-row gap-2 md:gap-6 w-6/12">
-                <SetImage uuid={product.product.image} name={product.product.name} width={100} height={100} crop={true}/>
+                <SetImage uuid={product.product.image!} name={product.product.name} width={100} height={100} crop={true}/>
                 <h2 className="text-sm md:text-lg antialiased font-semibold line-clamp-1 self-center">{product.product.name}</h2>
             </div>
             <h3 className="text-xs md:text-base antialiased font-bold text-sky-950">{product.product.price}{currency}</h3>

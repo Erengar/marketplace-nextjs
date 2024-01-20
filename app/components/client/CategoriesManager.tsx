@@ -1,11 +1,10 @@
 "use client";
-import {CategoryType} from "../../schemas"
+import {CategoryType} from "../../../db/schema"
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useState } from "react";
 import LoadingModal from "./LoadingModal";
 import {deleteCategoryServer} from "../../serveractions/deleteCategoryServer";
 import {motion, AnimatePresence} from "framer-motion";
-import { useEffect } from "react";
 
 
 export default function CategoriesManager({category, setNeedRerender}: {category: CategoryType, setNeedRerender: React.Dispatch<React.SetStateAction<boolean>>}) {

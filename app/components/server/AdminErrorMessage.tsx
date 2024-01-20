@@ -1,5 +1,3 @@
-import { error } from "console"
-
 export default function AdminErrorMessage({message}: {message: any}) {
     return (
         <div>

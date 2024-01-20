@@ -1,7 +1,5 @@
-import { CategoryType } from '../schemas'
 import Sidebar from '../components/server/Sidebar'
 import React from 'react'
-import { sql } from '@vercel/postgres';
 import ExpandableSidebar from '../components/client/ExpandableSidebar';
 import getCategories from '../helperfunctions/getCategories';
 

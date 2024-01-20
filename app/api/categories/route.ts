@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import { CategoryType } from '../../schemas';
+import { type CategoryType } from '../../../db/schema';
 import { NextResponse } from "next/server";
 import { type NextRequest } from 'next/server';
 

@@ -2,7 +2,7 @@
 import { addCategoryServer } from '../../serveractions/addCategoryServer';
 import { useEffect, useState } from 'react';
 import CategoriesManager from './CategoriesManager';
-import { CategoryType } from '../../schemas';
+import { CategoryType } from '../../../db/schema';
 import SubmitButton from './SubmitButton';
 import {useFormState} from 'react-dom';
 import AdminErrorMessage from '../server/AdminErrorMessage';

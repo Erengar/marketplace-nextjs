@@ -1,9 +1,8 @@
 "use client";
 import SubmitButton from "./SubmitButton";
-import { useState, useEffect, useContext, useCallback} from "react";
-import { CategoryType } from "../../schemas";
+import { useState, useEffect, useContext} from "react";
+import { CategoryType, ProductType } from "../../../db/schema";
 import { addProductServer } from "../../serveractions/addProductServer";
-import { ProductType } from "../../schemas";
 import ProductManager from "./ProductManager";
 import { useFormState } from "react-dom";
 import AdminErrorMessage from "../server/AdminErrorMessage";
@@ -11,10 +10,18 @@ import AdminSkeletonProduct from "./AdminSkeletonProduct";
 import { motion} from "framer-motion";
 import { CurrencyContext } from "../context/CurrencyProvider";
 import ProductTableHead from "./ProductTableHead";
+import Pagination from "./Pagination";
+import LoadingModal from "./LoadingModal";
 
 export default function Addproduct({categories}: {categories: CategoryType[] | null}){
     const currency = useContext(CurrencyContext)
     const [price, setPrice] = useState(`0${currency}`);
+
+    const [fetchingData, setFetchingData] = useState(false);
+
+    //These states are used for pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalObjects, setTotalObjects] = useState(0);
 
     //This is the state that holds information how to sort the products
     const [sortSignal, setSortSignal] = useState('name');
@@ -30,11 +37,18 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
     const [message, formAction] = useFormState(addProductServer, null);
 
 
-    const productLimit = 20;
+    const itemsPerPage = 20;
 
     useEffect(()=>{
-        fetch(`/api/products/?currentpage=1&limit=${productLimit}&category=${categoriesFilter}&sort=${sortSignal}`, {cache: 'no-store'}).then((res) => res.json()).then((data) => setProducts(data.data));
-    }, [needRerender, categoriesFilter, sortSignal])
+        setFetchingData(true);
+        fetch(`/api/products/?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}`, {cache: 'no-store'})
+        .then((res) => res.json())
+        .then((data) => {
+            setProducts(data.data)
+            setTotalObjects(data.total)
+            setFetchingData(false);
+        });
+    }, [needRerender, categoriesFilter, sortSignal, currentPage])
     return (
         <motion.section className="bg-slate-100"
         initial={{opacity:0}}
@@ -65,7 +79,11 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
                 file:p-3 file:md:p-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-200 file:text-blue-800 hover:file:bg-blue-300 file:cursor-pointer"/>
                 <SubmitButton text="Add Product" setNeedRerender={setNeedRerender}/>
             </form>
-            <div className="flex place-content-end">
+            {fetchingData && <LoadingModal text="" />}
+            <div className="flex place-content-around">
+                
+                <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalObjects={totalObjects} itemsPerPage={itemsPerPage}/>
+                
                 <select onChange={(e) => setCategoriesFilter(e.target.value)} className="border border-black rounded w-fit md:w-20 h-8 text-sky-950 antialised text-sm md:text-base m-2 md:m-4 align-self-end">
                     <option value='All'>All</option>
                     {categories && categories.map((category) => (

@@ -1,7 +1,7 @@
 "use client";
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 export default function ExpandableSidebar(){

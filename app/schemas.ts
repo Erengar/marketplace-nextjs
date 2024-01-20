@@ -1,16 +1,4 @@
-export interface CategoryType {
-    name: string;
-}
-
-export interface ProductType {
-    id: number;
-    name: string;
-    price: number;
-    amount: number;
-    image: string;
-    description: string;
-    category: string;
-}
+import { ProductType } from '../db/schema';
 
 export interface CartItemType {
     product: ProductType;

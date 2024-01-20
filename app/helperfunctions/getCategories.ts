@@ -1,4 +1,4 @@
-import { CategoryType } from "../schemas"
+import { CategoryType } from "../../db/schema"
 
 
 export default async function getCategories(): Promise<CategoryType[]> {

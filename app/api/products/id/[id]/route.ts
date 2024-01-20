@@ -1,6 +1,5 @@
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
-import { capitalize } from "lodash";
 
 export async function DELETE(
     request: Request,

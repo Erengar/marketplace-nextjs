@@ -2,7 +2,7 @@
 import { Suspense } from 'react'
 import Loading from '../errors/Loading'
 import Link from 'next/link'
-import { CategoryType } from '@/app/schemas'
+import { CategoryType } from '@/db/schema'
 import { motion } from 'framer-motion'
 
 
