@@ -1,6 +1,6 @@
 import Category from './components/client/Category'
 import { Metadata } from 'next'
-import { CategoryType } from './schemas'
+import { type CategoryType } from '../db/schema'
 import  getCategories  from './helperfunctions/getCategories'
 import { sql } from '@vercel/postgres'
 
