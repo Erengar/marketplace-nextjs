@@ -1,4 +1,4 @@
-import { ProductType } from "../../db/schema"
+import { type ProductType } from "../../db/schema"
 
 
 export default async function getProducts(category: string): Promise<ProductType[]> {

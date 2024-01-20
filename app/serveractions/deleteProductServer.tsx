@@ -1,7 +1,7 @@
 "use server";
 import { UploadcareSimpleAuthSchema, deleteFile } from '@uploadcare/rest-client';
 import { sql } from "@vercel/postgres";
-import { ProductType } from '../../db/schema';
+import { type ProductType } from '../../db/schema';
 import revalidateProducts from '../helperfunctions/revalidateProducts';
 
 export async function deleteProductServer(product: ProductType) {

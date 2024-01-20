@@ -1,4 +1,4 @@
-import {CategoryType} from "../../../db/schema"
+import { type CategoryType} from "../../../db/schema"
 import Link from "next/link"
 
 export default function Sidebar(props: { category: CategoryType, selectedCategory: string }) {

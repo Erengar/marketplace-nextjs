@@ -1,7 +1,7 @@
 "use client";
 import SubmitButton from "./SubmitButton";
 import { useState, useEffect, useContext} from "react";
-import { CategoryType, ProductType } from "../../../db/schema";
+import { type CategoryType, type ProductType } from "../../../db/schema";
 import { addProductServer } from "../../serveractions/addProductServer";
 import ProductManager from "./ProductManager";
 import { useFormState } from "react-dom";

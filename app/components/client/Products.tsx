@@ -1,5 +1,5 @@
 "use client";
-import { ProductType } from "@/db/schema";
+import { type ProductType } from "@/db/schema";
 import Product from "./Product";
 
 export default function Products({products}: {products: ProductType[]}) {

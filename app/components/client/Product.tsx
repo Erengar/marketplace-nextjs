@@ -1,6 +1,6 @@
 "use client";
 import { CartItemType } from "../../schemas";
-import { ProductType } from "@/db/schema";
+import { type ProductType } from "@/db/schema";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import SetImage from "./SetImage";
 import { motion } from "framer-motion";

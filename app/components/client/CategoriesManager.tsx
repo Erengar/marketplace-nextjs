@@ -1,5 +1,5 @@
 "use client";
-import {CategoryType} from "../../../db/schema"
+import {type CategoryType} from "../../../db/schema"
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useState } from "react";
 import LoadingModal from "./LoadingModal";
