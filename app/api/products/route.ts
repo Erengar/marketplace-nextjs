@@ -55,13 +55,14 @@ export async function GET(
     try {
         const res = request.nextUrl.searchParams
         category = res.get('category') || 'All'
+        category = capitalize(category)
         if (category === 'All') {
             if (sortDirection === 'ASC') {
                 result = await db.select().from(products).orderBy(asc(sort))
                 total = result.length
                 result = result.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
             } else {
-                result = await db.select().from(products).orderBy(desc(sort)).limit(limit)
+                result = await db.select().from(products).orderBy(desc(sort))
                 total = result.length
                 result = result.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
             }

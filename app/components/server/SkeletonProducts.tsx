@@ -1,8 +1,6 @@
-export default function SkeletonProducts(){
-    const numberOfSkeletons = 15;
+export default function SkeletonProducts({numberOfSkeletons}: {numberOfSkeletons: number}){
     return (
         <>
-            <h1 className="m-auto my-2 w-3/12 h-7 md:h-10 bg-slate-300 rounded animate-pulse duration-1000"></h1>
             <ul className="flex gap-3 flex-wrap">
                 {Array.from({ length: numberOfSkeletons }).map((_, index) => (
                     <li key={index} className=" rounded w-80 h-72 grow md:grow-0">

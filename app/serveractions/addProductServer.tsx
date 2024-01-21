@@ -4,6 +4,7 @@ import {sql} from "@vercel/postgres"
 import { uploadFile } from '@uploadcare/upload-client';
 import { UploadcareSimpleAuthSchema, deleteFile } from '@uploadcare/rest-client';
 import revalidateProducts from '../helperfunctions/revalidateProducts';
+import { capitalize } from 'lodash';
 
 const product = z.object({
     name: z.string({invalid_type_error: "Invalid name", required_error: "Name is required"}).min(3, "Name must contain at least 3 character(s)").max(50, "Name must contain at most 50 character(s)"),
@@ -58,7 +59,11 @@ export async function addProductServer(prevState:any, formData: FormData) {
     }
     
 
-    const {name, price, amount, description, category} = data.data;
+    let {name, price, amount, description, category} = data.data;
+    //Capitalize name and trim whitespace
+    name = capitalize(name).trim();
+    description = description.trim();
+    
     try{
         await sql`INSERT INTO products (name, price, amount, description, category, image) VALUES (${name}, ${price}, ${amount},${description}, ${category}, ${image})`;
     } catch (e: any) {

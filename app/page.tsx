@@ -2,7 +2,6 @@ import Category from './components/client/Category'
 import { Metadata } from 'next'
 import { type CategoryType } from '../db/schema'
 import  getCategories  from './helperfunctions/getCategories'
-import { sql } from '@vercel/postgres'
 
 
 export const metadata: Metadata = {

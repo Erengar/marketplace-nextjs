@@ -17,6 +17,7 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
     const currency = useContext(CurrencyContext)
     const [price, setPrice] = useState(`0${currency}`);
 
+    //This state is used to show a loading modal when fetching data
     const [fetchingData, setFetchingData] = useState(false);
 
     //These states are used for pagination
@@ -36,15 +37,21 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
 
     const [message, formAction] = useFormState(addProductServer, null);
 
+    //This useEffect will reset the current page to 1 when the categoriesFilter changes, whn user selects a new category
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [categoriesFilter])
+
 
     const itemsPerPage = 20;
 
     useEffect(()=>{
         setFetchingData(true);
-        fetch(`/api/products/?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}`, {cache: 'no-store'})
+        fetch(`/api/products/?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}`, {next: {tags: ["products"]}})
         .then((res) => res.json())
         .then((data) => {
             setProducts(data.data)
+            console.log(data.total)
             setTotalObjects(data.total)
             setFetchingData(false);
         });
