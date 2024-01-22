@@ -33,8 +33,8 @@ export default function Products({category}: {category:string}) {
             </div>
             <ul className="flex gap-3 flex-wrap">
                 {products
-                ? products.map((product: ProductType) => (
-                    <Product key={product.id} product={product} totalObjects={totalObjects}/>
+                ? products.map((product: ProductType, index) => (
+                    <Product key={product.id} product={product} currentPage={currentPage} totalObjects={totalObjects} itemsPerPage={itemsPerPage} index={index}/>
                     ))
                 : <SkeletonProducts numberOfSkeletons={itemsPerPage}/>}
             </ul>

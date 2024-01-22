@@ -7,7 +7,9 @@ import { easeIn, easeOut, motion } from "framer-motion";
 import { useContext, useEffect, useRef, useState } from "react";
 import { CurrencyContext } from "../context/CurrencyProvider";
 
-export default function Product({product, totalObjects}: { product: ProductType, totalObjects: number}) {
+export default function Product(
+    {product, currentPage, totalObjects, itemsPerPage, index}:
+    { product: ProductType, currentPage:number, totalObjects: number, itemsPerPage:number, index:number}) {
     const currency = useContext(CurrencyContext)
     // State for width of the element
     const [width, setWidth] = useState(0)
@@ -52,8 +54,11 @@ export default function Product({product, totalObjects}: { product: ProductType,
         };
     }, []);
 
+    // We want to turn off grow if we are on the last row and there are less than 3 items left
+    const shoulYouGrow = ((totalObjects - ((currentPage -1)  * itemsPerPage)) - index + 1) > (totalObjects % 5 >= 3 ? 1 : 3)
+
     return (
-        <motion.li ref={elementRef} className={`border-2 border-black border-solid rounded w-80 h-72 ${totalObjects > 2 && "grow"}`}
+        <motion.li ref={elementRef} className={`border-2 border-black border-solid rounded w-80 h-72 ${shoulYouGrow && "grow"}`}
         initial={{opacity:0}}
         animate={{opacity:1}}
         transition={{duration:0.5, ease: "easeIn"}}>
