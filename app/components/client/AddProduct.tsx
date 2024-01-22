@@ -48,11 +48,6 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
     const itemsPerPage = 20;
 
     useEffect(()=>{
-        if(firstRender.current){
-            firstRender.current = false;
-        } else {
-            setFetchingData(true);
-        }
         fetch(`/api/products/?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}`, {next: {tags: ["products"]}})
         .then((res) => res.json())
         .then((data) => {

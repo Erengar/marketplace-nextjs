@@ -3,13 +3,16 @@ import { CartItemType } from "../../schemas";
 import { type ProductType } from "@/db/schema";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import SetImage from "./SetImage";
-import { motion } from "framer-motion";
-import { useContext } from "react";
+import { easeIn, easeOut, motion } from "framer-motion";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CurrencyContext } from "../context/CurrencyProvider";
 
-export default function Product({product}: { product: ProductType}) {
+export default function Product({product, totalObjects}: { product: ProductType, totalObjects: number}) {
     const currency = useContext(CurrencyContext)
+    // State for width of the element
+    const [width, setWidth] = useState(0)
     
+    // Add item to shopping cart
     const addItem = () => {
         let shoppingCart : any = localStorage.getItem('shoppingCart')
         if (shoppingCart) {
@@ -30,25 +33,47 @@ export default function Product({product}: { product: ProductType}) {
         window.dispatchEvent(new Event('storage'))
     }
 
+    // Get width of the element to set the width of the image
+    const elementRef = useRef(null);
+    useEffect(() => {
+        const observer = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                setWidth(Math.ceil(entry.contentRect.width))
+            }
+        });
+        if (elementRef.current) {
+            observer.observe(elementRef.current);
+        }
+
+        return () => {
+            if (elementRef.current) {
+                observer.unobserve(elementRef.current);
+            }
+        };
+    }, []);
+
     return (
-        <motion.li className="border-2 border-black border-solid rounded w-80 h-72"
+        <motion.li ref={elementRef} className={`border-2 border-black border-solid rounded w-80 h-72 ${totalObjects > 2 && "grow"}`}
         initial={{opacity:0}}
-        animate={{opacity:1}}>
-            <SetImage uuid={product.image} name={product.name} width={330} height={220}/>
-            <h2 className="text-lg antialiased font-semibold line-clamp-1 pl-1">{product.name}</h2>
-            <div className='flex content-center justify-between px-0.5'>
-                <h3 className="text-base antialiased font-bold text-sky-950 pl-1">{product.price}{currency}</h3>
-                <div className="flex flex-col">
+        animate={{opacity:1}}
+        transition={{duration:0.5, ease: "easeIn"}}>
+            <SetImage uuid={product.image} name={product.name} width={width} height={220}/>
+            <div className='flex content-center justify-between p-1'>
+                <div>
+                    <h2 className="text-lg w-48 antialiased font-semibold line-clamp-1">{product.name}</h2>
+                    <h3 className="text-base antialiased font-bold text-sky-950">{product.price}{currency}</h3>
+                </div>
+                <div className="flex flex-col self-end">
                     <motion.button
                     onClick={addItem}
                     whileHover={{scale:1.2}}>
                         <AddShoppingCartIcon className="text-sky-600"/>
                     </motion.button>
                     <h4 className="text-xs antialised font-normal text-sky-600">
-                    {product.amount > 0 ?
-                    "In stock":
-                    "Out of stock"
-                }
+                    {product.amount > 0
+                    ? "In stock"
+                    : "Out of stock"
+                    }
                     </h4>
                 </div>
             </div>

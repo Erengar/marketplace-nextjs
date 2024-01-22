@@ -24,7 +24,6 @@ export default function Products({category}: {category:string}) {
         .then((data) => {
             setProducts(data.data)
             setTotalObjects(data.total)
-            console.log(data.total)
         })
     }, [currentPage, sortSignal])
     return (
@@ -35,12 +34,11 @@ export default function Products({category}: {category:string}) {
             <ul className="flex gap-3 flex-wrap">
                 {products
                 ? products.map((product: ProductType) => (
-                    <Product key={product.id} product={product}/>
+                    <Product key={product.id} product={product} totalObjects={totalObjects}/>
                     ))
-                    : <SkeletonProducts numberOfSkeletons={itemsPerPage}/>}
+                : <SkeletonProducts numberOfSkeletons={itemsPerPage}/>}
             </ul>
             <div className="mt-6 mb-6 flex justify-center">
-
                 <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalObjects={totalObjects} itemsPerPage={itemsPerPage}/>
             </div>
         </>
