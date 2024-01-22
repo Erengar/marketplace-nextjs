@@ -66,7 +66,7 @@ export default function Product({product, totalObjects}: { product: ProductType,
                 <div className="flex flex-col self-end">
                     <motion.button
                     onClick={addItem}
-                    whileHover={{scale:1.2}}>
+                    whileHover={{rotate:[0, 10, -10, 10, -10, 0]}}>
                         <AddShoppingCartIcon className="text-sky-600"/>
                     </motion.button>
                     <h4 className="text-xs antialised font-normal text-sky-600">

@@ -14,7 +14,7 @@ export default async function Page() {
 
     return (
     <main>
-        <ul className="flex flex-row flex-wrap gap-6 m-auto mx-2 xl:mx-80 mt-12">
+        <ul className="flex flex-row flex-wrap gap-16 m-auto mx-2 xl:mx-80 mt-12">
             {categories.map((category) => (
                 <Category key={category.name} category={category} />
                 ))}
