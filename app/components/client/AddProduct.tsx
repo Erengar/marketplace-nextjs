@@ -1,6 +1,6 @@
 "use client";
 import SubmitButton from "./SubmitButton";
-import { useState, useEffect, useContext} from "react";
+import { useState, useEffect, useContext, useRef} from "react";
 import { type CategoryType, type ProductType } from "../../../db/schema";
 import { addProductServer } from "../../serveractions/addProductServer";
 import ProductManager from "./ProductManager";
@@ -16,6 +16,8 @@ import LoadingModal from "./LoadingModal";
 export default function Addproduct({categories}: {categories: CategoryType[] | null}){
     const currency = useContext(CurrencyContext)
     const [price, setPrice] = useState(`0${currency}`);
+
+    const firstRender = useRef(true);
 
     //This state is used to show a loading modal when fetching data
     const [fetchingData, setFetchingData] = useState(false);
@@ -46,12 +48,15 @@ export default function Addproduct({categories}: {categories: CategoryType[] | n
     const itemsPerPage = 20;
 
     useEffect(()=>{
-        setFetchingData(true);
+        if(firstRender.current){
+            firstRender.current = false;
+        } else {
+            setFetchingData(true);
+        }
         fetch(`/api/products/?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}`, {next: {tags: ["products"]}})
         .then((res) => res.json())
         .then((data) => {
             setProducts(data.data)
-            console.log(data.total)
             setTotalObjects(data.total)
             setFetchingData(false);
         });
