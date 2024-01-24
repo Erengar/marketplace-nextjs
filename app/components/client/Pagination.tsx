@@ -1,7 +1,7 @@
 "use client"
 
 export default function Pagination({currentPage, setCurrentPage, totalObjects, itemsPerPage}:
-    {currentPage: number, setCurrentPage: React.Dispatch<React.SetStateAction<number>>, totalObjects: number, itemsPerPage: number}) {
+    {currentPage: number, setCurrentPage: (i:number) => void, totalObjects: number, itemsPerPage: number}) {
     return (
         <div className="flex gap-4 self-center place-self-center self-center">
             {Array.from({length: Math.ceil(totalObjects/itemsPerPage)}).map((page, index) => (

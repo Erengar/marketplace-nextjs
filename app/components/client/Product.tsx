@@ -3,9 +3,10 @@ import { CartItemType } from "../../schemas";
 import { type ProductType } from "@/db/schema";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import SetImage from "./SetImage";
-import { easeIn, easeOut, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useContext, useEffect, useRef, useState } from "react";
 import { CurrencyContext } from "../context/CurrencyProvider";
+import Link from "next/link";
 
 export default function Product(
     {product, currentPage, totalObjects, itemsPerPage, index}:
@@ -65,7 +66,9 @@ export default function Product(
             <SetImage uuid={product.image} name={product.name} width={width} height={220}/>
             <div className='flex content-center justify-between p-1'>
                 <div>
-                    <h2 className="text-lg w-48 antialiased font-semibold line-clamp-1">{product.name}</h2>
+                    <Link href={`product/${product.name}`}>
+                        <h2 className="text-lg w-48 antialiased font-semibold line-clamp-1">{product.name}</h2>
+                    </Link>
                     <h3 className="text-base antialiased font-bold text-sky-950">{product.price}{currency}</h3>
                 </div>
                 <div className="flex flex-col self-end">

@@ -1,3 +1,5 @@
+"use client"
+
 import UploadcareImage from '@uploadcare/nextjs-loader';
 
 /**
@@ -9,7 +11,7 @@ import UploadcareImage from '@uploadcare/nextjs-loader';
  * @param {boolean} props.crop - if true, the image will be cropped, if false, the image will be resized
  * @returns {JSX.Element} - returns an image
 */
-export default function SetImage({uuid, name, width, height, crop=false} : {uuid:string | null, name: string, width: number, height: number, crop?: boolean}) {
+export default function SetImage({ uuid, name, width, height, crop=false} : { uuid:string | null, name: string, width: number, height: number, crop?: boolean}) {
 
     const backup = "4a946bab-90b1-4b70-8028-94a73bb9f536"
     const resizing = `https://ucarecdn.com/${uuid? uuid: backup}/-/progressive/yes/-/preview/-/smart_resize/${width}x${height}/`

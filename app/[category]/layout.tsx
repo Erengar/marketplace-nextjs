@@ -16,6 +16,7 @@ export default async function Layout({params, children} : {params : { category :
                 <ExpandableSidebar />
             </div>
             {children}
+            <div id="modal-root"></div>
         </main>
     )
 }

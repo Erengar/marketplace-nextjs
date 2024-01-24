@@ -79,7 +79,6 @@ export async function GET(
             }
             
         } catch (error: any) {
-            console.log("API")
             return NextResponse.json({error: error.message})
         }
     return NextResponse.json({data: result, total: total})
