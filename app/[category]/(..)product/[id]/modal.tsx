@@ -3,6 +3,7 @@
 import { type ElementRef, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
+import CloseIcon from '@mui/icons-material/Close';
 
 export function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -19,12 +20,10 @@ export function Modal({ children }: { children: React.ReactNode }) {
   }
 
   return createPortal(
-    <>
-      <dialog ref={dialogRef} onClose={onDismiss}>
-        <button onClick={onDismiss} className="close-button">CLOSE</button>
+      <dialog ref={dialogRef} onClose={onDismiss} className='w-3/4'>
+        <button onClick={onDismiss} className="absolute"><CloseIcon/></button>
         {children}
-      </dialog>
-    </>,
+      </dialog>,
     document.getElementById('modal-root')!
   );
 }
