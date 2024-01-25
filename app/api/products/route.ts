@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse, NextRequest, } from "next/server";
 import { capitalize } from "lodash";
 import { drizzle } from 'drizzle-orm/vercel-postgres';
 import { products } from "../../../db/schema";
@@ -9,7 +9,8 @@ import { asc, desc, eq } from "drizzle-orm";
 export const revalidate = 0
 
 export async function GET(
-    request: NextRequest) {
+    request: NextRequest,
+    response: NextResponse,) {
         const db = drizzle(sql)
         //Default values
         let currentPage : number

@@ -49,9 +49,7 @@ export default function Product(
                     </Link>
                     <h3 className="text-base antialiased font-bold text-sky-950">{product.price}{currency}</h3>
                 </div>
-                <div className="flex flex-col self-end">
-                    <AddToCart product={product} icon={true}/>
-                </div>
+                <AddToCart product={product} icon={true}/>
             </div>
         </motion.li>
     )

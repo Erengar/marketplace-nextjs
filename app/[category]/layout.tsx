@@ -3,7 +3,7 @@ import React from 'react'
 import ExpandableSidebar from '../components/client/ExpandableSidebar';
 import getCategories from '../helperfunctions/getCategories';
 
-export default async function Layout({params, children} : {params : { category : string }, children: React.ReactNode}){
+export default async function Layout({params, children, modal} : {params : { category : string }, children: React.ReactNode, modal: React.ReactNode}){
     const categories = await getCategories()
     return (
         <main className="flex gap-2">
@@ -16,6 +16,7 @@ export default async function Layout({params, children} : {params : { category :
                 <ExpandableSidebar />
             </div>
             {children}
+            {modal}
             <div id="modal-root"></div>
         </main>
     )

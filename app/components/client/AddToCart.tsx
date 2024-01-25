@@ -29,7 +29,7 @@ export default function AddToCart({product, className, icon=false}: {product: Pr
     
     if (icon) {
         return (
-        <div className={className}>
+        <div className={`flex flex-col self-end ${className}`}>
             <motion.button
                 onClick={addItem}
                 whileHover={{rotate:[0, 10, -10, 10, -10, 0]}}>

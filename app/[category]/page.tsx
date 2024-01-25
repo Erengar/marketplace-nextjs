@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { capitalize } from 'lodash';
 import Products from '../components/client/Products';
 import { LoremIpsum } from 'react-lorem-ipsum';
+import Link from 'next/link';
 
 export async function generateMetadata({params, searchParams}:
     {params: {category: string}, searchParams: URLSearchParams}):
@@ -18,6 +19,7 @@ export default async function Page({params} : {params : { category : string }}){
             <h1 className="flex justify-center text-xl antialiased font-semibold
             text-blue-900
             md:text-4xl">
+                <Link href="/product/aaa">aaa</Link>
                 {capitalize(params.category)}
             </h1>
             <div className='text-xs md:text-base mx-4 lg:mx-32 mt-2 mb-4'>

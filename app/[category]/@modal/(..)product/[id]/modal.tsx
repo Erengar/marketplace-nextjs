@@ -20,7 +20,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
   }
 
   return createPortal(
-      <dialog ref={dialogRef} onClose={onDismiss} className='w-3/4'>
+      <dialog ref={dialogRef} onClose={onDismiss} className='w-3/4 rounded'>
         <button onClick={onDismiss} className="absolute"><CloseIcon/></button>
         {children}
       </dialog>,
