@@ -9,11 +9,13 @@ import AdminErrorMessage from '../server/AdminErrorMessage';
 import AdminCategorySkeleton from './AdminSkeletonCategory';
 import { motion } from 'framer-motion';
 
-export default function AddCategory({categories, setCategories}: {categories: CategoryType[] | null, setCategories: React.Dispatch<React.SetStateAction<CategoryType[] | null>>}) {
+export default function AddCategory() {
     //This is the state that will be used to refetch categories and rerender the CategoriesManager component
     const [needRerender, setNeedRerender] = useState(false);
     //This hook is used to handle the form state, it holds message returned from the server
     const [message, formAction] = useFormState(addCategoryServer, null);
+    //This hook is used to hold the categories returned from the server
+    const [categories, setCategories] = useState<CategoryType[] | null>(null);
 
     useEffect(() => {
         fetch('/api/categories/', {next: {tags: ["categories"]}}).then((res) => res.json()).then((data) => {setCategories(data.data)});
