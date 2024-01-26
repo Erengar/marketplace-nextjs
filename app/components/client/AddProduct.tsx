@@ -52,13 +52,13 @@ export default function Addproduct(){
             setFetchingData(false);
         });
     }, [needRerender, categoriesFilter, sortSignal, currentPage])
-    
+
     return (
         <motion.section className="bg-slate-100"
         initial={{opacity:0}}
         animate={{opacity:1}}>
             <AddProductForm categories={categories} setCategories={setCategories} setNeedRerender={setNeedRerender}/>
-            {!fetchingData && <LoadingModal text="" backDrop={false} seeThrough={true}/>}
+            {fetchingData && <LoadingModal text="" backDrop={false} seeThrough={true}/>}
             <div className="flex place-content-around">
                 
                 <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalObjects={totalObjects} itemsPerPage={itemsPerPage}/>
