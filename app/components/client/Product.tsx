@@ -44,7 +44,7 @@ export default function Product(
             <SetImage uuid={product.image} name={product.name} width={width} height={220}/>
             <div className='flex content-center justify-between p-1'>
                 <div>
-                    <Link href={`product/${product.id}`}>
+                    <Link href={`/product/${product.id}`} scroll={false}>
                         <h2 className="text-lg w-48 antialiased font-semibold overflow-hidden text-ellipsis">{product.name}</h2>
                     </Link>
                     <h3 className="text-base antialiased font-bold text-sky-950">{product.price}{currency}</h3>
