@@ -29,10 +29,10 @@ export default function ProductTableHead({sortSignal, setSortSignal}: {sortSigna
     return (
         <div className="mt-2 ml-4 md:ml-20 grid grid-cols-6 font-bold text-xs md:text-base">
             <span className="mr-4">Image</span>
-            <span className="mr-4"><span className=" cursor-pointer" onClick={() => setSort('name')}>Name{window.innerWidth > maxWidthForIcon && icon('name')}</span></span>
-            <span className="mr-4"><span className=" cursor-pointer" onClick={() => setSort('price')}>Price{window.innerWidth > maxWidthForIcon && icon('price')}</span></span>
-            <span className="mr-4"><span className=" cursor-pointer" onClick={() => setSort('stock')}>Stock{window.innerWidth > maxWidthForIcon && icon('stock')}</span></span>
-            <span className="mr-4"><span className=" cursor-pointer" onClick={() => setSort('category')}>Category{window.innerWidth > maxWidthForIcon && icon('category')}</span></span>
+            <span className="mr-4"><span className=" cursor-pointer" onClick={() => setSort('name')}>Name{window && window.innerWidth > maxWidthForIcon && icon('name')}</span></span>
+            <span className="mr-4"><span className=" cursor-pointer" onClick={() => setSort('price')}>Price{window && window.innerWidth > maxWidthForIcon && icon('price')}</span></span>
+            <span className="mr-4"><span className=" cursor-pointer" onClick={() => setSort('stock')}>Stock{window && window.innerWidth > maxWidthForIcon && icon('stock')}</span></span>
+            <span className="mr-4"><span className=" cursor-pointer" onClick={() => setSort('category')}>Category{window && window.innerWidth > maxWidthForIcon && icon('category')}</span></span>
         </div>
     )
 }

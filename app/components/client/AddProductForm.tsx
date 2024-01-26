@@ -1,7 +1,7 @@
 "use client"
 import { addProductServer } from "@/app/serveractions/addProductServer";
 import { CategoryType } from "@/db/schema";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useFormState } from "react-dom";
 import AdminErrorMessage from "../server/AdminErrorMessage"
 import SubmitButton from "./SubmitButton"
