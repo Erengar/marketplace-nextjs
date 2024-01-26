@@ -1,6 +1,7 @@
 "use client"
 
 import UploadcareImage from '@uploadcare/nextjs-loader';
+import { getBlurDataURL } from '@uploadcare/nextjs-loader';
 
 /**
  * This is react component that renders an image from uploadcare
@@ -16,6 +17,8 @@ export default function SetImage({className, uuid, name, width, height, crop=fal
     const backup = "4a946bab-90b1-4b70-8028-94a73bb9f536"
     const resizing = `https://ucarecdn.com/${uuid? uuid: backup}/-/progressive/yes/-/preview/-/smart_resize/${width}x${height}/`
     const cropping= `https://ucarecdn.com/${uuid? uuid: backup}/-/progressive/yes/-/preview/-/scale_crop/${width}x${height}/smart_objects/center/`
+    const blur = `https://ucarecdn.com/${uuid? uuid: backup}/-/preview/-/quality/lightest/-/blur/100/`
+
     return (
         <>
             {uuid
@@ -25,13 +28,18 @@ export default function SetImage({className, uuid, name, width, height, crop=fal
             src={crop? cropping: resizing}
             width={width}
             height={height}
+            placeholder='blur'
+            blurDataURL={blur}
             />
             :<UploadcareImage
             className={className}
             alt="Backup Image"
             src={crop? cropping: resizing}
             width={width}
-            height={height}/>
+            height={height}
+            placeholder='blur'
+            blurDataURL={blur}
+            />
             }
         </>
     )
