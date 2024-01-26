@@ -2,17 +2,17 @@
 import { TailSpin } from 'react-loading-icons'
 import { motion } from 'framer-motion';
 
-export default function LoadingModal({text}: {text: string}) {
+export default function LoadingModal({text, backDrop=true, seeThrough=false}: {text: string, backDrop?: boolean, seeThrough?: boolean}) {
     return (
-        <div className="fixed top-0 right-0 left-0 flex justify-center items-center w-full h-full max-h-full bg-gray-500 bg-opacity-50 z-10">
+        <div className={`fixed top-0 right-0 left-0 flex justify-center items-center w-full h-full max-h-full ${backDrop && "bg-gray-500 bg-opacity-50 z-10"}`}>
             <motion.div
-            className="min-w-[200px] max-w-6xl min-h-min z-20 rounded bg-white border border-black border-solid p-2 flex flex-col place-items-center gap-y-2 "
+            className={`min-w-[200px] max-w-6xl min-h-min z-20 rounded bg-white border border-black border-solid p-2 flex flex-col place-items-center gap-y-2 ${seeThrough && "bg-opacity-50 bg-black"}`}
             initial={{scale:0}}
             animate={{scale:1}}
             exit={{scale:0}}
             transition={{duration:0.1}}>
-                <TailSpin stroke="rgb(8 47 73)"/>
-                <h2 className="text-base antialiased font-bold text-sky-950">{text}...</h2>
+                <TailSpin stroke={`${seeThrough? "rgb(255, 250, 255)" :"rgb(8 47 73)"}`}/>
+                {text && <h2 className={`text-base antialiased font-bold ${seeThrough? "text-white": "text-sky-950"}`}>{text}...</h2>}
             </motion.div>
         </div>
     )

@@ -11,10 +11,6 @@ import LoadingModal from "./LoadingModal";
 import AddProductForm from "./AddProductForm";
 
 export default function Addproduct(){
-    const currency = useContext(CurrencyContext)
-    const [price, setPrice] = useState(`0${currency}`);
-
-    const firstRender = useRef(true);
 
     //This state is used to show a loading modal when fetching data
     const [fetchingData, setFetchingData] = useState(false);
@@ -45,6 +41,7 @@ export default function Addproduct(){
     const itemsPerPage = 20;
 
     useEffect(()=>{
+        setFetchingData(true);
         fetch(`/api/products/?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}`, {next: {tags: ["products"]}})
         .then((res) => res.json())
         .then((data) => {
@@ -58,7 +55,7 @@ export default function Addproduct(){
         initial={{opacity:0}}
         animate={{opacity:1}}>
             <AddProductForm categories={categories} setCategories={setCategories} setNeedRerender={setNeedRerender}/>
-            {fetchingData && <LoadingModal text="" />}
+            {fetchingData && <LoadingModal text="" backDrop={false} seeThrough={true}/>}
             <div className="flex place-content-around">
                 
                 <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalObjects={totalObjects} itemsPerPage={itemsPerPage}/>

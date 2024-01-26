@@ -17,7 +17,6 @@ export default async function Layout({params, children, modal} : {params : { cat
             </div>
             {children}
             {modal}
-            <div id="modal-root"></div>
         </main>
     )
 }

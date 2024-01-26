@@ -14,7 +14,7 @@ export default async function PhotoModal({params}: {params: {id: number}}) {
     return (
         <Modal>
             <Suspense fallback="Loading...">
-            <ProductView modal={true} product={product}/>
+                <ProductView modal={true} product={product}/>
             </Suspense>
         </Modal>);
 }
