@@ -19,8 +19,8 @@ export function Modal({ children }: { children: React.ReactNode }) {
   }
 
   return(
-    <div className="fixed top-0 right-0 left-0 flex justify-center items-center w-full h-full max-h-full bg-gray-500 bg-opacity-50 z-10">
-      <dialog ref={dialogRef} onClose={onDismiss} className='w-3/4 rounded'>
+    <div className="fixed top-0 right-0 left-0 flex justify-center items-center w-full h-full bg-gray-500 bg-opacity-50 z-10">
+      <dialog ref={dialogRef} onClose={onDismiss} className='md:w-3/4 rounded'>
         <button onClick={onDismiss} className="absolute"><CloseIcon/></button>
         {children}
       </dialog>

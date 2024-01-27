@@ -60,7 +60,7 @@ export default function Navbar() {
                     </li>
                 ))}
                 <li key="admin">
-                    <Link href="/admin">Admin</Link>
+                    <Link href="/admin/categories">Admin</Link>
                 </li>
                 <li key="cart">
                     <Link href="/shoppingcart" className='relative'>

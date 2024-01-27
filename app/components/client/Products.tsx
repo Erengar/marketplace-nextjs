@@ -5,13 +5,15 @@ import { useEffect, useState } from "react";
 import SkeletonProducts from "../server/SkeletonProducts";
 import Pagination from "./Pagination";
 import ProductSort from "./ProductSort";
+import { useRouter } from "next/navigation";
 
 export default function Products({category}: {category:string}) {
     const [products, setProducts] = useState<ProductType[]>();
     const [totalObjects, setTotalObjects] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(50);
+    const [itemsPerPage, setItemsPerPage] = useState(40);
     const [sortSignal, setSortSignal] = useState("name");
+    const router = useRouter();
 
     // Set items per page depending on screen size, 20 for mobile, 50 for desktop
     useEffect(() => {

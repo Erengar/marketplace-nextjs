@@ -2,6 +2,8 @@
 
 export default function Pagination({currentPage, setCurrentPage, totalObjects, itemsPerPage}:
     {currentPage: number, setCurrentPage: (i:number) => void, totalObjects: number, itemsPerPage: number}) {
+    //This ensures that the totalObjects is never 0, because if it is, the pagination will not render
+    totalObjects = totalObjects || 1;
     return (
         <div className="flex gap-4 self-center place-self-center self-center">
             {Array.from({length: Math.ceil(totalObjects/itemsPerPage)}).map((page, index) => (

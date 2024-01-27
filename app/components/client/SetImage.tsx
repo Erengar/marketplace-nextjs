@@ -17,7 +17,7 @@ export default function SetImage({className, uuid, name, width, height, crop=fal
     const backup = "4a946bab-90b1-4b70-8028-94a73bb9f536"
     const resizing = `https://ucarecdn.com/${uuid? uuid: backup}/-/progressive/yes/-/preview/-/smart_resize/${width}x${height}/`
     const cropping= `https://ucarecdn.com/${uuid? uuid: backup}/-/progressive/yes/-/preview/-/scale_crop/${width}x${height}/smart_objects/center/`
-    const blur = `https://ucarecdn.com/${uuid? uuid: backup}/-/preview/-/quality/lightest/-/blur/100/`
+    const blur = `https://ucarecdn.com/${uuid? uuid: backup}/-/preview/-/quality/lightest/-/blur/100/-/smart_resize/${width}x${height}/`
 
     return (
         <>
