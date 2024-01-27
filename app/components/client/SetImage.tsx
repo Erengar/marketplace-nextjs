@@ -2,6 +2,7 @@
 
 import UploadcareImage from '@uploadcare/nextjs-loader';
 import { getBlurDataURL } from '@uploadcare/nextjs-loader';
+import { useState, useEffect } from 'react';
 
 /**
  * This is react component that renders an image from uploadcare
@@ -13,11 +14,15 @@ import { getBlurDataURL } from '@uploadcare/nextjs-loader';
  * @returns {JSX.Element} - returns an image
 */
 export default function SetImage({className, uuid, name, width, height, crop=false} : { className?: string, uuid:string | null, name: string, width: number, height: number, crop?: boolean}) {
-
+    const [blurDataURL, setBlurDataURL] = useState<string>()
     const backup = "4a946bab-90b1-4b70-8028-94a73bb9f536"
     const resizing = `https://ucarecdn.com/${uuid? uuid: backup}/-/progressive/yes/-/preview/-/smart_resize/${width}x${height}/`
     const cropping= `https://ucarecdn.com/${uuid? uuid: backup}/-/progressive/yes/-/preview/-/scale_crop/${width}x${height}/smart_objects/center/`
     const blur = `https://ucarecdn.com/${uuid? uuid: backup}/-/preview/-/quality/lightest/-/blur/100/-/smart_resize/${width}x${height}/`
+
+    useEffect(() => {
+        getBlurDataURL(resizing).then((data) => setBlurDataURL(data))
+    }, [])
 
     return (
         <>
@@ -28,8 +33,8 @@ export default function SetImage({className, uuid, name, width, height, crop=fal
             src={crop? cropping: resizing}
             width={width}
             height={height}
-            placeholder='blur'
-            blurDataURL={blur}
+            placeholder={blurDataURL? 'blur': 'empty'}
+            blurDataURL={blurDataURL}
             />
             :<UploadcareImage
             className={className}
@@ -38,7 +43,7 @@ export default function SetImage({className, uuid, name, width, height, crop=fal
             width={width}
             height={height}
             placeholder='blur'
-            blurDataURL={blur}
+            blurDataURL={blurDataURL? blurDataURL: blur}
             />
             }
         </>
