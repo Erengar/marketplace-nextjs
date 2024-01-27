@@ -34,6 +34,9 @@ export default function Addproduct(){
     //This state is used to hold the categories returned from the server
     const [categories, setCategories] = useState<CategoryType[] | null>(null);
 
+    //This state is used to hold the error message if there is one
+    const [error, setError] = useState<string>();
+
     //This useEffect will reset the current page to 1 when the categoriesFilter changes, whn user selects a new category
     useEffect(() => {
         setCurrentPage(1);
@@ -47,10 +50,15 @@ export default function Addproduct(){
         fetch(`/api/products/?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}`, {next: {tags: ["products"]}})
         .then((res) => res.json())
         .then((data) => {
+            if (data.error) {
+                setError(data.error)
+                setFetchingData(false)
+                return
+            }
             setProducts(data.data)
             setTotalObjects(data.total)
-            setFetchingData(false);
-        });
+            setFetchingData(false)
+        })
     }, [needRerender, categoriesFilter, sortSignal, currentPage])
 
     return (
@@ -70,13 +78,14 @@ export default function Addproduct(){
                         ))}
                 </select>
             </div>
+            {error && <h4 className="text-red-500 font-semibold md:text-lg flex justify-center">{error}</h4>}
             <ProductTableHead sortSignal={sortSignal} setSortSignal={setSortSignal}/>
             <ul className="flex flex-col divide-y ml-4 md:ml-20">
                 {products
                 ? products.map((product) => (
                     <ProductManager key={product.id} product={product} setNeedRerender={setNeedRerender}/>
                     ))
-                : <AdminSkeletonProduct/>}
+                : !error && <AdminSkeletonProduct/>}
             </ul>
         </motion.section>
     )

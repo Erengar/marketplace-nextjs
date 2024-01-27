@@ -27,12 +27,19 @@ export async function GET(
         try {
             res = request.nextUrl.searchParams
         } catch (error: any) {
-            return NextResponse.json({error: error.message})
+            return NextResponse.json({error: error.message}, {status: 400})
         }
         
-        currentPage = parseInt(res.get('currentpage')!) || 1
-        itemsPerPage = parseInt(res.get('itemsperpage')!) || 10
-        limit = currentPage * itemsPerPage
+        try {
+
+            currentPage = parseInt(res.get('currentpage')!) || 1
+            itemsPerPage = parseInt(res.get('itemsperpage')!) || 10
+            limit = currentPage * itemsPerPage
+            category = res.get('category') || 'All'
+            category = capitalize(category)
+        } catch (error: any) {
+            return NextResponse.json({error: error.message}, {status: 500})
+        }
         
         try {
             sort = res.get('sort') || 'name'
@@ -49,14 +56,11 @@ export async function GET(
                 sort = products.name
             } 
         } catch (error: any) {
-            return NextResponse.json({error: "Invalid sorting parameter"})
+            return NextResponse.json({error: "Invalid sorting parameter"}, {status: 400})
         }
         
         
         try {
-            const res = request.nextUrl.searchParams
-            category = res.get('category') || 'All'
-            category = capitalize(category)
             if (category === 'All') {
                 if (sortDirection === 'ASC') {
                     result = await db.select().from(products).orderBy(asc(sort)).catch(error => {throw error})
@@ -78,9 +82,8 @@ export async function GET(
                     result = result.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
                 }
             }
-            
         } catch (error: any) {
-            return NextResponse.json({error: error.message})
+            return NextResponse.json({error: error.message}, {status: 500})
         }
-    return NextResponse.json({data: result, total: total})
+    return NextResponse.json({data: result, total: total}, {status: 200})
 }
