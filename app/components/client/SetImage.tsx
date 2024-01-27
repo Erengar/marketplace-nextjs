@@ -21,8 +21,15 @@ export default function SetImage({className, uuid, name, width, height, crop=fal
     const blur = `https://ucarecdn.com/${uuid? uuid: backup}/-/preview/-/quality/lightest/-/blur/100/-/smart_resize/${width}x${height}/`
 
     useEffect(() => {
+        if (width === 0 || height === 0) {
+            return
+        }
         getBlurDataURL(resizing).then((data) => setBlurDataURL(data))
-    }, [])
+    }, [width, height])
+
+    if ( width === 0 || height === 0) {
+        return null
+    }
 
     return (
         <>
