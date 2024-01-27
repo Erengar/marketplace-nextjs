@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import CartProduct from "./CartProduct";
 import { CartItemType} from "../../schemas"
-import RemoveItemModal from "../server/RemoveItemModal";
+import RemoveItemModal from "./RemoveItemModal";
 import { motion } from "framer-motion";
 
 export default function CartItems({items, setItems}: {items: CartItemType[], setItems: (items: CartItemType[]) => void}) {

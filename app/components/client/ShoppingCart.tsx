@@ -1,6 +1,6 @@
 "use client"
-import CartItems from "../client/CartItems"
-import CheckOut from "../client/CheckOut"
+import CartItems from "./CartItems"
+import CheckOut from "./CheckOut"
 import { useState } from "react"
 import { CartItemType } from "../../schemas"
 

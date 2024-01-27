@@ -1,4 +1,7 @@
-export default function SkeletonProducts({numberOfSkeletons}: {numberOfSkeletons: number}){
+"use server"
+
+
+export default async function SkeletonProducts({numberOfSkeletons}: {numberOfSkeletons: number}){
     return (
             <>
                 {Array.from({ length: numberOfSkeletons }).map((_, index) => (

@@ -1,3 +1,5 @@
+"use server"
+
 import { Modal } from './modal';
 import { drizzle } from 'drizzle-orm/vercel-postgres';
 import { sql } from "@vercel/postgres";

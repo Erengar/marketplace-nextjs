@@ -1,4 +1,6 @@
-export default function AdminErrorMessage({message}: {message: any}) {
+"use server"
+
+export default async function AdminErrorMessage({message}: {message: any}) {
     return (
         <div>
             {typeof message === 'string'

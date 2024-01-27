@@ -1,7 +1,9 @@
+"use server"
+
 import { type CategoryType} from "../../../db/schema"
 import Link from "next/link"
 
-export default function Sidebar(props: { category: CategoryType, selectedCategory: string }) {
+export default async function Sidebar(props: { category: CategoryType, selectedCategory: string }) {
     if ( props.category.name.toLowerCase() == props.selectedCategory ) {
         return (
         <Link href={`${props.category.name.toLowerCase()}`}>
