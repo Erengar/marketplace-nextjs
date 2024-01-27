@@ -11,16 +11,12 @@ export default function Products({category}: {category:string}) {
     const [products, setProducts] = useState<ProductType[]>();
     const [totalObjects, setTotalObjects] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(40);
+    const [itemsPerPage, setItemsPerPage] = useState(window.innerWidth < 768 ? 20 : 40);
     const [sortSignal, setSortSignal] = useState("name");
     const url = usePathname()
     const router = useRouter();
     const query = useSearchParams()
     
-    // Set items per page depending on screen size, 20 for mobile, 50 for desktop
-    useEffect(() => {
-        window.innerWidth < 768 ? setItemsPerPage(20) : setItemsPerPage(50)
-    },[])
     
     useEffect(() => {
         if (query.get("sort")) {

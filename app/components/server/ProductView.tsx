@@ -2,6 +2,7 @@ import { type ProductType } from "@/db/schema";
 import SetImage from "@/app/components/client/SetImage"
 import LoremIpsum from "react-lorem-ipsum";
 import AddToCart from "@/app/components/client/AddToCart";
+import PriceTag from "../client/PriceTag";
 
 export default function ProductView({product, modal=false} : {product: ProductType, modal?: boolean}) {
     return (
@@ -12,7 +13,7 @@ export default function ProductView({product, modal=false} : {product: ProductTy
             <div className='col-span-1 flex flex-col justify-between h-full place-items-center gap-4 p-4 md:p-8'>
                 <div className="border rounded bg-slate-100 w-full h-1/2 flex flex-col place-items-center justify-around">
                     <h1 className="md:text-xl font-bold">{product.name}</h1>
-                    <h3 className="md:text-xl font-semibold">{product.price}€</h3>
+                    <PriceTag price={product.price} className="md:text-xl font-semibold"/>
                     <AddToCart product={product} className="md:text-xl"/>
                 </div>
                 <p className="text-xs md:text-base">{product.description? product.description: <LoremIpsum/>}</p>

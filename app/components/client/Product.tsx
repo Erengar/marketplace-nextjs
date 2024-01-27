@@ -2,21 +2,25 @@
 import { type ProductType } from "@/db/schema";
 import SetImage from "./SetImage";
 import { motion } from "framer-motion";
-import { useContext, useEffect, useRef, useState } from "react";
-import { CurrencyContext } from "../context/CurrencyProvider";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import AddToCart from "./AddToCart";
+import PriceTag from "./PriceTag";
 
 export default function Product(
     {product, currentPage, totalObjects, itemsPerPage, index}:
     { product: ProductType, currentPage:number, totalObjects: number, itemsPerPage:number, index:number}) {
-    const currency = useContext(CurrencyContext)
     // State for width of the element
     const [width, setWidth] = useState(0)
+    //State fot calculating if the element should grow
+    const [grow, setGrow] = useState(false)
 
-    // Get width of the element to set the width of the image
     const elementRef = useRef(null);
     useEffect(() => {
+        // We want to turn off grow if we are on the last row and there are less than 3 items left
+        setGrow(((totalObjects - ((currentPage -1)  * itemsPerPage)) - index + 1) > (totalObjects % 5 >= 3 ? 1 : 3))
+
+        // Get width of the element to set the width of the image
         const observer = new ResizeObserver(entries => {
             for (let entry of entries) {
                 setWidth(Math.ceil(entry.contentRect.width))
@@ -33,11 +37,8 @@ export default function Product(
         };
     }, []);
 
-    // We want to turn off grow if we are on the last row and there are less than 3 items left
-    const shoulYouGrow = ((totalObjects - ((currentPage -1)  * itemsPerPage)) - index + 1) > (totalObjects % 5 >= 3 ? 1 : 3)
-
     return (
-        <motion.li ref={elementRef} className={`border-2 border-black border-solid rounded w-80 h-72 ${shoulYouGrow && "grow"}`}
+        <motion.li ref={elementRef} className={`border-2 border-black border-solid rounded w-80 h-72 ${grow && "grow"}`}
         initial={{opacity:0}}
         animate={{opacity:1}}
         transition={{duration:0.5, ease: "easeIn"}}>
@@ -47,7 +48,7 @@ export default function Product(
                     <Link href={`/product/${product.id}`} scroll={false}>
                         <h2 className="text-lg w-48 antialiased font-semibold overflow-hidden text-ellipsis">{product.name}</h2>
                     </Link>
-                    <h3 className="text-base antialiased font-bold text-sky-950">{product.price}{currency}</h3>
+                    <PriceTag price={product.price} className="text-base font-bold text-sky-950"/>
                 </div>
                 <AddToCart product={product} icon={true}/>
             </div>

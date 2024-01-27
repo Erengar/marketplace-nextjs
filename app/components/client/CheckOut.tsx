@@ -1,11 +1,10 @@
 "use client"
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect } from "react"
 import { CartItemType } from "../../schemas"
-import { CurrencyContext } from "../context/CurrencyProvider"
+import PriceTag from "./PriceTag"
 
 export default function CheckOut({items}: {items: CartItemType[]}) {
     const [totalPrice, setTotalPrice] = useState(0)
-    const currency = useContext(CurrencyContext)
 
     useEffect(() => {
         let total = 0
@@ -22,13 +21,13 @@ export default function CheckOut({items}: {items: CartItemType[]}) {
             <ul>
             {items.map(item => (
                 <li key={item.product.id} className="flex justify-between text-xs xl:text-sm">
-                    <span className="text-sky-950 antialiased font-semibold line-clamp-1">{item.product.name}</span> <span>{item.orderedAmount}x {item.product.price} {currency}</span></li>
+                    <span className="text-sky-950 antialiased font-semibold line-clamp-1">{item.product.name}</span> <span>{item.orderedAmount}x <PriceTag price={item.product.price} inline={true}/></span></li>
                 ))}
             </ul>
             <hr />
             <div className="flex justify-between text-xs sm:text-sm md:text-base">
                 <span>Total:</span>
-                <span>{totalPrice} {currency}</span>
+                <PriceTag price={totalPrice} inline={true}/>
             </div>
         </div>
     )

@@ -3,13 +3,12 @@ import { CartItemType } from "../../schemas";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import SetImage from "./SetImage";
-import { useContext, useState } from "react";
-import { CurrencyContext } from "../context/CurrencyProvider";
+import { useState } from "react";
+import PriceTag from "./PriceTag";
 
 export default function CartProduct({product, setRemovingItem}: { product: CartItemType, setRemovingItem: (a : CartItemType | null) => void }) {
     const [buttonAddPressed, setButtonAddPressed] = useState(false)
     const [buttonRemovePressed, setButtonRemovePressed] = useState(false)
-    const currency = useContext(CurrencyContext)
 
     // This function adds the item to the shopping cart
     async function addItem(){
@@ -57,7 +56,7 @@ export default function CartProduct({product, setRemovingItem}: { product: CartI
                 <SetImage uuid={product.product.image!} name={product.product.name} width={100} height={100} crop={true}/>
                 <h2 className="text-sm md:text-lg antialiased font-semibold line-clamp-1 self-center">{product.product.name}</h2>
             </div>
-            <h3 className="text-xs md:text-base antialiased font-bold text-sky-950">{product.product.price}{currency}</h3>
+            <PriceTag price={product.product.price} className="text-xs md:text-base font-bold text-sky-950"/>
             <div className="flex gap-2 md:gap-6">
                 <h3 className="text-xs md:text-base antialiased font-bold text-sky-600 col-span1 self-center">{product.orderedAmount}x</h3>
                 <div className="flex flex-col bg-slate-200 w-fit rounded border-solid border-black border-2 divide-y-2 divide-black">
