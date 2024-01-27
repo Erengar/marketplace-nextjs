@@ -1,12 +1,16 @@
 "use client"
 import { debounce } from "lodash"
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
 
 export default function SearchBar({query, className, searchQuery, setSearchQuery}: {query: string, className?: string, searchQuery: string | null, setSearchQuery: React.Dispatch<React.SetStateAction<string | null>>}) {
-    const input = document.getElementById("search-bar") as HTMLInputElement
+    let input : HTMLInputElement | null = null
     useEffect(() => {
-        input.value = searchQuery || ""
+        input = document.getElementById("search-bar") as HTMLInputElement
+    }, [])
+    useEffect(() => {
+        input!.value = searchQuery || ""
     }, [searchQuery])
+
 
     const handleSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value)

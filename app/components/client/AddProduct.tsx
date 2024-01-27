@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useContext, useRef} from "react";
+import { useState, useEffect, useRef} from "react";
 import { CategoryType, type ProductType } from "../../../db/schema";
 import ProductManager from "./ProductManager";
 import AdminSkeletonProduct from "./AdminSkeletonProduct";
