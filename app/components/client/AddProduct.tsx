@@ -9,98 +9,46 @@ import Pagination from "./Pagination";
 import LoadingModal from "./LoadingModal";
 import AddProductForm from "./AddProductForm";
 import SearchBar from "./SearchBar";
+import useSWR from 'swr'
+
+
+const fetcher = (url: string) => fetch(url, {next: {tags: ["products"]}}).then(res => res.json())
 
 export default function Addproduct(){
-
-    const firstRender = useRef(true);
-
-    //This state is used to show a loading modal when fetching data
-    const [fetchingData, setFetchingData] = useState(false);
-
     //These states are used for pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalObjects, setTotalObjects] = useState(0);
 
     //This is the state that holds information how to sort the products
     const [sortSignal, setSortSignal] = useState('name');
 
-    //This is the state that will be used to refetch categories and rerender the CategoriesManager component
-    const [needRerender, setNeedRerender] = useState(false);
-    //This is the state that will hold the products
-    const [products, setProducts] = useState<ProductType[] | null>(null);
     //This is the state that will hold the selected category to filter products
     const [categoriesFilter, setCategoriesFilter] = useState<string | null>('All');
 
+    //This state is used to hold the search query
     const [searchQuery, setSearchQuery] = useState<string | null>(null);
 
     //This state is used to hold the categories returned from the server
     const [categories, setCategories] = useState<CategoryType[] | null>(null);
 
-    //This state is used to hold the error message if there is one
-    const [error, setError] = useState<string>();
-
-    //This useEffect will reset the current page to 1 when the categoriesFilter changes, when user selects a new category
+    //This useEffect will reset the current page to 1 when the categoriesFilter changes, and will reset the categoriesFilter when the searchQuery changes
     useEffect(() => {
-        setCurrentPage(1);
+        currentPage !== 1 && setCurrentPage(1);
+        categoriesFilter !== "All" && setSearchQuery(null)
     }, [categoriesFilter])
 
-
+    //This useEffect will reset the categoriesFilter when the searchQuery changes
+    useEffect(() => {
+        setCategoriesFilter('All');
+    }, [searchQuery])   
+    
     const itemsPerPage = 20;
 
-    //This useEffect is for general purpose
-    useEffect(()=>{
-        if (searchQuery && categoriesFilter === 'All') {
-            return
-        }
-        //This is used to abort the fetch request, it should not be needed but it is here just in case
-        const controller = new AbortController();
-        setSearchQuery(null);
-        setFetchingData(true);
-        fetch(`/api/products?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}`, {next: {tags: ["products"]}, signal: controller.signal})
-        .then((res) => res.json())
-        .then((data) => {
-            if (data.error) {
-                setError(data.error)
-                setFetchingData(false)
-                return
-            }
-            setProducts(data.data)
-            setTotalObjects(data.total)
-            setFetchingData(false)
-        })
-        return () => controller.abort();
-    }, [needRerender, categoriesFilter, sortSignal, currentPage])
-
-    //This useEffect is for searchbar
-    useEffect(() => {
-        if (firstRender.current || !searchQuery) {
-            firstRender.current = false;
-            return;
-        }
-        //This is used to abort the fetch request, it should not be needed but it is here just in case
-        const controller = new AbortController();
-        setFetchingData(true);
-        setCategoriesFilter('All');
-        fetch(`/api/products?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&sort=${sortSignal}&searchQuery=${searchQuery}`, {next: {tags: ["products"]}, signal: controller.signal})
-        .then((res) => res.json())
-        .then((data) => {
-            if (data.error) {
-                setError(data.error)
-                setFetchingData(false)
-                return
-            }
-            setProducts(data.data)
-            setTotalObjects(data.total)
-            setFetchingData(false)
-        })
-        return () => controller.abort();
-    }, [searchQuery, currentPage, sortSignal])
-
+    const {data, error, isLoading } = useSWR(`/api/products?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}&searchQuery=${searchQuery}`, fetcher)
     return (
         <motion.section className="bg-slate-100"
         initial={{opacity:0}}
         animate={{opacity:1}}>
-            <AddProductForm categories={categories} setCategories={setCategories} setNeedRerender={setNeedRerender}/>
+            <AddProductForm categories={categories} setCategories={setCategories}/>
 
             <div className="flex justify-center mt-4">
                 <SearchBar
@@ -113,7 +61,7 @@ export default function Addproduct(){
                 <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                totalObjects={totalObjects}
+                totalObjects={data?.total}
                 itemsPerPage={itemsPerPage}/>
                 <select
                 value={categoriesFilter!}
@@ -128,12 +76,12 @@ export default function Addproduct(){
             {error && <h4 className="text-red-500 font-semibold md:text-lg flex justify-center">{error}</h4>}
             <ProductTableHead sortSignal={sortSignal} setSortSignal={setSortSignal}/>
             <ul className="flex flex-col divide-y ml-4 md:ml-20">
-                {fetchingData
+                {isLoading
                 ? <AdminSkeletonProduct/>
                 :
-                products
-                ? products.map((product) => (
-                    <ProductManager key={product.id} product={product} setNeedRerender={setNeedRerender}/>
+                data.data
+                ? data.data.map((product: ProductType) => (
+                    <ProductManager key={product.id} product={product}/>
                     ))
                 : !error && <AdminSkeletonProduct/>}
             </ul>

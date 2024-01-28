@@ -8,7 +8,7 @@ import SetImage from "./SetImage";
 import { motion, AnimatePresence } from "framer-motion";
 import { CurrencyContext } from "../context/CurrencyProvider";
 
-export default function ProductManger({product, setNeedRerender}: {product: ProductType, setNeedRerender: React.Dispatch<React.SetStateAction<boolean>>}) {
+export default function ProductManger({product}: {product: ProductType}) {
     const currency = useContext(CurrencyContext)
     const [isDeleting, setIsDeleting] = useState(false);
 
@@ -16,7 +16,6 @@ export default function ProductManger({product, setNeedRerender}: {product: Prod
         setIsDeleting(true);
         await deleteProductServer(product);
         setIsDeleting(false);
-        setNeedRerender((prev) => !prev);
     }
     return (
         <motion.li

@@ -7,8 +7,8 @@ import AdminErrorMessage from "../server/AdminErrorMessage"
 import SubmitButton from "./SubmitButton"
 
 export default function AddProductForm(
-    {categories, setCategories, setNeedRerender}:
-    {categories: CategoryType[] | null, setCategories: (categories: CategoryType[]) => void, setNeedRerender: React.Dispatch<React.SetStateAction<boolean>>,}) {
+    {categories, setCategories}:
+    {categories: CategoryType[] | null, setCategories: (categories: CategoryType[]) => void}) {
 
 
     const [message, formAction] = useFormState(addProductServer, null);
@@ -41,7 +41,7 @@ export default function AddProductForm(
             name='image'
             className="w-60 md:w-3/12 text-blue-800 font-semibold text-xs md:text-base
             file:p-3 file:md:p-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-200 file:text-blue-800 hover:file:bg-blue-300 file:cursor-pointer"/>
-            <SubmitButton text="Add Product" setNeedRerender={setNeedRerender}/>
+            <SubmitButton text="Add Product"/>
         </form>
     )
 }

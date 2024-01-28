@@ -4,13 +4,8 @@ import LoadingModal from "./LoadingModal";
 import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 
-export default function SubmitButton({text, setNeedRerender}: {text: string, setNeedRerender: React.Dispatch<React.SetStateAction<boolean>>}) {
+export default function SubmitButton({text}: {text: string}) {
     const status = useFormStatus()
-    useEffect(() => {
-        if (!status.pending) {
-            setNeedRerender((prev) => !prev)
-        }  
-    }, [status.pending])
 
     return (
         <>

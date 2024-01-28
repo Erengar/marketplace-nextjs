@@ -5,6 +5,7 @@ import { drizzle } from 'drizzle-orm/vercel-postgres';
 import { products } from "../../../db/schema";
 import { asc, desc, eq } from "drizzle-orm";
 import Fuse from 'fuse.js'
+import { NextApiResponse } from "next";
 
 
 
@@ -24,8 +25,7 @@ export async function GET(
         let sortDirection = 'ASC'
         let result
         let total
-        let search
-        
+        let search : string | null
         try {
             res = request.nextUrl.searchParams
         } catch (error: any) {
@@ -61,12 +61,12 @@ export async function GET(
         } catch (error: any) {
             return NextResponse.json({error: "Invalid sorting parameter"}, {status: 400})
         }
-
+        
         try {
-            if (search) {
+            if (search !== 'null') {
                 result = await db.select().from(products)
                 const fuse = new Fuse(result, {keys: ['name', 'category', 'description']})
-                result = fuse.search(search)
+                result = fuse.search(search!)
                 result = result.map((item) => item.item)
                 total = result.length
                 result = result.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
