@@ -8,17 +8,7 @@ import AdminErrorMessage from '../server/AdminErrorMessage';
 import AdminCategorySkeleton from './AdminSkeletonCategory';
 import { motion } from 'framer-motion';
 import useSWR from 'swr'
-import FetchError from "../../utils/FetchError";
-
-const fetcher = async (url: string) => {
-    const res = await fetch(url, {next: {tags: ["categories"]}})
-    if (!res.ok) {
-        const errorMessage = await res.json().then(data => data.message)
-        const error = new FetchError(errorMessage, res.status)
-        throw error
-    }
-    return res.json().then(data => data.data)
-}
+import {fetcher} from "../../helperfunctions/fetcher"
 
 export default function AddCategory() {
     //This hook is used to handle the form state, it holds message returned from the server

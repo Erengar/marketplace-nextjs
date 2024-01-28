@@ -9,16 +9,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import FetchError from "../../utils/FetchError";
 import AdminErrorMessage from "../server/AdminErrorMessage";
-
-const productsFetcher = async (url: string) => {
-    const res = await fetch(url, {next: {tags: ["products"]}})
-    if (!res.ok) {
-        const errorMessage = await res.json().then(data => data.message)
-        const error = new FetchError(errorMessage, res.status)
-        throw error
-    }
-    return res.json().then(data => data)
-}
+import {fetcher} from "../../helperfunctions/fetcher"
 
 export default function Products({category}: {category:string}) {
     const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +18,7 @@ export default function Products({category}: {category:string}) {
     const url = usePathname()
     const router = useRouter();
     const query = useSearchParams()
-    const products = useSWR(`/api/products/?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${category}&sort=${sortSignal}`, productsFetcher)
+    const products = useSWR(`/api/products/?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${category}&sort=${sortSignal}`, fetcher)
 
     //We want only 20 products per page on mobile
     useEffect(() => {

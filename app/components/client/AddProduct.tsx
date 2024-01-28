@@ -9,28 +9,9 @@ import Pagination from "./Pagination";
 import AddProductForm from "./AddProductForm";
 import SearchBar from "./SearchBar";
 import useSWR from 'swr'
-import FetchError from "../../utils/FetchError";
 import AdminErrorMessage from "../server/AdminErrorMessage";
+import {fetcher} from "../../helperfunctions/fetcher"
 
-
-const fetcherProducts = async (url: string) => {
-    const res = await fetch(url, {next: {tags: ["products"]}})
-    if (!res.ok) {
-        const errorMessage = await res.json().then(data => data.message)
-        const error = new FetchError(errorMessage, res.status)
-        throw error
-    }
-    return res.json()
-}
-const fetcherCategories = async (url: string) => {
-    const res = await fetch(url, {next: {tags: ["categories"]}})
-    if (!res.ok) {
-        const errorMessage = await res.json().then(data => data.message)
-        const error = new FetchError(errorMessage, res.status)
-        throw error
-    }
-    return res.json().then(data => data.data)
-}
 
 export default function Addproduct(){
     //These states are used for pagination
@@ -58,8 +39,8 @@ export default function Addproduct(){
     
     const itemsPerPage = 20;
 
-    const categories = useSWR('/api/categories/', fetcherCategories )
-    const products = useSWR(`/api/products?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}&searchQuery=${searchQuery}`, fetcherProducts)
+    const categories = useSWR('/api/categories/', fetcher )
+    const products = useSWR(`/api/products?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}&searchQuery=${searchQuery}`, fetcher)
     return (
         <motion.section className="bg-slate-100"
         initial={{opacity:0}}
