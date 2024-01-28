@@ -11,8 +11,13 @@ export default function Products({category}: {category:string}) {
     const [products, setProducts] = useState<ProductType[]>();
     const [totalObjects, setTotalObjects] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(window.innerWidth < 768 ? 20 : 40);
     const [sortSignal, setSortSignal] = useState("name");
+    const [itemsPerPage, setItemsPerPage] = useState(40);
+
+    //We want only 20 products per page on mobile
+    useEffect(() => {
+        setItemsPerPage(window.innerWidth < 768 ? 20 : 40);
+    }, []);
 
     const [error, setError] = useState<string>();
 

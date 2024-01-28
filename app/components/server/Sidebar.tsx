@@ -6,7 +6,7 @@ import Link from "next/link"
 export default async function Sidebar(props: { category: CategoryType, selectedCategory: string }) {
     if ( props.category.name.toLowerCase() == props.selectedCategory ) {
         return (
-        <Link href={`${props.category.name.toLowerCase()}`}>
+        <Link href={`${props.category.name.toLowerCase()}`} scroll={false}>
             <li className="h-12 flex justify-center
             dark: bg-slate-500
             bg-white"
@@ -17,7 +17,7 @@ export default async function Sidebar(props: { category: CategoryType, selectedC
         )
     } else {
         return(
-        <Link href={`${props.category.name.toLowerCase()}`}>
+        <Link href={`${props.category.name.toLowerCase()}`} scroll={false}>
             <li className="h-12 flex justify-center
             dark:bg-slate-700 dark:hover:bg-slate-600
             bg-slate-200 hover:bg-slate-400"

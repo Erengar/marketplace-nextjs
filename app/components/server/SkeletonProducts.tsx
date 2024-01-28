@@ -1,7 +1,7 @@
-"use server"
+"use client"
 
 
-export default async function SkeletonProducts({numberOfSkeletons}: {numberOfSkeletons: number}){
+export default function SkeletonProducts({numberOfSkeletons}: {numberOfSkeletons: number}){
     return (
             <>
                 {Array.from({ length: numberOfSkeletons }).map((_, index) => (
