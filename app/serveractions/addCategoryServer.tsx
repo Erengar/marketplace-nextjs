@@ -14,7 +14,7 @@ export async function addCategoryServer(prevState: any, formData: FormData) {
     });
     if (!data.success) {
         return {
-            message: data.error.flatten().fieldErrors,
+            error: data.error.flatten().fieldErrors,
         };
     } else {
         try{
@@ -23,11 +23,11 @@ export async function addCategoryServer(prevState: any, formData: FormData) {
         } catch (e: any) {
             if (e.code === '23505') {
                 return {
-                    message: "Category already exists",
+                    error: "Category already exists",
                 };
             }
         }
     } 
     await revalidateCategories()
-    
+    return {success: "Category added successfully."}
 }

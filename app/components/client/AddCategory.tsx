@@ -31,7 +31,8 @@ export default function AddCategory() {
         animate={{opacity:1}}>
             <form action={formAction} className="flex flex-col items-center">
                 <h1 className="font-semibold md:text-lg antialiased mb-2">Category</h1>
-                {message && <AdminErrorMessage message={message.message}/>}
+                {message?.error && <AdminErrorMessage message={message.error}/>}
+                {message?.success && <p className="text-green-500">{message.success}</p>}
                 <label htmlFor="category-name" className="text-sm md:text-base">Name:</label>
                 <input id="category-name" type="text" name='name' required className="border-2 border-black rounded md:w-3/12 w-60 h-6 md:h-8"/>
                 <SubmitButton text="Add Category" mutate={categories.mutate}/>

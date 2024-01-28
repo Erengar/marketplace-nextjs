@@ -97,7 +97,7 @@ export default function Addproduct(){
                 :
                 products.data?.data
                 ? products.data.data.map((product: ProductType) => (
-                    <ProductManager key={product.id} product={product}/>
+                    <ProductManager key={product.id} product={product} mutate={products.mutate}/>
                     ))
                 : !products.error && <AdminSkeletonProduct/>}
             </ul>

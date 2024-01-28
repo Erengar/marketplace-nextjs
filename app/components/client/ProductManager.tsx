@@ -8,13 +8,14 @@ import SetImage from "./SetImage";
 import { motion, AnimatePresence } from "framer-motion";
 import { CurrencyContext } from "../context/CurrencyProvider";
 
-export default function ProductManger({product}: {product: ProductType}) {
+export default function ProductManger({product, mutate}: {product: ProductType, mutate?: any}) {
     const currency = useContext(CurrencyContext)
     const [isDeleting, setIsDeleting] = useState(false);
 
     async function deleteProduct(){
         setIsDeleting(true);
         await deleteProductServer(product);
+        mutate();
         setIsDeleting(false);
     }
     return (

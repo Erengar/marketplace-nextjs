@@ -18,7 +18,7 @@ const product = z.object({
 export async function addProductServer(prevState:any, formData: FormData) {
     if (!formData) {
         return {
-            message: "No form data",
+            error: "No form data",
         };
     }
     let image = null;
@@ -41,11 +41,11 @@ export async function addProductServer(prevState:any, formData: FormData) {
     if (!data.success) {
         if (imageError) {
             return {
-                message: {...data.error.flatten().fieldErrors, image: imageError},
+                error: {...data.error.flatten().fieldErrors, image: imageError},
             };
         }
         return {
-            message: data.error.flatten().fieldErrors,
+            error: data.error.flatten().fieldErrors,
         };
     }
 
@@ -77,9 +77,12 @@ export async function addProductServer(prevState:any, formData: FormData) {
         }
         if (e.code === '23505') {
             return {
-                message: "Product already exists",
+                error: "Product already exists",
             };
         }
     }
     await revalidateProducts();
+    return {
+        success: "Product added successfully",
+    };
 }
