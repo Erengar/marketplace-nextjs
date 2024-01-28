@@ -101,7 +101,7 @@ export default function Addproduct(){
         initial={{opacity:0}}
         animate={{opacity:1}}>
             <AddProductForm categories={categories} setCategories={setCategories} setNeedRerender={setNeedRerender}/>
-            {fetchingData && <LoadingModal text="" backDrop={false} seeThrough={true}/>}
+
             <div className="flex justify-center mt-4">
                 <SearchBar
                 query="products"
@@ -128,7 +128,8 @@ export default function Addproduct(){
             {error && <h4 className="text-red-500 font-semibold md:text-lg flex justify-center">{error}</h4>}
             <ProductTableHead sortSignal={sortSignal} setSortSignal={setSortSignal}/>
             <ul className="flex flex-col divide-y ml-4 md:ml-20">
-                {products
+                {fetchingData ? <AdminSkeletonProduct/>:
+                products
                 ? products.map((product) => (
                     <ProductManager key={product.id} product={product} setNeedRerender={setNeedRerender}/>
                     ))
