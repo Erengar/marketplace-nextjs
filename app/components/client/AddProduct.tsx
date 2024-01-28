@@ -128,7 +128,9 @@ export default function Addproduct(){
             {error && <h4 className="text-red-500 font-semibold md:text-lg flex justify-center">{error}</h4>}
             <ProductTableHead sortSignal={sortSignal} setSortSignal={setSortSignal}/>
             <ul className="flex flex-col divide-y ml-4 md:ml-20">
-                {fetchingData ? <AdminSkeletonProduct/>:
+                {fetchingData
+                ? <AdminSkeletonProduct/>
+                :
                 products
                 ? products.map((product) => (
                     <ProductManager key={product.id} product={product} setNeedRerender={setNeedRerender}/>
