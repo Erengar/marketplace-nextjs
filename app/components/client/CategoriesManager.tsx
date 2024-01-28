@@ -5,16 +5,17 @@ import { useState } from "react";
 import LoadingModal from "./LoadingModal";
 import {deleteCategoryServer} from "../../serveractions/deleteCategoryServer";
 import {motion, AnimatePresence} from "framer-motion";
+import { mutate} from "swr";
 
 
-export default function CategoriesManager({category, setNeedRerender}: {category: CategoryType, setNeedRerender: React.Dispatch<React.SetStateAction<boolean>>}) {
+export default function CategoriesManager({category}: {category: CategoryType}) {
     const [isDeleting, setIsDeleting] = useState(false);
 
     async function deleteCategory() {
         setIsDeleting(true);
         await deleteCategoryServer(category);
+        mutate('/api/categories/');
         setIsDeleting(false);
-        setNeedRerender((prev) => !prev);
     }
 
 

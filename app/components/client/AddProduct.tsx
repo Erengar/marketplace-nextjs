@@ -1,18 +1,18 @@
 "use client";
-import { useState, useEffect, useRef} from "react";
+import { useState, useEffect} from "react";
 import { CategoryType, type ProductType } from "../../../db/schema";
 import ProductManager from "./ProductManager";
 import AdminSkeletonProduct from "./AdminSkeletonProduct";
 import { motion} from "framer-motion";
 import ProductTableHead from "./ProductTableHead";
 import Pagination from "./Pagination";
-import LoadingModal from "./LoadingModal";
 import AddProductForm from "./AddProductForm";
 import SearchBar from "./SearchBar";
 import useSWR from 'swr'
 
 
-const fetcher = (url: string) => fetch(url, {next: {tags: ["products"]}}).then(res => res.json())
+const fetcherProducts = (url: string) => fetch(url, {next: {tags: ["products"]}}).then(res => res.json())
+const fetcherCategories = (url: string) => fetch(url, {next: {tags: ["categories"]}}).then(res => res.json().then(data => data.data))
 
 export default function Addproduct(){
     //These states are used for pagination
@@ -27,9 +27,6 @@ export default function Addproduct(){
     //This state is used to hold the search query
     const [searchQuery, setSearchQuery] = useState<string | null>(null);
 
-    //This state is used to hold the categories returned from the server
-    const [categories, setCategories] = useState<CategoryType[] | null>(null);
-
     //This useEffect will reset the current page to 1 when the categoriesFilter changes, and will reset the categoriesFilter when the searchQuery changes
     useEffect(() => {
         currentPage !== 1 && setCurrentPage(1);
@@ -43,13 +40,13 @@ export default function Addproduct(){
     
     const itemsPerPage = 20;
 
-    const {data, error, isLoading } = useSWR(`/api/products?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}&searchQuery=${searchQuery}`, fetcher)
+    const categories = useSWR('/api/categories/', fetcherCategories )
+    const products = useSWR(`/api/products?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}&searchQuery=${searchQuery}`, fetcherProducts)
     return (
         <motion.section className="bg-slate-100"
         initial={{opacity:0}}
         animate={{opacity:1}}>
-            <AddProductForm categories={categories} setCategories={setCategories}/>
-
+            <AddProductForm mutate={products.mutate}/>
             <div className="flex justify-center mt-4">
                 <SearchBar
                 query="products"
@@ -61,29 +58,29 @@ export default function Addproduct(){
                 <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                totalObjects={data?.total}
+                totalObjects={products.data?.total}
                 itemsPerPage={itemsPerPage}/>
                 <select
                 value={categoriesFilter!}
                 onChange={(e) => setCategoriesFilter(e.target.value)}
                 className="border border-black rounded w-fit md:w-20 h-8 text-sky-950 antialised text-sm md:text-base m-2 md:m-4 align-self-end">
                     <option value='All'>All</option>
-                    {categories && categories.map((category) => (
+                    {categories.data && categories.data.map((category:CategoryType) => (
                         <option key={category.name} value={category.name}>{category.name}</option>
                         ))}
                 </select>
             </div>
-            {error && <h4 className="text-red-500 font-semibold md:text-lg flex justify-center">{error}</h4>}
+            {products.error && <h4 className="text-red-500 font-semibold md:text-lg flex justify-center">{products.error}</h4>}
             <ProductTableHead sortSignal={sortSignal} setSortSignal={setSortSignal}/>
             <ul className="flex flex-col divide-y ml-4 md:ml-20">
-                {isLoading
+                {products.isLoading
                 ? <AdminSkeletonProduct/>
                 :
-                data.data
-                ? data.data.map((product: ProductType) => (
+                products.data.data
+                ? products.data.data.map((product: ProductType) => (
                     <ProductManager key={product.id} product={product}/>
                     ))
-                : !error && <AdminSkeletonProduct/>}
+                : !products.error && <AdminSkeletonProduct/>}
             </ul>
         </motion.section>
     )
