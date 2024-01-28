@@ -28,7 +28,7 @@ export async function GET(
         try {
             res = request.nextUrl.searchParams
         } catch (error: any) {
-            return NextResponse.json({error: error.message}, {status: 400})
+            return NextResponse.json({message: error.message}, {status: 400})
         }
         
         
@@ -40,7 +40,7 @@ export async function GET(
             category = res.get('category') || 'All'
             category = capitalize(category)
         } catch (error: any) {
-            return NextResponse.json({error: error.message}, {status: 500})
+            return NextResponse.json({message: error.message}, {status: 500})
         }
         
         try {
@@ -58,7 +58,7 @@ export async function GET(
                 sort = products.name
             } 
         } catch (error: any) {
-            return NextResponse.json({error: "Invalid sorting parameter"}, {status: 400})
+            return NextResponse.json({message: "Invalid sorting parameter"}, {status: 400})
         }
         
         try {
@@ -94,7 +94,7 @@ export async function GET(
                 }
             }
         } catch {
-            return NextResponse.json({error: "Invalid parameters"}, {status: 400})
+            return NextResponse.json({message: "Invalid parameters."}, {status: 400})
         }
     return NextResponse.json({data: result, total: total}, {status: 200})
 }

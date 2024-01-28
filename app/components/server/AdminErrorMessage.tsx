@@ -1,8 +1,8 @@
-"use server"
+"use client"
 
-export default async function AdminErrorMessage({message}: {message: any}) {
+export default function AdminErrorMessage({message, className}: {message: any, className?: string}) {
     return (
-        <div>
+        <div className={className}>
             {typeof message === 'string'
             ? <p className="text-xs md:text-base text-red-500">{message}</p>
             : Object.values(message).map((error: any)=> (

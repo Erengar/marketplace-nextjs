@@ -7,8 +7,18 @@ import Pagination from "./Pagination";
 import ProductSort from "./ProductSort";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useSWR from "swr";
+import FetchError from "../../utils/FetchError";
+import AdminErrorMessage from "../server/AdminErrorMessage";
 
-const productsFetcher = (url: string) => fetch(url, {next: {tags: ["products"]}}).then(res => res.json().then(data => data))
+const productsFetcher = async (url: string) => {
+    const res = await fetch(url, {next: {tags: ["products"]}})
+    if (!res.ok) {
+        const errorMessage = await res.json().then(data => data.message)
+        const error = new FetchError(errorMessage, res.status)
+        throw error
+    }
+    return res.json().then(data => data)
+}
 
 export default function Products({category}: {category:string}) {
     const [currentPage, setCurrentPage] = useState(1);
@@ -41,12 +51,15 @@ export default function Products({category}: {category:string}) {
     }, [currentPage, sortSignal])
     return (
         <>
-            {products.error && <h4 className="text-red-500 font-semibold md:text-lg flex justify-center">{products.error}</h4>}
+            {products.error && <AdminErrorMessage message={products.error.message} className="flex justify-center"/>}
             <div className="mb-4 sm:pr-4 lg:pr-20 flex justify-end">
                 <ProductSort setSortSignal={setSortSignal}/>
             </div>
             <ul className="flex gap-3 flex-wrap">
-                {products.data?.data
+                {products.isLoading
+                ? <SkeletonProducts numberOfSkeletons={itemsPerPage}/>
+                : 
+                products.data?.data
                 ? products.data.data.map((product: ProductType, index: number) => (
                     <Product key={product.id} product={product} currentPage={currentPage} totalObjects={products.data?.total} itemsPerPage={itemsPerPage} index={index}/>
                     ))

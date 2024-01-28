@@ -9,10 +9,28 @@ import Pagination from "./Pagination";
 import AddProductForm from "./AddProductForm";
 import SearchBar from "./SearchBar";
 import useSWR from 'swr'
+import FetchError from "../../utils/FetchError";
+import AdminErrorMessage from "../server/AdminErrorMessage";
 
 
-const fetcherProducts = (url: string) => fetch(url, {next: {tags: ["products"]}}).then(res => res.json())
-const fetcherCategories = (url: string) => fetch(url, {next: {tags: ["categories"]}}).then(res => res.json().then(data => data.data))
+const fetcherProducts = async (url: string) => {
+    const res = await fetch(url, {next: {tags: ["products"]}})
+    if (!res.ok) {
+        const errorMessage = await res.json().then(data => data.message)
+        const error = new FetchError(errorMessage, res.status)
+        throw error
+    }
+    return res.json()
+}
+const fetcherCategories = async (url: string) => {
+    const res = await fetch(url, {next: {tags: ["categories"]}})
+    if (!res.ok) {
+        const errorMessage = await res.json().then(data => data.message)
+        const error = new FetchError(errorMessage, res.status)
+        throw error
+    }
+    return res.json().then(data => data.data)
+}
 
 export default function Addproduct(){
     //These states are used for pagination
@@ -70,13 +88,14 @@ export default function Addproduct(){
                         ))}
                 </select>
             </div>
-            {products.error && <h4 className="text-red-500 font-semibold md:text-lg flex justify-center">{products.error}</h4>}
+            {products.error && <AdminErrorMessage message={products.error.message} className="flex justify-center"/>}
+            {categories.error && <AdminErrorMessage message={categories.error.message} className="flex justify-center"/>}
             <ProductTableHead sortSignal={sortSignal} setSortSignal={setSortSignal}/>
             <ul className="flex flex-col divide-y ml-4 md:ml-20">
                 {products.isLoading
                 ? <AdminSkeletonProduct/>
                 :
-                products.data.data
+                products.data?.data
                 ? products.data.data.map((product: ProductType) => (
                     <ProductManager key={product.id} product={product}/>
                     ))
