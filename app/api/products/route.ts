@@ -5,7 +5,6 @@ import { drizzle } from 'drizzle-orm/vercel-postgres';
 import { products } from "../../../db/schema";
 import { asc, desc, eq } from "drizzle-orm";
 import Fuse from 'fuse.js'
-import { NextApiResponse } from "next";
 
 
 
@@ -63,7 +62,7 @@ export async function GET(
         }
         
         try {
-            if (search !== 'null') {
+            if (search !== 'null' && search !== null) {
                 result = await db.select().from(products)
                 const fuse = new Fuse(result, {keys: ['name', 'category', 'description']})
                 result = fuse.search(search!)
@@ -71,7 +70,7 @@ export async function GET(
                 total = result.length
                 result = result.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
             } else {
-
+                
                 if (category === 'All') {
                     if (sortDirection === 'ASC') {
                         result = await db.select().from(products).orderBy(asc(sort)).catch(error => {throw error})
