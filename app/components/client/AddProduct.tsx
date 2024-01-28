@@ -52,9 +52,11 @@ export default function Addproduct(){
         if (searchQuery && categoriesFilter === 'All') {
             return
         }
+        //This is used to abort the fetch request, it should not be needed but it is here just in case
+        const controller = new AbortController();
         setSearchQuery(null);
         setFetchingData(true);
-        fetch(`/api/products?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}`, {next: {tags: ["products"]}})
+        fetch(`/api/products?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}`, {next: {tags: ["products"]}, signal: controller.signal})
         .then((res) => res.json())
         .then((data) => {
             if (data.error) {
@@ -66,6 +68,7 @@ export default function Addproduct(){
             setTotalObjects(data.total)
             setFetchingData(false)
         })
+        return () => controller.abort();
     }, [needRerender, categoriesFilter, sortSignal, currentPage])
 
     //This useEffect is for searchbar
@@ -74,9 +77,11 @@ export default function Addproduct(){
             firstRender.current = false;
             return;
         }
+        //This is used to abort the fetch request, it should not be needed but it is here just in case
+        const controller = new AbortController();
         setFetchingData(true);
         setCategoriesFilter('All');
-        fetch(`/api/products?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&sort=${sortSignal}&searchQuery=${searchQuery}`, {next: {tags: ["products"]}})
+        fetch(`/api/products?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&sort=${sortSignal}&searchQuery=${searchQuery}`, {next: {tags: ["products"]}, signal: controller.signal})
         .then((res) => res.json())
         .then((data) => {
             if (data.error) {
@@ -88,6 +93,7 @@ export default function Addproduct(){
             setTotalObjects(data.total)
             setFetchingData(false)
         })
+        return () => controller.abort();
     }, [searchQuery, currentPage, sortSignal])
 
     return (

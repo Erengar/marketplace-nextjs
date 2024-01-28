@@ -8,7 +8,6 @@ import { drizzle } from 'drizzle-orm/vercel-postgres';
 import { sql } from "@vercel/postgres";
 import { products } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import wait from 'wait';
 
 export default async function ProductView({modal=false, params} : { modal?: boolean, params: {id: number}}) {
     const db = drizzle(sql)
