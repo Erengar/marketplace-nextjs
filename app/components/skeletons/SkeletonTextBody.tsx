@@ -5,7 +5,7 @@ export default function SkeletonTextBody({length = 25} : {length?: number}) {
             {Array.from({length: length}).map((_, i) => {
                 const randomIndex = Math.floor(Math.random() * lengths.length);
                 const randomNumber = lengths[randomIndex];
-                return(<div key={i} className={`h-4 w-${randomNumber} bg-slate-300 rounded animate-pulse duration-1000`}/>)
+                return(<div key={i} className={`h-2 md:h-4 w-${randomNumber} bg-slate-300 rounded animate-pulse duration-1000`}/>)
                 }
             )}
         </div>

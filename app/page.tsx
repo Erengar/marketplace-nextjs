@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     const categories: CategoryType[] = await getCategories()
-
     return (
     <main>
         <ul className="flex flex-row flex-wrap gap-16 m-auto mx-2 xl:mx-80 mt-12">

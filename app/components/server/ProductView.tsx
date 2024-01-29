@@ -24,7 +24,7 @@ export default async function ProductView({modal=false, params} : { modal?: bool
                     <PriceTag price={product.price} className="md:text-xl font-semibold"/>
                     <AddToCart product={product} className="md:text-xl"/>
                 </div>
-                {product.description ? <p className="text-xt md:text-base">product.description</p>: <LoremIpsum p={1} avgSentencesPerParagraph={10}/>}
+                {product.description ? <p className="text-xs md:text-base">product.description</p>: <LoremIpsum p={1} avgSentencesPerParagraph={10}/>}
             </div>
         </div>
     )

@@ -7,9 +7,9 @@ import Pagination from "./Pagination";
 import ProductSort from "./ProductSort";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useSWR from "swr";
-import FetchError from "../../utils/FetchError";
 import AdminErrorMessage from "./AdminErrorMessage";
 import {fetcher} from "../../helperfunctions/fetcher"
+
 
 export default function Products({category}: {category:string}) {
     const [currentPage, setCurrentPage] = useState(1);

@@ -11,7 +11,8 @@ export async function generateMetadata({params, searchParams}:
     return {
         title: `${capitalize(params.category)} | Market`
     }
-} 
+}
+
 
 export default async function Page({params} : {params : { category : string }}){
     return (
