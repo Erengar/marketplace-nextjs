@@ -58,7 +58,7 @@ export default function Addproduct(){
                 <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                totalObjects={products.data?.total}
+                totalObjects={!products.isLoading && products.data?.total}
                 itemsPerPage={itemsPerPage}/>
                 <select
                 value={categoriesFilter!}
