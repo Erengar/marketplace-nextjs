@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migration:generate": "drizzle-kit generate:pg --schema=./db/schema.ts",
+    "migration:push": "node -r esbuild-register db/migrations.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -21,6 +23,7 @@
     "@vercel/kv": "^1.0.1",
     "@vercel/postgres": "^0.5.1",
     "@vercel/speed-insights": "^1.0.2",
+    "dotenv": "^16.4.1",
     "drizzle-orm": "^0.29.3",
     "express-rate-limit": "^7.1.5",
     "framer-motion": "^10.16.16",
@@ -31,6 +34,8 @@
     "next": "^14.1.0",
     "next-themes": "^0.2.1",
     "nextjs-cors": "^2.2.0",
+    "pg": "^8.11.3",
+    "postgres": "^3.4.3",
     "react": "^18",
     "react-dom": "^18",
     "react-loading-icons": "^1.1.0",

@@ -1,10 +1,12 @@
-import { integer, numeric, pgEnum, pgTable, serial, uniqueIndex, varchar, smallint, real } from 'drizzle-orm/pg-core'
+import { pgTable, serial, varchar, smallint, real, uuid } from 'drizzle-orm/pg-core'
 
-export const categories = pgTable('categories', {
-    name: varchar('name', {length: 50}).primaryKey().unique().notNull()
+export var categories = pgTable('categories', {
+    name: varchar('name', {length: 50}).primaryKey().unique().notNull(),
+    description : varchar('description', {length: 1000})
 })
 
-export const products = pgTable('products', {
+//Remake this with uuid instead of serial
+export var products = pgTable('products', {
     id: serial('id').primaryKey().notNull(),
     name: varchar('name', {length: 50}).unique().notNull(),
     price: real('price').notNull(),

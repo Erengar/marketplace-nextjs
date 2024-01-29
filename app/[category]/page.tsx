@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import { capitalize } from 'lodash';
 import Products from '../components/client/Products';
-import { LoremIpsum } from 'react-lorem-ipsum';
+import CategoryHeader from '../components/server/CategoryHeader';
+import { Suspense } from 'react';
+import SkeletonCategoryHeader from '../components/skeletons/SkeletonCategoryHeader';
 
 export async function generateMetadata({params, searchParams}:
     {params: {category: string}, searchParams: URLSearchParams}):
@@ -12,17 +14,11 @@ export async function generateMetadata({params, searchParams}:
 } 
 
 export default async function Page({params} : {params : { category : string }}){
-    let description
     return (
         <section className="w-full px-2">
-            <h1 className="flex justify-center text-xl antialiased font-semibold
-            text-blue-900
-            md:text-4xl">
-                {capitalize(params.category)}
-            </h1>
-            <div className='text-xs md:text-base mx-4 lg:mx-32 mt-2 mb-4'>
-                {description ? description : <LoremIpsum p={1} avgSentencesPerParagraph={10}/>}
-            </div>
+            <Suspense fallback={<SkeletonCategoryHeader/>}>
+                <CategoryHeader categoryName={params.category}/>
+            </Suspense>
             <Products category={params.category}/>
         </section>
     );

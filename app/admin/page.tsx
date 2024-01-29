@@ -8,7 +8,5 @@ export const metadata: Metadata = {
 
 export default async function Admin() {
     permanentRedirect('/admin/categories')
-    return (
-        <></>
-    )
+    return null
 }

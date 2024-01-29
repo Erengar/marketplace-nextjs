@@ -1,6 +1,6 @@
 "use server"
 import ProductView from '@/app/components/server/ProductView';
-import ProductViewSkeleton from '@/app/components/server/ProductViewSkeleton';
+import ProductViewSkeleton from '@/app/components/skeletons/SkeletonProductView';
 import { Suspense } from 'react';
 
 

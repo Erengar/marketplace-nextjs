@@ -3,7 +3,7 @@
 import { Modal } from './modal';
 import ProductView from '@/app/components/server/ProductView';
 import { Suspense } from 'react';
-import ProductViewSkeleton from '@/app/components/server/ProductViewSkeleton';
+import ProductViewSkeleton from '@/app/components/skeletons/SkeletonProductView';
 
 
 export default async function PhotoModal({params}: {params: {id: number}}) {

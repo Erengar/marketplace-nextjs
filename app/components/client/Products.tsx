@@ -2,13 +2,13 @@
 import { type ProductType } from "@/db/schema";
 import Product from "./Product";
 import { useEffect, useState } from "react";
-import SkeletonProducts from "../server/SkeletonProducts";
+import SkeletonProducts from "../skeletons/SkeletonProducts";
 import Pagination from "./Pagination";
 import ProductSort from "./ProductSort";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import FetchError from "../../utils/FetchError";
-import AdminErrorMessage from "../server/AdminErrorMessage";
+import AdminErrorMessage from "./AdminErrorMessage";
 import {fetcher} from "../../helperfunctions/fetcher"
 
 export default function Products({category}: {category:string}) {

@@ -2,14 +2,14 @@
 import { useState, useEffect} from "react";
 import { CategoryType, type ProductType } from "../../../db/schema";
 import ProductManager from "./ProductManager";
-import AdminSkeletonProduct from "./AdminSkeletonProduct";
+import AdminSkeletonProduct from "../skeletons/SkeletonAdminProduct";
 import { motion} from "framer-motion";
 import ProductTableHead from "./ProductTableHead";
 import Pagination from "./Pagination";
 import AddProductForm from "./AddProductForm";
 import SearchBar from "./SearchBar";
 import useSWR from 'swr'
-import AdminErrorMessage from "../server/AdminErrorMessage";
+import AdminErrorMessage from "./AdminErrorMessage";
 import {fetcher} from "../../helperfunctions/fetcher"
 
 
@@ -41,6 +41,7 @@ export default function Addproduct(){
 
     const categories = useSWR('/api/categories/', fetcher )
     const products = useSWR(`/api/products?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}&searchQuery=${searchQuery}`, fetcher)
+    console.log(categories.data)
     return (
         <motion.section className="bg-slate-100"
         initial={{opacity:0}}
@@ -64,7 +65,7 @@ export default function Addproduct(){
                 onChange={(e) => setCategoriesFilter(e.target.value)}
                 className="border border-black rounded w-fit md:w-20 h-8 text-sky-950 antialised text-sm md:text-base m-2 md:m-4 align-self-end">
                     <option value='All'>All</option>
-                    {categories.data && categories.data.map((category:CategoryType) => (
+                    {categories.data?.data && categories.data.data.map((category:CategoryType) => (
                         <option key={category.name} value={category.name}>{category.name}</option>
                         ))}
                 </select>
@@ -73,10 +74,7 @@ export default function Addproduct(){
             {categories.error && <AdminErrorMessage message={categories.error.message} className="flex justify-center"/>}
             <ProductTableHead sortSignal={sortSignal} setSortSignal={setSortSignal}/>
             <ul className="flex flex-col divide-y ml-4 md:ml-20">
-                {products.isLoading
-                ? <AdminSkeletonProduct/>
-                :
-                products.data?.data
+                {products.data?.data && !categories.isLoading
                 ? products.data.data.map((product: ProductType) => (
                     <ProductManager key={product.id} product={product} mutate={products.mutate}/>
                     ))

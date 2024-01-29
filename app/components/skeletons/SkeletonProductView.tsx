@@ -1,8 +1,9 @@
 "use server"
 
+import SkeletonTextBody from "./SkeletonTextBody";
+
 
 export default async function ProductViewSkeleton({modal=false} : {modal?: boolean}) {
-    const lengths = [96, 40, 48, 64, 80, 24, 52]
     return(
         <div className={`bg-slate-100 ${modal? null: "md:w-3/4"} grid grid-cols-1 lg:grid-cols-2 rounded`}>
             <div className='col-span-1 md:p-8 flex justify-center'>
@@ -14,14 +15,7 @@ export default async function ProductViewSkeleton({modal=false} : {modal?: boole
                     <div className="h-4 md:h-5 w-24 bg-slate-300 rounded animate-pulse duration-1000"/>
                     <div className="h-9 lg:h-11 w-24 lg:w-28 bg-slate-300 rounded animate-pulse duration-1000"/>
                 </div>
-                <div className="flex flex-wrap gap-1">
-                    {Array.from({length: 25}).map((_, i) => {
-                        const randomIndex = Math.floor(Math.random() * lengths.length);
-                        const randomNumber = lengths[randomIndex];
-                        return(<div key={i} className={`h-4 w-${randomNumber} bg-slate-300 rounded animate-pulse duration-1000`}/>)
-                    }
-                )}
-                </div>
+                <SkeletonTextBody/>
             </div>
         </div>
     )

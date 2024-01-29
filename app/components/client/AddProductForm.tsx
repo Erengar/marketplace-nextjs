@@ -2,7 +2,7 @@
 import { addProductServer } from "@/app/serveractions/addProductServer";
 import { CategoryType } from "@/db/schema";
 import { useFormState } from "react-dom";
-import AdminErrorMessage from "../server/AdminErrorMessage"
+import AdminErrorMessage from "./AdminErrorMessage"
 import SubmitButton from "./SubmitButton"
 import useSWR from 'swr'
 
@@ -25,7 +25,7 @@ export default function AddProductForm({mutate}: {mutate?: any}) {
             <input id="product-amount" type="number" name='amount' required className="border-2 border-black rounded md:w-3/12 w-60 md:h-8"/>
             <label htmlFor="product-category" className="text-sm md:text-base">Category:</label>
             <select id="product-category" name='category' required className="border-2 border-black rounded md:w-3/12 w-60 md:h-8">
-                {categories.data && categories.data.map((category: CategoryType) => (
+                {categories.data?.data && categories.data.data.map((category: CategoryType) => (
                     <option key={category.name} value={category.name}>{category.name}</option>
                     ))}
             </select>
