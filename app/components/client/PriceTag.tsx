@@ -2,7 +2,13 @@
 import { useContext } from "react";
 import { CurrencyContext } from "../context/CurrencyProvider";
 
-export default function PriceTag({price, className, inline=false}: {price: number, className?: string, inline?: boolean}) {
+type PriceTagProps = {
+    price: number;
+    className?: string;
+    inline?: boolean;
+}
+
+export default function PriceTag({price, className, inline=false}: PriceTagProps) {
     const currency = useContext(CurrencyContext)
     if (inline) return (
         <span className={`antialiased ${className}`}>{price}{currency}</span>

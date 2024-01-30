@@ -7,9 +7,15 @@ import Link from "next/link";
 import AddToCart from "./AddToCart";
 import PriceTag from "./PriceTag";
 
-export default function Product(
-    {product, currentPage, totalObjects, itemsPerPage, index}:
-    { product: ProductType, currentPage:number, totalObjects: number, itemsPerPage:number, index:number}) {
+type ProductProps = {
+    product: ProductType;
+    currentPage:number;
+    totalObjects: number;
+    itemsPerPage:number;
+    index:number;
+}
+
+export default function Product({product, currentPage, totalObjects, itemsPerPage, index}:ProductProps) {
     // State for width of the element
     const [width, setWidth] = useState(0)
     //State fot calculating if the element should grow

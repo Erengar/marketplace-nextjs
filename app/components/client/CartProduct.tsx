@@ -3,10 +3,16 @@ import { CartItemType } from "../../schemas";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import SetImage from "./SetImage";
-import { useState } from "react";
+import React, { useState } from "react";
 import PriceTag from "./PriceTag";
 
-export default function CartProduct({product, setRemovingItem}: { product: CartItemType, setRemovingItem: (a : CartItemType | null) => void }) {
+type CartProductProps = {
+    product: CartItemType;
+    setRemovingItem: React.Dispatch<React.SetStateAction<CartItemType | null>>;
+}
+
+
+export default function CartProduct({product, setRemovingItem}: CartProductProps) {
     const [buttonAddPressed, setButtonAddPressed] = useState(false)
     const [buttonRemovePressed, setButtonRemovePressed] = useState(false)
 

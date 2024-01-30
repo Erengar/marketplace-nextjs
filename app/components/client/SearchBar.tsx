@@ -2,7 +2,15 @@
 import { debounce } from "lodash"
 import { useEffect, useRef } from "react"
 
-export default function SearchBar({query, className, searchQuery, setSearchQuery}: {query: string, className?: string, searchQuery: string | null, setSearchQuery: React.Dispatch<React.SetStateAction<string | null>>}) {
+type SearchBarProps = {
+    query: string;
+    className?: string;
+    searchQuery: string | null;
+    setSearchQuery: React.Dispatch<React.SetStateAction<string | null>>;
+
+}
+
+export default function SearchBar({query, className, searchQuery, setSearchQuery}: SearchBarProps) {
     const inputRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
         if (inputRef.current) {

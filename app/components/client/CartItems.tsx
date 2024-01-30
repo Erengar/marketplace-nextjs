@@ -5,7 +5,12 @@ import { CartItemType} from "../../schemas"
 import RemoveItemModal from "./RemoveItemModal";
 import { motion } from "framer-motion";
 
-export default function CartItems({items, setItems}: {items: CartItemType[], setItems: (items: CartItemType[]) => void}) {
+type CartItemsProps = {
+    items: CartItemType[];
+    setItems: React.Dispatch<React.SetStateAction<CartItemType[]>>;
+}
+
+export default function CartItems({items, setItems}: CartItemsProps) {
     // This is the state of the item being removed
     const [removingItem, setRemovingItem] = useState<CartItemType | null>(null);
 

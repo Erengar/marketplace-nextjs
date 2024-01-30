@@ -2,7 +2,14 @@
 import { TailSpin } from 'react-loading-icons'
 import { motion } from 'framer-motion';
 
-export default function LoadingModal({text, backDrop=true, seeThrough=false}: {text: string, backDrop?: boolean, seeThrough?: boolean}) {
+type LoadingModalProps = {
+    text?: string;
+    backDrop?: boolean;
+    seeThrough?: boolean;
+}
+
+
+export default function LoadingModal({text, backDrop=true, seeThrough=false}: LoadingModalProps) {
     return (
         <div className={`z-10 fixed top-0 right-0 left-0 flex justify-center items-center w-full h-full max-h-full ${backDrop && "bg-gray-500 bg-opacity-50"}`}>
             <motion.div

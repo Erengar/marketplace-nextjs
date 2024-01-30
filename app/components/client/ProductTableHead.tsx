@@ -2,7 +2,12 @@
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
-export default function ProductTableHead({sortSignal, setSortSignal}: {sortSignal: string, setSortSignal: (signal: string) => void}){
+type ProductTableHeadProps = {
+    sortSignal: string;
+    setSortSignal: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function ProductTableHead({sortSignal, setSortSignal}: ProductTableHeadProps){
     const maxWidthForIcon = 450;
     //This function is changing sort from ascending to descending and vice versa
     function setSort(signal: string) {

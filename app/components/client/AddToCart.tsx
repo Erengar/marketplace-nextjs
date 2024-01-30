@@ -4,7 +4,13 @@ import { CartItemType } from "../../schemas";
 import { motion } from "framer-motion";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-export default function AddToCart({product, className, icon=false}: {product: ProductType, className?: string | undefined, icon?: boolean}) {
+type AddToCartProps = {
+    product: ProductType;
+    className?: string;
+    icon?: boolean;
+}
+
+export default function AddToCart({product, className, icon=false}: AddToCartProps) {
     // Add item to shopping cart
     const addItem = () => {
         let shoppingCart : any = localStorage.getItem('shoppingCart')

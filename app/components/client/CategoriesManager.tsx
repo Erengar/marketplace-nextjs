@@ -18,19 +18,20 @@ export default function CategoriesManager({category}: {category: CategoryType}) 
         setIsDeleting(false);
     }
 
-
     return (
+        <>
+        <AnimatePresence>
+        {isDeleting && <LoadingModal text="Deleting Category"/>}
+        </AnimatePresence>
         <motion.li
         className="border-black flex justify-between"
         initial={{opacity:0}}
         animate={{opacity:1}}
         exit={{opacity:0}}
         transition={{duration:0.5}}>
-            <AnimatePresence>
-            {isDeleting && <LoadingModal text="Deleting Category"/>}
-            </AnimatePresence>
             <span>{category.name}</span>
             <button onClick={deleteCategory} className='text-red-600 hover:text-red-800'><CancelIcon/></button>
         </motion.li>
+        </>
     );
 }

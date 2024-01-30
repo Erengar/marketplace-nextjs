@@ -1,6 +1,6 @@
 "use client"
 
-export default function ProductSort({setSortSignal}: {setSortSignal: (e:string) => void}) {
+export default function ProductSort({setSortSignal}: {setSortSignal: React.Dispatch<React.SetStateAction<string>>}) {
     return (
         <select className="border rounded border-black">
             <option value="name" onClick={() => setSortSignal("name")}>Name A-Z</option>

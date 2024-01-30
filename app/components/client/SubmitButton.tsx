@@ -4,7 +4,12 @@ import LoadingModal from "./LoadingModal";
 import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 
-export default function SubmitButton({text, mutate}: {text: string, mutate?: any}) {
+type SubmitButtonProps = {
+    text: string;
+    mutate?: any;
+}
+
+export default function SubmitButton({text, mutate}: SubmitButtonProps) {
     const status = useFormStatus()
 
     useEffect(() => {

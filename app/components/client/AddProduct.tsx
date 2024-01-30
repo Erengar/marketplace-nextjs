@@ -41,7 +41,6 @@ export default function Addproduct(){
 
     const categories = useSWR('/api/categories/', fetcher )
     const products = useSWR(`/api/products?currentpage=${currentPage}&itemsperpage=${itemsPerPage}&category=${categoriesFilter}&sort=${sortSignal}&searchQuery=${searchQuery}`, fetcher)
-    console.log(categories.data)
     return (
         <motion.section className="bg-slate-100"
         initial={{opacity:0}}

@@ -4,6 +4,15 @@ import UploadcareImage from '@uploadcare/nextjs-loader';
 import { getBlurDataURL } from '@uploadcare/nextjs-loader';
 import { useState, useEffect } from 'react';
 
+type SetImageProps = {
+    className?: string;
+    uuid: string | null;
+    name: string;
+    width: number;
+    height: number;
+    crop?: boolean;
+}
+
 /**
  * This is react component that renders an image from uploadcare
  * @param {string} props.uuid - uuid of the image
@@ -13,7 +22,7 @@ import { useState, useEffect } from 'react';
  * @param {boolean} props.crop - if true, the image will be cropped, if false, the image will be resized
  * @returns {JSX.Element} - returns an image
 */
-export default function SetImage({className, uuid, name, width, height, crop=false} : { className?: string, uuid:string | null, name: string, width: number, height: number, crop?: boolean}) {
+export default function SetImage({className, uuid, name, width, height, crop=false} : SetImageProps) {
     const [blurDataURL, setBlurDataURL] = useState<string>()
     const backup = "4a946bab-90b1-4b70-8028-94a73bb9f536"
     const resizing = `https://ucarecdn.com/${uuid? uuid: backup}/-/progressive/yes/-/preview/-/smart_resize/${width}x${height}/`

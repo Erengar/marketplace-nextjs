@@ -1,6 +1,11 @@
 "use client"
 
-export default function AdminErrorMessage({message, className}: {message: any, className?: string}) {
+type AdminErrorMessageProps = {
+    message: any;
+    className?: string;
+}
+
+export default function AdminErrorMessage({message, className}: AdminErrorMessageProps) {
     return (
         <div className={className}>
             {typeof message === 'string'
