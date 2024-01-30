@@ -12,7 +12,7 @@ export default function Category({category}: {category: CategoryType}) {
     const startHover = () => {
         setShowDescription(true)
         setTimeout(() => {
-            Array.from(document.getElementsByClassName("category-description")).map((element) => element.classList.add('z-20'))}, 100)
+            Array.from(document.getElementsByClassName("category-description")).map((element) => element.classList.add('z-20'))}, 200)
     }
     const endHover = () => {
         Array.from(document.getElementsByClassName("category-description")).map((element) => element.classList.remove('z-20'))
