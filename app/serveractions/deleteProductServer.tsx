@@ -1,8 +1,10 @@
 "use server";
 import { UploadcareSimpleAuthSchema, deleteFile } from '@uploadcare/rest-client';
 import { sql } from "@vercel/postgres";
-import { type ProductType } from '../../db/schema';
+import { products, type ProductType } from '../../db/schema';
 import revalidateProducts from '../helperfunctions/revalidateProducts';
+import { drizzle } from 'drizzle-orm/vercel-postgres';
+import { eq } from 'drizzle-orm';
 
 export async function deleteProductServer(product: ProductType) {
     const uploadcareSimpleAuthSchema = new UploadcareSimpleAuthSchema({
@@ -12,6 +14,7 @@ export async function deleteProductServer(product: ProductType) {
     if (product.image) {
         deleteFile({uuid: product.image}, {authSchema:uploadcareSimpleAuthSchema});
     }
-    sql`DELETE FROM products WHERE id = ${product.id}`
+    const db = drizzle(sql)
+    await db.delete(products).where(eq(products.id, product.id))
     await revalidateProducts()
 }

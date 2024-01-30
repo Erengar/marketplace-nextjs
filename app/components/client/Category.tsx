@@ -21,7 +21,7 @@ export default function Category({category}: {category: CategoryType}) {
     return (
         <Link
         key={category.name}
-        href={`${category.name.toLowerCase()}`} className='flex relative'
+        href={`${category.slug}`} className='flex relative'
         onMouseEnter={startHover}
         onMouseLeave={endHover}>
             <motion.li

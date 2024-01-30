@@ -18,7 +18,7 @@ export default async function Page({params} : {params : { category : string }}){
     return (
         <section className="w-full px-2">
             <Suspense fallback={<SkeletonCategoryHeader/>}>
-                <CategoryHeader categoryName={params.category}/>
+                <CategoryHeader categorySlug={params.category}/>
             </Suspense>
             <Products category={params.category}/>
         </section>

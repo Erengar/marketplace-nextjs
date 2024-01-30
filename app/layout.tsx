@@ -13,6 +13,7 @@ export default function RootLayout({children,} : {children: React.ReactNode}) {
         <body className='overflow-scroll'>
             <Navbar />
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ThemeSwitcher />
             <CurrencyProvider >
            
                 {children}

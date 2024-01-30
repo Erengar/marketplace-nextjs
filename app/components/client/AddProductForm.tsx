@@ -5,12 +5,12 @@ import { useFormState } from "react-dom";
 import AdminErrorMessage from "./AdminErrorMessage"
 import SubmitButton from "./SubmitButton"
 import useSWR from 'swr'
+import {fetcher} from "../../helperfunctions/fetcher"
 
-const fetcherCategories = (url: string) => fetch(url, {next: {tags: ["categories"]}}).then(res => res.json().then(data => data.data))
 
 export default function AddProductForm({mutate}: {mutate?: any}) {        
     const [message, formAction] = useFormState(addProductServer, null);
-    const categories = useSWR('/api/categories/', fetcherCategories )
+    const categories = useSWR('/api/categories/', fetcher )
     return (
         <form action={formAction}className="flex flex-col items-center">
             <h1 className="font-semibold md:text-lg antialiased mb-2">Products</h1>

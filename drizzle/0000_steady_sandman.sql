@@ -1,7 +1,9 @@
 CREATE TABLE IF NOT EXISTS "categories" (
 	"name" varchar(50) PRIMARY KEY NOT NULL,
 	"description" varchar(1000),
-	CONSTRAINT "categories_name_unique" UNIQUE("name")
+	"slug" varchar(50) NOT NULL,
+	CONSTRAINT "categories_name_unique" UNIQUE("name"),
+	CONSTRAINT "categories_slug_unique" UNIQUE("slug")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "products" (

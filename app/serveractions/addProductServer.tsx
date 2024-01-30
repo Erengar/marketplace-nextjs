@@ -1,10 +1,12 @@
 "use server";
 import { z } from 'zod';
-import {sql} from "@vercel/postgres"
+import { sql} from "@vercel/postgres"
 import { uploadFile } from '@uploadcare/upload-client';
 import { UploadcareSimpleAuthSchema, deleteFile } from '@uploadcare/rest-client';
 import revalidateProducts from '../helperfunctions/revalidateProducts';
 import { capitalize } from 'lodash';
+import { drizzle } from 'drizzle-orm/vercel-postgres';
+import { products } from '@/db/schema';
 
 const product = z.object({
     name: z.string({invalid_type_error: "Invalid name", required_error: "Name is required"}).min(3, "Name must contain at least 3 character(s)").max(50, "Name must contain at most 50 character(s)"),
@@ -65,7 +67,8 @@ export async function addProductServer(prevState:any, formData: FormData) {
     description = description.trim();
     
     try{
-        await sql`INSERT INTO products (name, price, amount, description, category, image) VALUES (${name}, ${price}, ${amount},${description}, ${category}, ${image})`;
+        const db = drizzle(sql)
+        await db.insert(products).values({name: name, price: price, amount: amount, description: description, category: category, image: image})
     } catch (e: any) {
         //If product is not added to database delete image from Uploadcare
         if (image){
@@ -78,6 +81,10 @@ export async function addProductServer(prevState:any, formData: FormData) {
         if (e.code === '23505') {
             return {
                 error: "Product already exists",
+            };
+        } else {
+            return {
+                error: "Error adding product",
             };
         }
     }

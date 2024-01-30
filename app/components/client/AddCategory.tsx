@@ -26,6 +26,8 @@ export default function AddCategory() {
                 {message?.success && <p className="text-green-500">{message.success}</p>}
                 <label htmlFor="category-name" className="text-sm md:text-base">Name:</label>
                 <input id="category-name" type="text" name='name' required className="border-2 border-black rounded md:w-3/12 w-60 h-6 md:h-8"/>
+                <label htmlFor="category-description" className="text-sm md:text-base">Description:</label>
+                <textarea id="category-description" name='description' className="border-2 border-black rounded md:w-3/12 w-60 h-20 md:h-36"/>
                 <SubmitButton text="Add Category" mutate={categories.mutate}/>
             </form>
             {categories.error && <AdminErrorMessage message={categories.error.message} className='flex justify-center'/>}

@@ -6,8 +6,8 @@ import { LoremIpsum } from 'react-lorem-ipsum';
 import { capitalize } from 'lodash';
 
 
-export default async function CategoryHead({categoryName}: {categoryName: string}) {
-    const category = await getCategories(categoryName).then((categories: CategoryType[]) => categories[0]);
+export default async function CategoryHead({categorySlug}: {categorySlug: string}) {
+    const category = await getCategories(categorySlug).then((categories: CategoryType[]) => categories[0]);
     return (
         <>
         <h1 className="flex justify-center text-xl antialiased font-semibold

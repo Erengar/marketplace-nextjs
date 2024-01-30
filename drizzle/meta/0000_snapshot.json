@@ -1,5 +1,5 @@
 {
-  "id": "c15c07f3-a5ce-4a74-aa89-5a84b62a26b5",
+  "id": "3d2e37d2-5a2e-4ebe-9aa0-8cdc80a9d786",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -19,6 +19,12 @@
           "type": "varchar(1000)",
           "primaryKey": false,
           "notNull": false
+        },
+        "slug": {
+          "name": "slug",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
@@ -30,6 +36,13 @@
           "nullsNotDistinct": false,
           "columns": [
             "name"
+          ]
+        },
+        "categories_slug_unique": {
+          "name": "categories_slug_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "slug"
           ]
         }
       }

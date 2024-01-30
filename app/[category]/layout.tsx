@@ -11,7 +11,7 @@ export default async function Layout({params, children, modal} : {params : { cat
                 <section className="flex flex-col
                 w-32 bg-slate-300 max-w-xl divide-y divide-black divide font-semibold">
                     {categories.map((category) => 
-                    <Sidebar key={`${category.name}`} category={category} selectedCategory={params.category} />)}
+                    <Sidebar key={category.name} category={category} selectedCategory={params.category} />)}
                 </section>
                 <ExpandableSidebar />
             </div>
