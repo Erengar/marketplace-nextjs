@@ -6,7 +6,7 @@ import { Suspense } from 'react';
 import ProductViewSkeleton from '@/app/components/skeletons/SkeletonProductView';
 
 
-export default async function PhotoModal({params}: {params: {id: number}}) {
+export default async function PhotoModal({params}: {params: {id: string}}) {
     return (
         <Modal>
             <Suspense fallback={<ProductViewSkeleton modal={true}/>}>

@@ -7,7 +7,7 @@ import PriceTag from "../client/PriceTag";
 import getProducts from "@/app/helperfunctions/getProducts";
 import { ProductType } from "@/db/schema";
 
-export default async function ProductView({modal=false, params} : { modal?: boolean, params: {id: number}}) {
+export default async function ProductView({modal=false, params} : { modal?: boolean, params: {id: string}}) {
     const product = await getProducts({id:params.id}).then((products: ProductType[]) => products[0])
     return (
         <div className={`bg-slate-100 ${modal? null: "md:w-3/4"} grid grid-cols-1 lg:grid-cols-2 rounded`}>
