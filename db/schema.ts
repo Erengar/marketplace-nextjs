@@ -13,7 +13,7 @@ export var categories = pgTable('categories', {
 
 //Remake this with uuid instead of serial
 export var products = pgTable('products', {
-    id: uuid('id').primaryKey().notNull(),
+    id: uuid('id').primaryKey().notNull().defaultRandom(),
     name: varchar('name', {length: 50}).unique().notNull(),
     price: real('price').notNull(),
     amount: smallint('amount').notNull().default(1),
