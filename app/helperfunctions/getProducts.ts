@@ -10,7 +10,7 @@ type getProductsType ={
     itemsPerPage?: number
     category?: string
     sort?: string
-    id?: number
+    id?: string
 }
 
 export default async function getProducts({currentPage=1, itemsPerPage, category, sort, id}:getProductsType): Promise<ProductType[]> {
