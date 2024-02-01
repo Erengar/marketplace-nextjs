@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1706650178321,
-      "tag": "0000_steady_sandman",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1706803547484,
-      "tag": "0001_flimsy_king_cobra",
+      "when": 1706806963165,
+      "tag": "0000_even_piledriver",
       "breakpoints": true
     }
   ]

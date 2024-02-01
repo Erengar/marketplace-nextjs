@@ -1,5 +1,5 @@
 {
-  "id": "3d2e37d2-5a2e-4ebe-9aa0-8cdc80a9d786",
+  "id": "0b547730-6475-47d1-b327-c16add9b20e4",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -27,7 +27,15 @@
           "notNull": true
         }
       },
-      "indexes": {},
+      "indexes": {
+        "slug_idx": {
+          "name": "slug_idx",
+          "columns": [
+            "slug"
+          ],
+          "isUnique": false
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
@@ -53,7 +61,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
@@ -95,7 +103,22 @@
           "notNull": true
         }
       },
-      "indexes": {},
+      "indexes": {
+        "id_idx": {
+          "name": "id_idx",
+          "columns": [
+            "id"
+          ],
+          "isUnique": false
+        },
+        "category_idx": {
+          "name": "category_idx",
+          "columns": [
+            "category"
+          ],
+          "isUnique": false
+        }
+      },
       "foreignKeys": {
         "products_category_categories_name_fk": {
           "name": "products_category_categories_name_fk",

@@ -69,7 +69,7 @@ export default function Navbar() {
                         ?<motion.div
                         className="text-xxs text-semibold antialiased text-white inline-flex justify-center items-center
                         h-4 w-4 bg-blue-500 rounded-full
-                        absolute left-3"
+                        absolute left-3 z-10"
                         key={total}
                         initial={{scale: 0}}
                         animate={addingItem?{scale: [1,1.5,1]}:{scale: [1]}}
