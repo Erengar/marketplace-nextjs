@@ -4,15 +4,11 @@ import SetImage from "@/app/components/client/SetImage"
 import LoremIpsum from "react-lorem-ipsum";
 import AddToCart from "@/app/components/client/AddToCart";
 import PriceTag from "../client/PriceTag";
-import { drizzle } from 'drizzle-orm/vercel-postgres';
-import { sql } from "@vercel/postgres";
-import { products } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import getProducts from "@/app/helperfunctions/getProducts";
+import { ProductType } from "@/db/schema";
 
 export default async function ProductView({modal=false, params} : { modal?: boolean, params: {id: number}}) {
-    const db = drizzle(sql)
-    const query = await db.select().from(products).where(eq(products.id, params.id))
-    const product = query[0]
+    const product = await getProducts({id:params.id}).then((products: ProductType[]) => products[0])
     return (
         <div className={`bg-slate-100 ${modal? null: "md:w-3/4"} grid grid-cols-1 lg:grid-cols-2 rounded`}>
             <div className='col-span-1 md:p-8 flex justify-center'>

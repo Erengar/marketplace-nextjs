@@ -30,7 +30,7 @@ export default function CategoriesManager({category}: {category: CategoryType}) 
         exit={{opacity:0}}
         transition={{duration:0.5}}>
             <span>{category.name}</span>
-            <button onClick={deleteCategory} className='text-red-600 hover:text-red-800'><CancelIcon/></button>
+            <button onClick={deleteCategory} className='text-red-600 hover:text-red-800'><CancelIcon/><span className="sr-only">Remove Category</span></button>
         </motion.li>
         </>
     );

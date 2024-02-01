@@ -40,6 +40,7 @@ export default function AddToCart({product, className, icon=false}: AddToCartPro
                 onClick={addItem}
                 whileHover={{rotate:[0, 10, -10, 10, -10, 0]}}>
                 <AddShoppingCartIcon className="text-sky-600"/>
+                <span className="sr-only">Add to Cart</span>
             </motion.button>
             <h4 className="text-xs antialised font-normal text-sky-600">
                 {product.amount > 0

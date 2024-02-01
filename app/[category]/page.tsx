@@ -10,6 +10,7 @@ export async function generateMetadata({params, searchParams}:
     Promise<Metadata> {
     return {
         title: `${capitalize(params.category)} | Market`
+        
     }
 }
 

@@ -33,7 +33,7 @@ export default function ProductManger({product, mutate}: {product: ProductType, 
             <span className="mr-4 line-clamp-1">{product.price}{currency}</span>
             <span className="mr-4 line-clamp-1">{product.amount}x</span>
             <span className="mr-4 line-clamp-1">{product.category}</span>
-            <button onClick={deleteProduct} className='text-red-600 hover:text-red-800'><CancelIcon/></button>
+            <button id="product-removal" onClick={deleteProduct} className='text-red-600 hover:text-red-800'><CancelIcon/><span className="sr-only">Product Removal</span></button>
         </motion.li>
     )
 }

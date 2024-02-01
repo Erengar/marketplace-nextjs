@@ -5,7 +5,10 @@ import  getCategories  from './helperfunctions/getCategories'
 
 
 export const metadata: Metadata = {
-    title: 'Home',
+    title: 'Home | Market',
+    description: '',
+    keywords: '',
+    
 }
 
 

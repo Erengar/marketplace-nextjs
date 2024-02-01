@@ -66,8 +66,8 @@ export default function CartProduct({product, setRemovingItem}: CartProductProps
             <div className="flex gap-2 md:gap-6">
                 <h3 className="text-xs md:text-base antialiased font-bold text-sky-600 col-span1 self-center">{product.orderedAmount}x</h3>
                 <div className="flex flex-col bg-slate-200 w-fit rounded border-solid border-black border-2 divide-y-2 divide-black">
-                    <button className={`antialiased font-semibold hover:bg-slate-400 shadow-black ${buttonAddPressed? "shadow-inner" : "shadow-none"}`} onClick={addItem}><AddIcon /></button>
-                    <button className={`antialiased font-semibold hover:bg-slate-400 shadow-black ${buttonRemovePressed? "shadow-inner" : "shadow-none"}`} onClick={removeItem}><RemoveIcon /></button>
+                    <button className={`antialiased font-semibold hover:bg-slate-400 shadow-black ${buttonAddPressed? "shadow-inner" : "shadow-none"}`} onClick={addItem}><AddIcon /><span className="sr-only">Add Product</span></button>
+                    <button className={`antialiased font-semibold hover:bg-slate-400 shadow-black ${buttonRemovePressed? "shadow-inner" : "shadow-none"}`} onClick={removeItem}><RemoveIcon /><span className="sr-only">Deduct Product</span></button>
                 </div>
             </div>
         </li>

@@ -59,7 +59,9 @@ export default function Addproduct(){
                 setCurrentPage={setCurrentPage}
                 totalObjects={!products.isLoading && products.data?.total}
                 itemsPerPage={itemsPerPage}/>
+                <label htmlFor="categoriesFilter" className="sr-only">Filter by Categories</label>
                 <select
+                id="categoriesFilter"
                 value={categoriesFilter!}
                 onChange={(e) => setCategoriesFilter(e.target.value)}
                 className="border border-black rounded w-fit md:w-20 h-8 text-sky-950 antialised text-sm md:text-base m-2 md:m-4 align-self-end">

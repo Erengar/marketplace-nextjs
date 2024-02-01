@@ -7,7 +7,7 @@ export default function Error({error,reset,}: {error: Error & { digest?: string 
 reset: () => void}) {
     return (
     <Modal>
-    <ErrorComponent error={error} reset={reset}/>)
+        <ErrorComponent error={error} reset={reset}/>)
     </Modal>
     )
 }

@@ -45,8 +45,8 @@ export default function CartItems({items, setItems}: CartItemsProps) {
                     ))
                 }
             </motion.ul>
-            {removingItem ?
-            <RemoveItemModal removingItem={removingItem} setRemovingitem={setRemovingItem}/>
+            {removingItem
+            ? <RemoveItemModal removingItem={removingItem} setRemovingitem={setRemovingItem}/>
             : null}
         </>
     )

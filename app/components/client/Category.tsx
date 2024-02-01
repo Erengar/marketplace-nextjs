@@ -37,7 +37,7 @@ export default function Category({category}: {category: CategoryType}) {
                 animate={showDescription? {rotate:[-45,0]} : {rotate:[0,-45]}}
                 transition={{duration: 0.3, ease:'easeInOut'}}
                 >
-                    {category.name}
+                    <h2>{category.name}</h2>
                 </motion.span>
             </motion.li>
             <AnimatePresence>

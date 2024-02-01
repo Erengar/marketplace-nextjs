@@ -50,12 +50,12 @@ export default function Navbar() {
                     item === 'Home' ? 
                     <li key={item}>
                         <Link href="/">
-                            {item}
+                            <h3>{item}</h3>
                         </Link>
                     </li>:
                     <li key={item}>
                         <Link href={`/${item.toLowerCase()}`}>
-                            {item}
+                            <h3>{item}</h3>
                         </Link>
                     </li>
                 ))}
@@ -78,7 +78,7 @@ export default function Navbar() {
                         >{total}</motion.div>
                         :null}
                         </AnimatePresence>
-                        <ShoppingCartIcon/>
+                        <h3><ShoppingCartIcon/></h3>
                     </Link>
                 </li>
             </ul>

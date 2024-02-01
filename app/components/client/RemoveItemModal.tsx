@@ -31,7 +31,7 @@ export default function RemoveItemModal({ removingItem, setRemovingitem }: Remov
 
     return (
         <div onClick={removeModal} className="fixed top-0 right-0 left-0 flex justify-center items-center w-full h-full max-h-full bg-gray-500 bg-opacity-50 z-10">
-            <div className="min-w-[200px] max-w-6xl min-h-min z-20 rounded bg-white border border-black border-solid p-2 flex flex-col gap-y-6">
+            <div onClick={e => e.stopPropagation()} className="min-w-[200px] max-w-6xl min-h-min z-20 rounded bg-white border border-black border-solid p-2 flex flex-col gap-y-6">
                 <h2 className="text-base antialiased font-bold text-sky-950">{`Are you sure you want to remove ${removingItem.product.name} from shopping cart?`}</h2>
                 <div className="flex place-content-around">
                     <button onClick={removeItem} className="h-10 w-20 text-base antialiased font-bold text-red-700 border border-black border-solid rounded bg-slate-200 hover:bg-slate-400">Yes</button>
