@@ -6,22 +6,23 @@ export default function AdminSkeletonProduct() {
 
     return (
         <>
-        {Array.from({ length: numberOfSkeletons }).map((_, index) => (
-            <motion.li
-            key={index}
-            className="flex flex-row justify-between items-center pr-4"
-            initial={{opacity:0}}
-            animate={{opacity:1}}
-            exit={{opacity:0}}
-            transition={{duration:0.5}}>
-                <span className="w-10 h-12 bg-slate-300 rounded animate-pulse duration-1000"></span>
-                <span className="w-2/12 h-4 bg-slate-300 rounded animate-pulse duration-1000"></span>
-                <span className="w-2/12 h-4 bg-slate-300 rounded animate-pulse duration-1000"></span>
-                <span className="w-2/12 h-4 bg-slate-300 rounded animate-pulse duration-1000"></span>
-                <span className="w-2/12 h-4 bg-slate-300 rounded animate-pulse duration-1000"></span>
-                <span className="w-2/12 h-4 bg-slate-300 rounded animate-pulse duration-1000"></span>
-            </motion.li>
-        ))}
+            {Array.from({ length: numberOfSkeletons }).map((_, index) => (
+                <motion.li
+                    key={index}
+                    className="flex flex-row items-center justify-between pr-4"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <span className="h-12 w-10 animate-pulse rounded bg-slate-300 duration-1000"></span>
+                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000"></span>
+                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000"></span>
+                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000"></span>
+                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000"></span>
+                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000"></span>
+                </motion.li>
+            ))}
         </>
-    )
+    );
 }

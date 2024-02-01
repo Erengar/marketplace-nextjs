@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext} from "react";
+import React, { createContext, useContext } from "react";
 
 export const CurrencyContext = createContext<any>(null);
 
@@ -9,9 +9,9 @@ export function CurrencyProvider({ children, ...props }: any) {
         <CurrencyContext.Provider {...props} value={value}>
             {children}
         </CurrencyContext.Provider>
-        )
+    );
 }
 
 export const useCurrencyContext = () => {
     return useContext(CurrencyContext);
-}
+};

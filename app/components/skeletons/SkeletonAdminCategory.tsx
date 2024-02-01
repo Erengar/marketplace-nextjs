@@ -7,16 +7,17 @@ export default function AdminSkeletonCategory() {
         <>
             {Array.from({ length: numberOfSkeletons }).map((_, index) => (
                 <motion.li
-                key={index}
-                className="flex flex-row justify-between items-center border-black py-1.5 md:py-2"
-                initial={{opacity:0}}
-                animate={{opacity:1}}
-                exit={{opacity:0}}
-                transition={{duration:0.5}}>
-                    <span className="w-2/12 h-3 bg-slate-300 rounded animate-pulse duration-1000"></span>
-                    <span className="w-5 h-3 bg-slate-300 rounded-full animate-pulse duration-1000"></span>
+                    key={index}
+                    className="flex flex-row items-center justify-between border-black py-1.5 md:py-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <span className="h-3 w-2/12 animate-pulse rounded bg-slate-300 duration-1000"></span>
+                    <span className="h-3 w-5 animate-pulse rounded-full bg-slate-300 duration-1000"></span>
                 </motion.li>
             ))}
         </>
-    )
+    );
 }

@@ -9,27 +9,36 @@ import PriceTag from "./PriceTag";
 
 type ProductProps = {
     product: ProductType;
-    currentPage:number;
+    currentPage: number;
     totalObjects: number;
-    itemsPerPage:number;
-    index:number;
-}
+    itemsPerPage: number;
+    index: number;
+};
 
-export default function Product({product, currentPage, totalObjects, itemsPerPage, index}:ProductProps) {
+export default function Product({
+    product,
+    currentPage,
+    totalObjects,
+    itemsPerPage,
+    index,
+}: ProductProps) {
     // State for width of the element
-    const [width, setWidth] = useState(0)
+    const [width, setWidth] = useState(0);
     //State fot calculating if the element should grow
-    const [grow, setGrow] = useState(false)
+    const [grow, setGrow] = useState(false);
 
     const elementRef = useRef(null);
     useEffect(() => {
         // We want to turn off grow if we are on the last row and there are less than 3 items left
-        setGrow(((totalObjects - ((currentPage -1)  * itemsPerPage)) - index + 1) > (totalObjects % 5 >= 3 ? 1 : 3))
+        setGrow(
+            totalObjects - (currentPage - 1) * itemsPerPage - index + 1 >
+                (totalObjects % 5 >= 3 ? 1 : 3),
+        );
 
         // Get width of the element to set the width of the image
-        const observer = new ResizeObserver(entries => {
+        const observer = new ResizeObserver((entries) => {
             for (let entry of entries) {
-                setWidth(Math.ceil(entry.contentRect.width))
+                setWidth(Math.ceil(entry.contentRect.width));
             }
         });
         if (elementRef.current) {
@@ -44,20 +53,33 @@ export default function Product({product, currentPage, totalObjects, itemsPerPag
     }, []);
 
     return (
-        <motion.li ref={elementRef} className={`border-2 border-black border-solid rounded w-80 h-72 ${grow && "grow"}`}
-        initial={{opacity:0}}
-        animate={{opacity:1}}
-        transition={{duration:0.5, ease: "easeIn"}}>
-            <SetImage uuid={product.image} name={product.name} width={width} height={220}/>
-            <div className='flex content-center justify-between p-1'>
+        <motion.li
+            ref={elementRef}
+            className={`h-72 w-80 rounded border-2 border-solid border-black ${grow && "grow"}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeIn" }}
+        >
+            <SetImage
+                uuid={product.image}
+                name={product.name}
+                width={width}
+                height={220}
+            />
+            <div className="flex content-center justify-between p-1">
                 <div>
                     <Link href={`/product/${product.id}`} scroll={false}>
-                        <h2 className="text-lg w-48 antialiased font-semibold overflow-hidden text-ellipsis">{product.name}</h2>
+                        <h2 className="w-48 overflow-hidden text-ellipsis text-lg font-semibold antialiased">
+                            {product.name}
+                        </h2>
                     </Link>
-                    <PriceTag price={product.price} className="text-base font-bold text-sky-950"/>
+                    <PriceTag
+                        price={product.price}
+                        className="text-base font-bold text-sky-950"
+                    />
                 </div>
-                <AddToCart product={product} icon={true}/>
+                <AddToCart product={product} icon={true} />
             </div>
         </motion.li>
-    )
+    );
 }

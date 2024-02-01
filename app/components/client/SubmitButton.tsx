@@ -7,23 +7,28 @@ import { AnimatePresence } from "framer-motion";
 type SubmitButtonProps = {
     text: string;
     mutate?: any;
-}
+};
 
-export default function SubmitButton({text, mutate}: SubmitButtonProps) {
-    const status = useFormStatus()
+export default function SubmitButton({ text, mutate }: SubmitButtonProps) {
+    const status = useFormStatus();
 
     useEffect(() => {
         if (!status.pending && mutate) {
-            mutate()
-        }  
-    }, [status.pending])
+            mutate();
+        }
+    }, [status.pending]);
 
     return (
         <>
             <AnimatePresence>
-            {status.pending && <LoadingModal text="Adding Product"/>}
+                {status.pending && <LoadingModal text="Adding Product" />}
             </AnimatePresence>
-            <button type="submit" className="h-8 md:h-10 w-fit px-1 mt-4 md:mt-8 text-sm md:text-base antialiased font-bold text-sky-950 border border-black border-solid rounded bg-slate-200 hover:bg-slate-400">{text}</button>
+            <button
+                type="submit"
+                className="mt-4 h-8 w-fit rounded border border-solid border-black bg-slate-200 px-1 text-sm font-bold text-sky-950 antialiased hover:bg-slate-400 md:mt-8 md:h-10 md:text-base"
+            >
+                {text}
+            </button>
         </>
-    )
+    );
 }

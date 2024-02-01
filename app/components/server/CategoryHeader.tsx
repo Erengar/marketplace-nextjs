@@ -2,22 +2,33 @@
 
 import getCategories from "@/app/helperfunctions/getCategories";
 import { CategoryType } from "@/db/schema";
-import { LoremIpsum } from 'react-lorem-ipsum';
-import { capitalize } from 'lodash';
+import { LoremIpsum } from "react-lorem-ipsum";
+import { capitalize } from "lodash";
 
-
-export default async function CategoryHead({categorySlug}: {categorySlug: string}) {
-    const category = await getCategories(categorySlug).then((categories: CategoryType[]) => categories[0]);
+export default async function CategoryHead({
+    categorySlug,
+}: {
+    categorySlug: string;
+}) {
+    const category = await getCategories(categorySlug).then(
+        (categories: CategoryType[]) => categories[0],
+    );
     return (
         <>
-        <h1 className="flex justify-center text-xl antialiased font-semibold
-            text-blue-900
-            md:text-4xl">
-            {capitalize(category?.name)}
-        </h1>
-        <div className='text-xs md:text-base mx-4 lg:mx-32 mt-2 mb-4'>
-            {category?.description ? category.description : <LoremIpsum p={1} avgSentencesPerParagraph={10}/>}
-        </div>
+            <h1
+                className="flex justify-center text-xl font-semibold text-blue-900
+            antialiased
+            md:text-4xl"
+            >
+                {capitalize(category?.name)}
+            </h1>
+            <div className="mx-4 mb-4 mt-2 text-xs md:text-base lg:mx-32">
+                {category?.description ? (
+                    category.description
+                ) : (
+                    <LoremIpsum p={1} avgSentencesPerParagraph={10} />
+                )}
+            </div>
         </>
-    )
+    );
 }
