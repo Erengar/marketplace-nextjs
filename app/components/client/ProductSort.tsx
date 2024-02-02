@@ -12,7 +12,7 @@ export default function ProductSort({
             </label>
             <select
                 id="categories-filter"
-                className="rounded border border-black"
+                className="h-6 rounded border border-sky-950 pl-2 text-xs font-semibold text-sky-950 hover:shadow md:h-8 md:text-base"
             >
                 <option value="name" onClick={() => setSortSignal("name")}>
                     Name A-Z

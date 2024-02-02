@@ -22,7 +22,7 @@ export default async function CategoryHead({
             >
                 {capitalize(category?.name)}
             </h1>
-            <div className="mx-4 mb-4 mt-2 text-xs md:text-base lg:mx-32">
+            <div className="mx-4 mb-4 mt-2 text-xs text-gray-900 md:text-base lg:mx-32">
                 {category?.description ? (
                     category.description
                 ) : (

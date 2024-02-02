@@ -54,12 +54,12 @@ export default function CartItems({ items, setItems }: CartItemsProps) {
                     ))
                 )}
             </motion.ul>
-            {removingItem ? (
+            {removingItem && (
                 <RemoveItemModal
                     removingItem={removingItem}
                     setRemovingitem={setRemovingItem}
                 />
-            ) : null}
+            )}
         </>
     );
 }

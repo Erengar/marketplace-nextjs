@@ -7,16 +7,20 @@ import { deleteProductServer } from "../../serveractions/deleteProductServer";
 import SetImage from "./SetImage";
 import { motion, AnimatePresence } from "framer-motion";
 import { CurrencyContext } from "../context/CurrencyProvider";
+import ConfirmationModal from "./ConfirmationModal";
 
 export default function ProductManger({
     product,
     mutate,
+    showWarning,
 }: {
     product: ProductType;
     mutate?: any;
+    showWarning?: boolean;
 }) {
     const currency = useContext(CurrencyContext);
     const [isDeleting, setIsDeleting] = useState(false);
+    const [isConfirming, setIsConfirming] = useState(false);
 
     async function deleteProduct() {
         setIsDeleting(true);
@@ -35,6 +39,7 @@ export default function ProductManger({
             <AnimatePresence>
                 {isDeleting && <LoadingModal text="Deleting Product" />}
             </AnimatePresence>
+            {isConfirming && <ConfirmationModal needConfirm={setIsConfirming} deleteItem={deleteProduct} item={product} table="Products"/>}
             <SetImage
                 uuid={product.image}
                 name={product.name}
@@ -52,7 +57,7 @@ export default function ProductManger({
             <span className="mr-4 line-clamp-1">{product.category}</span>
             <button
                 id="product-removal"
-                onClick={deleteProduct}
+                onClick={showWarning ? () => setIsConfirming(true) : deleteProduct}
                 className="text-red-600 hover:text-red-800"
             >
                 <CancelIcon />

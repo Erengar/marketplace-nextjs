@@ -23,7 +23,11 @@ export default function SearchBar({
     }, [searchQuery]);
 
     const handleSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchQuery(e.target.value);
+        if (e.target.value === "") {
+            setSearchQuery(null);
+        } else {
+            setSearchQuery(e.target.value);
+        }
     }, 750);
     return (
         <>

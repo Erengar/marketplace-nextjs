@@ -6,13 +6,17 @@ import LoadingModal from "./LoadingModal";
 import { deleteCategoryServer } from "../../serveractions/deleteCategoryServer";
 import { motion, AnimatePresence } from "framer-motion";
 import { mutate } from "swr";
+import ConfirmationModal from "./ConfirmationModal";
 
 export default function CategoriesManager({
     category,
+    showWarning
 }: {
     category: CategoryType;
+    showWarning: boolean;
 }) {
     const [isDeleting, setIsDeleting] = useState(false);
+    const [isConfirming, setIsConfirming] = useState(false);
 
     async function deleteCategory() {
         setIsDeleting(true);
@@ -26,6 +30,7 @@ export default function CategoriesManager({
             <AnimatePresence>
                 {isDeleting && <LoadingModal text="Deleting Category" />}
             </AnimatePresence>
+            {isConfirming && <ConfirmationModal needConfirm={setIsConfirming} deleteItem={deleteCategory} item={category} table='Category'/>}
             <motion.li
                 className="flex justify-between border-black"
                 initial={{ opacity: 0 }}
@@ -35,7 +40,7 @@ export default function CategoriesManager({
             >
                 <span>{category.name}</span>
                 <button
-                    onClick={deleteCategory}
+                    onClick={showWarning? () => setIsConfirming(true) : deleteCategory}
                     className="text-red-600 hover:text-red-800"
                 >
                     <CancelIcon />

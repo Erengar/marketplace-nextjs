@@ -1,4 +1,4 @@
-import Navbar from "./components/client/Navbar";
+import Navbar from "./components/server/Navbar";
 import { ThemeProvider } from "./components/context/ThemeProvider";
 import { ThemeSwitcher } from "./components/client/ThemeSwitcher";
 import Footer from "./components/server/Footer";
@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className="overflow-scroll bg-slate-100">
+            <body className="overflow-scroll bg-slate-50">
                 <Navbar />
                 <ThemeProvider
                     attribute="class"

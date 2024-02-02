@@ -5,7 +5,7 @@ import { LoremIpsum } from "react-lorem-ipsum";
 export default function CategoryDescription() {
     return (
         <motion.div
-            className="category-description absolute line-clamp-6 h-40 w-40 cursor-default rounded bg-zinc-600 text-slate-300"
+            className="category-description absolute line-clamp-6 h-40 w-40 cursor-default rounded bg-blue-100 text-sky-900"
             onClick={(event) => event.preventDefault()}
             initial={{ left: 75, width: 0 }}
             animate={{ left: 144, width: 160 }}

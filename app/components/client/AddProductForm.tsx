@@ -12,7 +12,7 @@ export default function AddProductForm({ mutate }: { mutate?: any }) {
     const categories = useSWR("/api/categories/", fetcher);
     return (
         <form action={formAction} className="flex flex-col items-center">
-            <h1 className="mb-2 font-semibold antialiased md:text-lg">
+            <h1 className="mb-2 font-semibold antialiased md:text-lg text-sky-950">
                 Products
             </h1>
             {message?.error && <AdminErrorMessage message={message.error} />}

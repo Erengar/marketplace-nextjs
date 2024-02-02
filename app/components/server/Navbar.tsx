@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import ShoppingCartBuble from "./ShoppingCartBuble";
+import ShoppingCartBuble from "../client/ShoppingCartBuble";
 
 const navbarItems = ["Home"];
 
 export default async function Navbar() {
     return (
         <nav
-            className="h-7 bg-slate-300 pt-1 dark:bg-slate-700
+            className="h-7 bg-sky-100 pt-1 dark:bg-slate-700
         md:h-14
         md:pt-3"
         >

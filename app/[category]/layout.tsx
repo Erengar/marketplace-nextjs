@@ -21,7 +21,7 @@ export default async function Layout({
             >
                 <section
                     className="divide flex
-                w-32 max-w-xl flex-col divide-y divide-black bg-slate-300 font-semibold"
+                w-32 max-w-xl flex-col divide-y divide-black bg-sky-100 font-semibold"
                 >
                     {categories.map((category) => (
                         <Sidebar

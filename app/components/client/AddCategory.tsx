@@ -9,13 +9,16 @@ import AdminCategorySkeleton from "../skeletons/SkeletonAdminCategory";
 import { motion } from "framer-motion";
 import useSWR from "swr";
 import { fetcher } from "../../helperfunctions/fetcher";
+import { useState } from "react";
+import ToggleButton from "./ToggleButton";
 
 export default function AddCategory() {
     //This hook is used to handle the form state, it holds message returned from the server
     const [message, formAction] = useFormState(addCategoryServer, null);
     //This hook is used to fetch categories from the server
     const categories = useSWR("/api/categories/", fetcher);
-    console.log(categories.data);
+    //This state is used to determine whether to show modal for confirming deletion
+    const [showWarning, setShowWarning] = useState(true);
     return (
         <motion.section
             className="bg-slate-100"
@@ -23,7 +26,7 @@ export default function AddCategory() {
             animate={{ opacity: 1 }}
         >
             <form action={formAction} className="flex flex-col items-center">
-                <h1 className="mb-2 font-semibold antialiased md:text-lg">
+                <h1 className="mb-2 font-semibold text-sky-950 antialiased md:text-lg">
                     Category
                 </h1>
                 {message?.error && (
@@ -61,12 +64,16 @@ export default function AddCategory() {
                     className="flex justify-center"
                 />
             )}
+            <div className="flex justify-end items-center md:mx-20 gap-2">
+                <ToggleButton isOn={showWarning} setIsOn={setShowWarning} />
+            </div>
             <ul className="mx-1 flex flex-col divide-y text-sm md:mx-20 md:text-base">
                 {categories.data?.data && !categories.isLoading ? (
                     categories.data.data.map((category: CategoryType) => (
                         <CategoriesManager
                             key={category.name}
                             category={category}
+                            showWarning={showWarning}
                         />
                     ))
                 ) : (

@@ -32,7 +32,7 @@ export default async function ProductView({
             </div>
             <div className="col-span-1 flex h-full flex-col place-items-center justify-between gap-4 p-4 md:p-8">
                 <div className="flex h-1/2 w-full flex-col place-items-center justify-around rounded border bg-slate-100">
-                    <h1 className="font-bold md:text-xl">{product.name}</h1>
+                    <h1 className="font-bold md:text-4xl antialiased text-sky-950">{product.name}</h1>
                     <PriceTag
                         price={product.price}
                         className="font-semibold md:text-xl"

@@ -24,7 +24,7 @@ export default function CheckOut({ items }: { items: CartItemType[] }) {
                 {items.map((item) => (
                     <li
                         key={item.product.id}
-                        className="flex justify-between text-xs xl:text-sm"
+                        className="flex justify-between px-1 text-xs xl:text-sm"
                     >
                         <span className="line-clamp-1 font-semibold text-sky-950 antialiased">
                             {item.product.name}
@@ -40,7 +40,7 @@ export default function CheckOut({ items }: { items: CartItemType[] }) {
                 ))}
             </ul>
             <hr />
-            <div className="flex justify-between text-xs sm:text-sm md:text-base">
+            <div className="flex justify-between px-1 text-xs sm:text-sm md:text-base">
                 <span>Total:</span>
                 <PriceTag price={totalPrice} inline={true} />
             </div>
