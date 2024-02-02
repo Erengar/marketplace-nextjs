@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className="overflow-scroll">
+            <body className="overflow-scroll bg-slate-100">
                 <Navbar />
                 <ThemeProvider
                     attribute="class"

@@ -12,8 +12,8 @@ export default async function Sidebar(props: {
             <Link href={`${props.category.slug}`} scroll={false}>
                 <li
                     className="dark: flex h-12
-            justify-center bg-slate-500
-            bg-white"
+            justify-center
+            bg-slate-100"
                 >
                     {props.category.name}
                 </li>
