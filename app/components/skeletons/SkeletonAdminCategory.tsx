@@ -14,8 +14,8 @@ export default function AdminSkeletonCategory() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <span className="h-3 w-2/12 animate-pulse rounded bg-slate-300 duration-1000"></span>
-                    <span className="h-3 w-5 animate-pulse rounded-full bg-slate-300 duration-1000"></span>
+                    <span className="h-3 w-2/12 animate-pulse rounded bg-slate-300 duration-1000 dark:bg-slate-600"></span>
+                    <span className="h-3 w-5 animate-pulse rounded-full bg-slate-300 duration-1000 dark:bg-slate-600"></span>
                 </motion.li>
             ))}
         </>

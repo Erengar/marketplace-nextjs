@@ -8,7 +8,7 @@ export default function SkeletonTextBody({ length = 25 }: { length?: number }) {
                 return (
                     <div
                         key={i}
-                        className={`h-2 md:h-4 w-${randomNumber} animate-pulse rounded bg-slate-300 duration-1000`}
+                        className={`h-2 md:h-4 w-${randomNumber} animate-pulse rounded bg-slate-300 duration-1000 dark:bg-slate-600`}
                     />
                 );
             })}

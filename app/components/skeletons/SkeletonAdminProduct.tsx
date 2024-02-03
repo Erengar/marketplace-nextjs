@@ -15,12 +15,12 @@ export default function AdminSkeletonProduct() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <span className="h-12 w-10 animate-pulse rounded bg-slate-300 duration-1000"></span>
-                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000"></span>
-                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000"></span>
-                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000"></span>
-                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000"></span>
-                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000"></span>
+                    <span className="h-12 w-10 animate-pulse rounded bg-slate-300 duration-1000 dark:bg-slate-600"></span>
+                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000 dark:bg-slate-600"></span>
+                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000 dark:bg-slate-600"></span>
+                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000 dark:bg-slate-600"></span>
+                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000 dark:bg-slate-600"></span>
+                    <span className="h-4 w-2/12 animate-pulse rounded bg-slate-300 duration-1000 dark:bg-slate-600"></span>
                 </motion.li>
             ))}
         </>
