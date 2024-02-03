@@ -21,11 +21,12 @@ export default async function Layout({
             >
                 <section
                     className="divide flex
-                w-32 max-w-xl flex-col divide-y divide-black bg-sky-100 font-semibold"
+                w-32 max-w-xl flex-col divide-y divide-black bg-sky-100 font-semibold dark:bg-slate-900"
                 >
-                    {categories.map((category) => (
+                    {categories.map((category, index) => (
                         <Sidebar
                             key={category.name}
+                            index={index}
                             category={category}
                             selectedCategory={params.category}
                         />

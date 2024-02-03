@@ -55,7 +55,7 @@ export default function Product({
     return (
         <motion.li
             ref={elementRef}
-            className={`h-72 w-80 rounded border-2 border-solid border-black ${grow && "grow"}`}
+            className={`h-72 w-80 rounded border-2 border-solid border-black dark:border dark:border-sky-900 ${grow && "grow"}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, ease: "easeIn" }}
@@ -69,13 +69,13 @@ export default function Product({
             <div className="flex content-center justify-between p-1">
                 <div>
                     <Link href={`/product/${product.id}`} scroll={false}>
-                        <h2 className="w-48 overflow-hidden text-ellipsis text-lg font-semibold antialiased">
+                        <h2 className="w-48 overflow-hidden text-ellipsis text-lg font-semibold antialiased dark:text-gray-300">
                             {product.name}
                         </h2>
                     </Link>
                     <PriceTag
                         price={product.price}
-                        className="text-base font-bold text-sky-950"
+                        className="text-base font-bold text-sky-950 dark:text-sky-200"
                     />
                 </div>
                 <AddToCart product={product} icon={true} />

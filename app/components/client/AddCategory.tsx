@@ -21,12 +21,12 @@ export default function AddCategory() {
     const [showWarning, setShowWarning] = useState(true);
     return (
         <motion.section
-            className="bg-slate-100"
+            className="bg-slate-100 dark:bg-slate-800"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
         >
-            <form action={formAction} className="flex flex-col items-center">
-                <h1 className="mb-2 font-semibold text-sky-950 antialiased md:text-lg">
+            <form action={formAction} className="flex flex-col items-center dark:text-gray-200">
+                <h1 className="mb-2 font-semibold text-sky-950 antialiased dark:text-sky-100 md:text-lg">
                     Category
                 </h1>
                 {message?.error && (
@@ -64,10 +64,10 @@ export default function AddCategory() {
                     className="flex justify-center"
                 />
             )}
-            <div className="flex justify-end items-center md:mx-20 gap-2">
+            <div className="flex items-center justify-end gap-2 md:mx-20">
                 <ToggleButton isOn={showWarning} setIsOn={setShowWarning} />
             </div>
-            <ul className="mx-1 flex flex-col divide-y text-sm md:mx-20 md:text-base">
+            <ul className="mx-1 flex flex-col divide-y text-sm md:mx-20 md:text-base dark:text-gray-200">
                 {categories.data?.data && !categories.isLoading ? (
                     categories.data.data.map((category: CategoryType) => (
                         <CategoriesManager

@@ -10,7 +10,7 @@ export default function ToggleButton({ isOn, setIsOn }: ToggleButtonProps) {
     const toggleSwitch = () => setIsOn(!isOn);
     return (
         <>
-            <span className="text-red-500">Show warning</span>
+            <span className="text-red-500 dark:text-red-400 text-xs md:text-base">Show warning</span>
             <button
                 className={`h-5 w-10 rounded-full bg-red-600 p-0.5`}
                 onClick={toggleSwitch}

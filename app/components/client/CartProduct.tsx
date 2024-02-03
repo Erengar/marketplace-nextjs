@@ -72,28 +72,28 @@ export default function CartProduct({
                     height={100}
                     crop={true}
                 />
-                <h2 className="line-clamp-1 self-center text-sm font-semibold antialiased md:text-lg">
+                <h2 className="line-clamp-1 self-center text-sm font-semibold antialiased dark:text-gray-300 md:text-lg">
                     {product.product.name}
                 </h2>
             </div>
             <PriceTag
                 price={product.product.price}
-                className="text-xs font-bold text-sky-950 md:text-base"
+                className="text-xs font-bold text-sky-950 antialiased dark:text-sky-200 md:text-base"
             />
             <div className="flex gap-2 md:gap-6">
-                <h3 className="col-span1 self-center text-xs font-bold text-sky-600 antialiased md:text-base">
+                <h3 className="col-span1 self-center text-xs font-bold text-sky-600 antialiased dark:text-sky-400 md:text-base">
                     {product.orderedAmount}x
                 </h3>
-                <div className="flex w-fit flex-col divide-y-2 divide-black rounded border-2 border-solid border-black bg-slate-200">
+                <div className="flex w-fit flex-col divide-y-2 divide-black rounded border-2 border-solid border-black bg-slate-200 dark:bg-slate-500 dark:text-gray-100">
                     <button
-                        className={`font-semibold antialiased shadow-black hover:bg-slate-400 ${buttonAddPressed ? "shadow-inner" : "shadow-none"}`}
+                        className={`font-semibold antialiased shadow-black hover:bg-slate-400 dark:hover:bg-blue-300 ${buttonAddPressed ? "shadow-inner" : "shadow-none"}`}
                         onClick={addItem}
                     >
                         <AddIcon />
                         <span className="sr-only">Add Product</span>
                     </button>
                     <button
-                        className={`font-semibold antialiased shadow-black hover:bg-slate-400 ${buttonRemovePressed ? "shadow-inner" : "shadow-none"}`}
+                        className={`font-semibold antialiased shadow-black hover:bg-slate-400 dark:hover:bg-blue-300 ${buttonRemovePressed ? "shadow-inner" : "shadow-none"}`}
                         onClick={removeItem}
                     >
                         <RemoveIcon />

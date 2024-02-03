@@ -9,11 +9,11 @@ const navbarItems = ["Home"];
 export default async function Navbar() {
     return (
         <nav
-            className="h-7 bg-sky-100 pt-1 dark:bg-slate-700
+            className="h-7 bg-sky-100 pt-1 dark:bg-blue-300
         md:h-14
         md:pt-3"
         >
-            <ul className="flex flex-row justify-center gap-10 text-xs font-bold text-sky-900 md:text-base">
+            <ul className="flex flex-row justify-center gap-10 text-xs font-bold text-sky-900 dark:text-sky-950 md:text-base">
                 {navbarItems.map(
                     (item: string): JSX.Element =>
                         item === "Home" ? (
@@ -35,7 +35,7 @@ export default async function Navbar() {
                 </li>
                 <li key="cart">
                     <Link href="/shoppingcart" className="relative">
-                        <ShoppingCartBuble/>
+                        <ShoppingCartBuble />
                         <h3>
                             <ShoppingCartIcon />
                         </h3>

@@ -55,15 +55,15 @@ export default function AddToCart({
 
     if (icon) {
         return (
-            <div className={`flex flex-col self-end ${className}`}>
+            <div className={`flex flex-col self-end ${className} text-sky-600 dark:text-cyan-300`}>
                 <motion.button
                     onClick={addItem}
                     whileHover={{ rotate: [0, 10, -10, 10, -10, 0] }}
                 >
-                    <AddShoppingCartIcon className="text-sky-600" />
+                    <AddShoppingCartIcon/>
                     <span className="sr-only">Add to Cart</span>
                 </motion.button>
-                <h4 className="antialised text-xs font-normal text-sky-600">
+                <h4 className="antialised text-xs font-normal">
                     {product.amount > 0 ? "In stock" : "Out of stock"}
                 </h4>
             </div>

@@ -31,9 +31,8 @@ export default function Category({ category }: { category: CategoryType }) {
             onMouseLeave={endHover}
         >
             <motion.li
-                className={`category text-white dark:bg-slate-950
-            dark:hover:scale-110 dark:hover:bg-slate-900 dark:active:scale-110
-            dark:active:outline-1 dark:active:outline-slate-700 ${showDescription ? "bg-sky-500" : "bg-sky-600"} max-h-sm flex h-40
+                className={`category text-white dark:bg-slate-900 dark:text-white
+            ${showDescription ? "bg-sky-500" : "bg-sky-600"} max-h-sm flex h-40
             min-h-fit w-40 min-w-fit max-w-sm items-center justify-center rounded-lg border border-solid font-semibold active:scale-110 active:outline-1 active:outline-neutral-400 ${showDescription ? "z-30" : "z-10"}`}
                 key={category.name}
                 animate={

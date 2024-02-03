@@ -51,7 +51,7 @@ export default function Addproduct() {
     );
     return (
         <motion.section
-            className="bg-slate-100"
+            className="bg-slate-100 dark:bg-slate-800"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
         >
@@ -61,7 +61,7 @@ export default function Addproduct() {
                     query="products"
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
-                    className="rounded border-2 border-sky-950 text-sm font-semibold text-sky-950 focus:outline-none focus:ring md:text-base"
+                    className="rounded border-2 border-sky-950 text-sm font-semibold text-sky-950 focus:outline-none focus:ring md:text-base dark:border-sky-200 dark:text-sky-200"
                 />
             </div>
             <div className="flex place-content-around">
@@ -78,7 +78,7 @@ export default function Addproduct() {
                     id="categoriesFilter"
                     value={categoriesFilter!}
                     onChange={(e) => setCategoriesFilter(e.target.value)}
-                    className="antialised align-self-end m-2 h-8 w-fit rounded border border-sky-950 pl-2 text-xs font-semibold text-sky-950 md:m-4 md:w-20 md:text-base"
+                    className="antialised align-self-end m-2 h-8 w-fit rounded border border-sky-950 pl-2 text-xs font-semibold text-sky-950 dark:border-sky-200 dark:text-sky-200 md:m-4 md:w-20 md:text-base"
                 >
                     <option value="All">All</option>
                     {categories.data?.data &&
@@ -101,7 +101,7 @@ export default function Addproduct() {
                     className="flex justify-center"
                 />
             )}
-            <div className="mr-2 flex items-center justify-end sm:mr-10 md:mr-16 lg:mr-20 xl:mr-28">
+            <div className="mr-2 flex items-center justify-end gap-2 sm:mr-10 md:mr-16 lg:mr-20 xl:mr-28">
                 <ToggleButton isOn={showWarning} setIsOn={setShowWarning} />
             </div>
             <ProductTableHead

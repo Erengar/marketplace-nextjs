@@ -41,7 +41,7 @@ export default function CategoriesManager({
                 <span>{category.name}</span>
                 <button
                     onClick={showWarning? () => setIsConfirming(true) : deleteCategory}
-                    className="text-red-600 hover:text-red-800"
+                    className="text-red-600 hover:text-red-800 dark:hover:text-red-400"
                 >
                     <CancelIcon />
                     <span className="sr-only">Remove Category</span>

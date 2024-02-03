@@ -11,8 +11,8 @@ export default function AddProductForm({ mutate }: { mutate?: any }) {
     const [message, formAction] = useFormState(addProductServer, null);
     const categories = useSWR("/api/categories/", fetcher);
     return (
-        <form action={formAction} className="flex flex-col items-center">
-            <h1 className="mb-2 font-semibold antialiased md:text-lg text-sky-950">
+        <form action={formAction} className="flex flex-col items-center dark:text-gray-200">
+            <h1 className="mb-2 font-semibold antialiased md:text-lg text-sky-950 dark:text-sky-100">
                 Products
             </h1>
             {message?.error && <AdminErrorMessage message={message.error} />}
@@ -87,7 +87,7 @@ export default function AddProductForm({ mutate }: { mutate?: any }) {
                 id="product-image"
                 type="file"
                 name="image"
-                className="w-60 text-xs font-semibold text-blue-800 file:cursor-pointer file:rounded-full
+                className="w-60 text-xs font-semibold text-blue-800 file:cursor-pointer file:rounded-full dark:text-blue-200
             file:border-0 file:bg-blue-200 file:p-3 file:font-semibold file:text-blue-800 hover:file:bg-blue-300 md:w-3/12 md:text-base file:md:p-4"
             />
             <SubmitButton text="Add Product" mutate={mutate} />

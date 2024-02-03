@@ -8,12 +8,10 @@ export const ThemeSwitcher = () => {
 
     useEffect(() => {
         setMounted(true);
-        //Remove later, when dark styling is implemented
-        setTheme("light");
     }, []);
 
-    //Remove later, when dark styling is implemented
-    return null;
+
+    return null
 
     if (!mounted) {
         return null;

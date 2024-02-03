@@ -25,7 +25,7 @@ export default function SubmitButton({ text, mutate }: SubmitButtonProps) {
             </AnimatePresence>
             <button
                 type="submit"
-                className="mt-4 h-8 w-fit rounded border border-solid border-black bg-slate-200 px-1 text-sm font-bold text-sky-950 antialiased hover:bg-slate-400 md:mt-8 md:h-10 md:text-base"
+                className="mt-4 h-8 w-fit rounded bg-sky-500 px-1 px-2 text-sm font-semibold text-white antialiased hover:bg-sky-600 md:mt-8 md:h-10 md:text-base dark:text-gray-200"
             >
                 {text}
             </button>

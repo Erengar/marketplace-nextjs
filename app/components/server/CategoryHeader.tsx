@@ -16,13 +16,13 @@ export default async function CategoryHead({
     return (
         <>
             <h1
-                className="flex justify-center text-xl font-semibold text-blue-900
+                className="flex justify-center text-xl font-semibold text-blue-900 dark:text-gray-200
             antialiased
             md:text-4xl"
             >
                 {capitalize(category?.name)}
             </h1>
-            <div className="mx-4 mb-4 mt-2 text-xs text-gray-900 md:text-base lg:mx-32">
+            <div className="mx-4 mb-4 mt-2 text-xs text-gray-900 dark:text-gray-300 md:text-base lg:mx-32">
                 {category?.description ? (
                     category.description
                 ) : (

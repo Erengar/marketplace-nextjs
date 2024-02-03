@@ -39,7 +39,14 @@ export default function ProductManger({
             <AnimatePresence>
                 {isDeleting && <LoadingModal text="Deleting Product" />}
             </AnimatePresence>
-            {isConfirming && <ConfirmationModal needConfirm={setIsConfirming} deleteItem={deleteProduct} item={product} table="Products"/>}
+            {isConfirming && (
+                <ConfirmationModal
+                    needConfirm={setIsConfirming}
+                    deleteItem={deleteProduct}
+                    item={product}
+                    table="Products"
+                />
+            )}
             <SetImage
                 uuid={product.image}
                 name={product.name}
@@ -55,14 +62,20 @@ export default function ProductManger({
             </span>
             <span className="mr-4 line-clamp-1">{product.amount}x</span>
             <span className="mr-4 line-clamp-1">{product.category}</span>
-            <button
-                id="product-removal"
-                onClick={showWarning ? () => setIsConfirming(true) : deleteProduct}
-                className="text-red-600 hover:text-red-800"
-            >
-                <CancelIcon />
-                <span className="sr-only">Product Removal</span>
-            </button>
+            <div className="flex justify-center">
+                <button
+                    id="product-removal"
+                    onClick={
+                        showWarning
+                            ? () => setIsConfirming(true)
+                            : deleteProduct
+                    }
+                    className="text-red-600 hover:text-red-800 dark:hover:text-red-400"
+                >
+                    <CancelIcon />
+                    <span className="sr-only">Product Removal</span>
+                </button>
+            </div>
         </motion.li>
     );
 }

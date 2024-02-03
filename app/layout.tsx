@@ -12,17 +12,20 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className="overflow-scroll bg-slate-50">
-                <Navbar />
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                >
-                    <ThemeSwitcher />
-                    <CurrencyProvider>{children}</CurrencyProvider>
-                </ThemeProvider>
-            </body>
+            <head></head>
+            <main>
+                <body className="overflow-scroll bg-slate-50 dark:bg-slate-900">
+                    <Navbar />
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="system"
+                        enableSystem
+                    >
+                        <ThemeSwitcher />
+                        <CurrencyProvider>{children}</CurrencyProvider>
+                    </ThemeProvider>
+                </body>
+            </main>
         </html>
     );
 }

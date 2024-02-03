@@ -40,8 +40,8 @@ export default function ShoppingCartBuble() {
             {total > 0 ? (
                 <motion.div
                     className="text-xxs text-semibold absolute left-3 top-3 z-10 inline-flex h-3 w-3 items-center
-                        justify-center rounded-full bg-blue-500 text-white
-                        antialiased md:h-4 md:w-4"
+                        justify-center rounded-full bg-blue-500 text-white antialiased
+                        dark:bg-blue-700 md:h-4 md:w-4"
                     key={total}
                     initial={{ scale: 1 }}
                     animate={
