@@ -8,6 +8,7 @@ export const ThemeSwitcher = () => {
 
     useEffect(() => {
         setMounted(true);
+        setTheme('light')
     }, []);
 
     if (!mounted) {
