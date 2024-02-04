@@ -13,19 +13,19 @@ export default function RootLayout({
     return (
         <html lang="en">
             <head></head>
-            <main>
-                <body className="overflow-scroll bg-slate-50 dark:bg-slate-900">
-                    <Navbar />
-                    <ThemeProvider
-                        attribute="class"
-                        defaultTheme="system"
-                        enableSystem
-                    >
-                        <ThemeSwitcher />
-                        <CurrencyProvider>{children}</CurrencyProvider>
-                    </ThemeProvider>
-                </body>
-            </main>
+            <body className="overflow-scroll bg-slate-50 dark:bg-slate-900">
+                <Navbar />
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                >
+                    <ThemeSwitcher />
+                    <CurrencyProvider>
+                        <main>{children}</main>
+                    </CurrencyProvider>
+                </ThemeProvider>
+            </body>
         </html>
     );
 }

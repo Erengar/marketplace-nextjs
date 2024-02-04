@@ -1,7 +1,7 @@
-import Category from "./components/client/Category";
 import { Metadata } from "next";
-import { type CategoryType } from "../db/schema";
-import getCategories from "./helperfunctions/getCategories";
+import Categories from "./components/server/Categories";
+import { Suspense } from "react";
+import SkeletonFrontPage from "./components/skeletons/SkeletonFrontPage";
 
 export const metadata: Metadata = {
     title: "Home | Market",
@@ -10,14 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-    const categories: CategoryType[] = await getCategories();
     return (
-        <main>
-            <ul className="m-auto mx-2 mt-12 flex flex-row flex-wrap gap-2 xl:mx-80">
-                {categories.map((category) => (
-                    <Category key={category.name} category={category} />
-                ))}
-            </ul>
-        </main>
+        <Suspense fallback={<SkeletonFrontPage/>}>
+            <Categories />
+        </Suspense>
     );
 }
