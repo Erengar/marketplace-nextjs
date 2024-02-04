@@ -1,9 +1,6 @@
 "use client";
-import { addCategoryServer } from "../../serveractions/addCategoryServer";
 import CategoriesManager from "./CategoriesManager";
 import { type CategoryType } from "../../../db/schema";
-import SubmitButton from "./SubmitButton";
-import { useFormState } from "react-dom";
 import AdminErrorMessage from "./AdminErrorMessage";
 import AdminCategorySkeleton from "../skeletons/SkeletonAdminCategory";
 import { motion } from "framer-motion";
@@ -11,10 +8,9 @@ import useSWR from "swr";
 import { fetcher } from "../../helperfunctions/fetcher";
 import { useState } from "react";
 import ToggleButton from "./ToggleButton";
+import AddCategoryForm from "./AddCategoryForm";
 
 export default function AddCategory() {
-    //This hook is used to handle the form state, it holds message returned from the server
-    const [message, formAction] = useFormState(addCategoryServer, null);
     //This hook is used to fetch categories from the server
     const categories = useSWR("/api/categories/", fetcher);
     //This state is used to determine whether to show modal for confirming deletion
@@ -25,39 +21,7 @@ export default function AddCategory() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
         >
-            <form action={formAction} className="flex flex-col items-center dark:text-gray-200">
-                <h1 className="mb-2 font-semibold text-sky-950 antialiased dark:text-sky-100 md:text-lg">
-                    Category
-                </h1>
-                {message?.error && (
-                    <AdminErrorMessage message={message.error} />
-                )}
-                {message?.success && (
-                    <p className="text-green-500">{message.success}</p>
-                )}
-                <label htmlFor="category-name" className="text-sm md:text-base">
-                    Name:
-                </label>
-                <input
-                    id="category-name"
-                    type="text"
-                    name="name"
-                    required
-                    className="h-6 w-60 rounded border-2 border-black md:h-8 md:w-3/12"
-                />
-                <label
-                    htmlFor="category-description"
-                    className="text-sm md:text-base"
-                >
-                    Description:
-                </label>
-                <textarea
-                    id="category-description"
-                    name="description"
-                    className="h-20 w-60 rounded border-2 border-black md:h-36 md:w-3/12"
-                />
-                <SubmitButton text="Add Category" mutate={categories.mutate} />
-            </form>
+            <AddCategoryForm categories={categories} />
             {categories.error && (
                 <AdminErrorMessage
                     message={categories.error.message}
@@ -67,7 +31,7 @@ export default function AddCategory() {
             <div className="flex items-center justify-end gap-2 md:mx-20">
                 <ToggleButton isOn={showWarning} setIsOn={setShowWarning} />
             </div>
-            <ul className="mx-1 flex flex-col divide-y text-sm md:mx-20 md:text-base dark:text-gray-200">
+            <ul className="mx-1 flex flex-col divide-y text-sm dark:text-gray-200 md:mx-20 md:text-base">
                 {categories.data?.data && !categories.isLoading ? (
                     categories.data.data.map((category: CategoryType) => (
                         <CategoriesManager

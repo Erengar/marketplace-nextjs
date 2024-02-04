@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 export default function SelectTable() {
     const url = usePathname();
     return (
-        <div className="antialised flex justify-center divide-x pt-4 text-xs font-bold md:text-lg">
+        <div className="antialised flex justify-center divide-x pt-4 text-xs font-bold md:text-lg dark:text-gray-200">
             <Link
                 href="/admin/categories"
-                className={`rounded-tl border-black px-4 py-2 hover:bg-blue-400 ${url.endsWith("categories") ? "bg-slate-100 dark:bg-slate-800" : "bg-blue-200 dark:bg-slate-500"}`}
+                className={`rounded-tl border-black px-4 py-2 hover:bg-blue-400 ${url.endsWith("categories") ? "bg-slate-100 dark:bg-slate-800" : "bg-blue-200 dark:bg-slate-600"}`}
             >
                 <h2>Categories</h2>
             </Link>

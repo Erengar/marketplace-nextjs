@@ -1,4 +1,4 @@
-import AddCategory from "@/app/components/client/AddCategory";
+import AddCategory from "../../../app/components/client/AddCategory";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

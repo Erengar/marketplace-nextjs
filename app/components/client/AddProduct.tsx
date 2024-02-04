@@ -12,6 +12,7 @@ import useSWR from "swr";
 import AdminErrorMessage from "./AdminErrorMessage";
 import { fetcher } from "../../helperfunctions/fetcher";
 import ToggleButton from "./ToggleButton";
+import CategoriesFilter from "./CategoriesFilter";
 
 export default function Addproduct() {
     //These states are used for pagination
@@ -61,7 +62,7 @@ export default function Addproduct() {
                     query="products"
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
-                    className="rounded border-2 border-sky-950 text-sm font-semibold text-sky-950 focus:outline-none focus:ring md:text-base dark:border-sky-200 dark:text-sky-200"
+                    className="rounded border-2 border-sky-950 text-sm font-semibold text-sky-950 focus:outline-none focus:ring dark:border-sky-200 dark:text-sky-200 md:text-base"
                 />
             </div>
             <div className="flex place-content-around">
@@ -71,23 +72,11 @@ export default function Addproduct() {
                     totalObjects={!products.isLoading && products.data?.total}
                     itemsPerPage={itemsPerPage}
                 />
-                <label htmlFor="categoriesFilter" className="sr-only">
-                    Filter by Categories
-                </label>
-                <select
-                    id="categoriesFilter"
-                    value={categoriesFilter!}
-                    onChange={(e) => setCategoriesFilter(e.target.value)}
-                    className="antialised align-self-end m-2 h-8 w-fit rounded border border-sky-950 pl-2 text-xs font-semibold text-sky-950 dark:border-sky-200 dark:text-sky-200 md:m-4 md:w-20 md:text-base"
-                >
-                    <option value="All">All</option>
-                    {categories.data?.data &&
-                        categories.data.data.map((category: CategoryType) => (
-                            <option key={category.name} value={category.name}>
-                                {category.name}
-                            </option>
-                        ))}
-                </select>
+                <CategoriesFilter
+                    categoriesFilter={categoriesFilter}
+                    setCategoriesFilter={setCategoriesFilter}
+                    categories={categories}
+                />
             </div>
             {products.error && (
                 <AdminErrorMessage

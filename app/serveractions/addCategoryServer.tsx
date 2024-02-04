@@ -3,7 +3,7 @@ import { z } from "zod";
 import { sql } from "@vercel/postgres";
 import revalidateCategories from "../helperfunctions/revalidateCategories";
 import { drizzle } from "drizzle-orm/vercel-postgres";
-import { categories } from "@/db/schema";
+import { categories } from "../../db/schema";
 import { kebabCase } from "lodash";
 
 const category = z.object({

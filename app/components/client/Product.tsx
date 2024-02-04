@@ -31,8 +31,8 @@ export default function Product({
     useEffect(() => {
         // We want to turn off grow if we are on the last row and there are less than 3 items left
         setGrow(
-            totalObjects - (currentPage - 1) * itemsPerPage - index + 1 >
-                (totalObjects % 5 >= 3 ? 1 : 3),
+            (totalObjects - (currentPage - 1) * itemsPerPage - index + 1 >
+                (totalObjects % 5 >= 3 ? 1 : 3)) || window.innerWidth < 1136,
         );
 
         // Get width of the element to set the width of the image
