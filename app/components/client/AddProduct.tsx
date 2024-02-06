@@ -9,7 +9,7 @@ import Pagination from "./Pagination";
 import AddProductForm from "./AddProductForm";
 import SearchBar from "./SearchBar";
 import useSWR from "swr";
-import AdminErrorMessage from "./AdminErrorMessage";
+import ErrorMessage from "./ErrorMessage";
 import { fetcher } from "../../helperfunctions/fetcher";
 import ToggleButton from "./ToggleButton";
 import CategoriesFilter from "./CategoriesFilter";
@@ -79,13 +79,13 @@ export default function Addproduct() {
                 />
             </div>
             {products.error && (
-                <AdminErrorMessage
+                <ErrorMessage
                     message={products.error.message}
                     className="flex justify-center"
                 />
             )}
             {categories.error && (
-                <AdminErrorMessage
+                <ErrorMessage
                     message={categories.error.message}
                     className="flex justify-center"
                 />

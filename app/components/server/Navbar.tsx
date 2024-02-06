@@ -41,6 +41,8 @@ export default async function Navbar() {
                         </h3>
                     </Link>
                 </li>
+                <li><Link href="/signup">Sign Up</Link></li>
+                <li><Link href="/mongo">Mongo Test</Link></li>
             </ul>
         </nav>
     );

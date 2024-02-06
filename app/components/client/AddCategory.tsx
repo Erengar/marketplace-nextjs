@@ -1,7 +1,7 @@
 "use client";
 import CategoriesManager from "./CategoriesManager";
 import { type CategoryType } from "../../../db/schema";
-import AdminErrorMessage from "./AdminErrorMessage";
+import ErrorMessage from "./ErrorMessage";
 import AdminCategorySkeleton from "../skeletons/SkeletonAdminCategory";
 import { motion } from "framer-motion";
 import useSWR from "swr";
@@ -23,7 +23,7 @@ export default function AddCategory() {
         >
             <AddCategoryForm categories={categories} />
             {categories.error && (
-                <AdminErrorMessage
+                <ErrorMessage
                     message={categories.error.message}
                     className="flex justify-center"
                 />

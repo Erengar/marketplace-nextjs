@@ -1,9 +1,10 @@
 import { Schema } from "mongoose";
+import mongoose from "mongoose";
 
 export const userSchema = new Schema({
-    name:String,
-    email:{type:String,unique:true, required:true},
+    username:String,
     password:{type:String,required:true, minLength:8, maxLength: 30},
+    email:{type:String,unique:true, required:true},
     phone:String,
     location:{
         country:String,
@@ -12,3 +13,5 @@ export const userSchema = new Schema({
         zip:String
     }
 })
+
+export const User = mongoose.models.User || mongoose.model("User", userSchema);

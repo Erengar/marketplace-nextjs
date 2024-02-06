@@ -2,10 +2,11 @@
 import { addProductServer } from "@/app/serveractions/addProductServer";
 import { CategoryType } from "@/db/schema";
 import { useFormState } from "react-dom";
-import AdminErrorMessage from "./AdminErrorMessage";
+import ErrorMessage from "./ErrorMessage";
 import SubmitButton from "./SubmitButton";
 import useSWR from "swr";
 import { fetcher } from "../../helperfunctions/fetcher";
+import SuccessMessage from "./SuccessMessage";
 
 export default function AddProductForm({ mutate }: { mutate?: any }) {
     const [message, formAction] = useFormState(addProductServer, null);
@@ -15,12 +16,12 @@ export default function AddProductForm({ mutate }: { mutate?: any }) {
             <h1 className="mb-2 font-semibold antialiased md:text-lg text-sky-950 dark:text-sky-100">
                 Products
             </h1>
-            {message?.error && <AdminErrorMessage message={message.error} />}
+            {message?.error && <ErrorMessage message={message.error} />}
             {message?.success && (
-                <p className="text-green-500">{message.success}</p>
+                <SuccessMessage message={message.success}/>
             )}
             {categories.error && (
-                <AdminErrorMessage message={categories.error} />
+                <ErrorMessage message={categories.error} />
             )}
             <label htmlFor="product-name" className="text-sm md:text-base">
                 Name:

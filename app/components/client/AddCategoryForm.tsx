@@ -2,7 +2,8 @@
 import SubmitButton from "./SubmitButton";
 import { useFormState } from "react-dom";
 import { addCategoryServer } from "../../serveractions/addCategoryServer";
-import AdminErrorMessage from "./AdminErrorMessage";
+import ErrorMessage from "./ErrorMessage";
+import SuccessMessage from "./SuccessMessage";
 
 export default function AddCategoryForm({categories}: {categories: any}) {
     //This hook is used to handle the form state, it holds message returned from the server
@@ -15,9 +16,9 @@ export default function AddCategoryForm({categories}: {categories: any}) {
             <h1 className="mb-2 font-semibold text-sky-950 antialiased dark:text-sky-100 md:text-lg">
                 Category
             </h1>
-            {message?.error && <AdminErrorMessage message={message.error} />}
+            {message?.error && <ErrorMessage message={message.error} />}
             {message?.success && (
-                <p className="text-green-500">{message.success}</p>
+                <SuccessMessage message={message.success}/>
             )}
             <label htmlFor="category-name" className="text-sm md:text-base">
                 Name:

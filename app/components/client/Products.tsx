@@ -7,7 +7,7 @@ import Pagination from "./Pagination";
 import ProductSort from "./ProductSort";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useSWR from "swr";
-import AdminErrorMessage from "./AdminErrorMessage";
+import ErrorMessage from "./ErrorMessage";
 import { fetcher } from "../../helperfunctions/fetcher";
 import ProductsNothingHere from "./ProductsNothingHere";
 
@@ -44,7 +44,7 @@ export default function Products({ category }: { category: string }) {
     return (
         <>
             {products.error && (
-                <AdminErrorMessage
+                <ErrorMessage
                     message={products.error.message}
                     className="flex justify-center"
                 />
