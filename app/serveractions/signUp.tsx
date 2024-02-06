@@ -49,6 +49,7 @@ export async function signUp(prevState: any, formData: FormData) {
         return { error: data.error.flatten().fieldErrors };
     }
     return { success: "Not Implemented Yet." };
+    /*
     await mongoose.connect(process.env.MONGODB_URI!);
     const newUser = new User({
         username: data.data.username,
@@ -56,5 +57,5 @@ export async function signUp(prevState: any, formData: FormData) {
         email: data.data.email,
     });
     await newUser.save();
-    await mongoose.connection.close();
+    await mongoose.connection.close();*/
 }
