@@ -9,6 +9,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import AdminErrorMessage from "./AdminErrorMessage";
 import { fetcher } from "../../helperfunctions/fetcher";
+import ProductsNothingHere from "./ProductsNothingHere";
 
 export default function Products({ category }: { category: string }) {
     const [currentPage, setCurrentPage] = useState(1);
@@ -54,7 +55,7 @@ export default function Products({ category }: { category: string }) {
             <ul className="flex flex-wrap gap-3">
                 {products.isLoading ? (
                     <SkeletonProducts numberOfSkeletons={itemsPerPage} />
-                ) : products.data?.data ? (
+                ) : products.data?.data.length !== 0 ? (
                     products.data.data.map(
                         (product: ProductType, index: number) => (
                             <Product
@@ -67,19 +68,23 @@ export default function Products({ category }: { category: string }) {
                             />
                         ),
                     )
-                ) : (
-                    !products.error && (
+                ) : !products.error ? (
+                    products.data?.data ? (
+                        <ProductsNothingHere />
+                    ) : (
                         <SkeletonProducts numberOfSkeletons={itemsPerPage} />
                     )
-                )}
+                ) : null}
             </ul>
             <div className="mb-6 mt-6 flex justify-center">
-                <Pagination
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    totalObjects={products.data?.total}
-                    itemsPerPage={itemsPerPage}
-                />
+                {products.data?.total ? (
+                    <Pagination
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        totalObjects={products.data?.total}
+                        itemsPerPage={itemsPerPage}
+                    />
+                ) : null}
             </div>
         </>
     );

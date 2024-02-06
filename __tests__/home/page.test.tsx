@@ -1,8 +1,11 @@
 import '@testing-library/jest-dom'
-import { render, screen, waitFor } from '@testing-library/react';
-import AddCategory from "../../app/components/client/AddCategory";
-import {it, expect, test} from '@jest/globals';
 
-test('renders AddCategory', async () => {
-    render(<AddCategory />);
+import {render, screen} from '@testing-library/react'
+import Page from "../../app/page";
+import {it, expect, test, describe} from '@jest/globals';
+
+describe('renders AddCategory', () => {
+    it('renders AddCategory', () => {
+        render(<Page />);
+    })
 })

@@ -15,6 +15,20 @@
       "when": 1706810518514,
       "tag": "0001_fair_bloodscream",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1707161773754,
+      "tag": "0002_optimal_yellow_claw",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1707173315861,
+      "tag": "0003_loving_shocker",
+      "breakpoints": true
     }
   ]
 }

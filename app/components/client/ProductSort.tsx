@@ -21,7 +21,7 @@ export default function ProductSort({
                     value="name-desc"
                     onClick={() => setSortSignal("-name")}
                 >
-                    Name Z-a
+                    Name Z-A
                 </option>
                 <option value="price" onClick={() => setSortSignal("price")}>
                     Price From Lowest
