@@ -22,7 +22,7 @@ export default function AddCategory() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
         >
-            {!categories?.isLoading ? (
+            {categories?.isLoading ? (
                 <LoadingHorizontal />
             ) : (
                 <div className="h-0.5" />
