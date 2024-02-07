@@ -49,11 +49,11 @@ export default function Products({ category }: { category: string }) {
                     className="flex justify-center"
                 />
             )}
-            
+            {products.data.data?.length ? (
                 <div className="mb-4 flex justify-end sm:pr-4 lg:pr-20">
                     <ProductSort setSortSignal={setSortSignal} />
                 </div>
-            
+            ) : null}
             <ul className="flex flex-wrap gap-3">
                 {products.isLoading ? (
                     <SkeletonProducts numberOfSkeletons={itemsPerPage} />
