@@ -1,7 +1,11 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export default function LoadingHorizontal() {
-    const width = window?.innerWidth;
+    const [width, setWidth] = useState(window?.innerWidth);
+    useEffect(() => {
+        typeof window !== "undefined" && setWidth(window?.innerWidth);
+    }, []);
     const duration = width > 768 ? 1.5 : 1.2;
     return (
         <div className={`flex h-0.5 w-full bg-slate-100`}>
