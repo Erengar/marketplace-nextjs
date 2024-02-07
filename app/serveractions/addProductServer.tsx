@@ -81,6 +81,12 @@ export async function addProductServer(prevState: any, formData: FormData) {
         return {
             error: data.error.flatten().fieldErrors,
         };
+    } else if (imageError) {
+        return {
+            error: {
+                image: imageError,
+            },
+        };
     }
 
     //If there is an image convert image to buffer and upload to Uploadcare

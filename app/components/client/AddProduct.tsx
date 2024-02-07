@@ -13,6 +13,7 @@ import ErrorMessage from "./ErrorMessage";
 import { fetcher } from "../../helperfunctions/fetcher";
 import ToggleButton from "./ToggleButton";
 import CategoriesFilter from "./CategoriesFilter";
+import LoadingHorizontal from "./LoadingHorizontal";
 
 export default function Addproduct() {
     //These states are used for pagination
@@ -56,6 +57,11 @@ export default function Addproduct() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
         >
+            {products?.isLoading ? (
+                <LoadingHorizontal />
+            ) : (
+                <div className="h-0.5" />
+            )}
             <AddProductForm mutate={products.mutate} />
             <div className="mt-4 flex justify-center">
                 <SearchBar

@@ -1,8 +1,7 @@
-"use client"; // Error components must be Client Components
+"use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ReplayIcon from "@mui/icons-material/Replay";
-import { TailSpin } from "react-loading-icons";
 
 export default function Error({
     error,
@@ -11,10 +10,6 @@ export default function Error({
     error: Error & { digest?: string };
     reset: () => void;
 }) {
-    const [retry, setRetry] = useState(false);
-    useEffect(() => {
-        console.error(error);
-    }, [error]);
 
     return (
         <div className="flex h-[80vh] w-screen justify-center md:w-[99vw]">
@@ -25,16 +20,11 @@ export default function Error({
                 <div className="flex justify-center md:text-xl">
                     <button
                         onClick={() => {
-                            setRetry(true);
                             reset();
                         }}
                         className="flex flex-col items-center"
                     >
-                        {retry ? (
-                            <TailSpin stroke="blue" />
-                        ) : (
-                            <ReplayIcon className="scale-150" />
-                        )}
+                        <ReplayIcon className="scale-150 hover:text-sky-700" />
                         Try again
                     </button>
                 </div>

@@ -9,6 +9,7 @@ import { fetcher } from "../../helperfunctions/fetcher";
 import { useState } from "react";
 import ToggleButton from "./ToggleButton";
 import AddCategoryForm from "./AddCategoryForm";
+import LoadingHorizontal from "./LoadingHorizontal";
 
 export default function AddCategory() {
     //This hook is used to fetch categories from the server
@@ -21,6 +22,11 @@ export default function AddCategory() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
         >
+            {categories?.isLoading ? (
+                <LoadingHorizontal />
+            ) : (
+                <div className="h-0.5" />
+            )}
             <AddCategoryForm categories={categories} />
             {categories.error && (
                 <ErrorMessage

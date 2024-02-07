@@ -29,7 +29,9 @@ export default function ConfirmationModal({
                 <h2 className="text-base font-bold text-sky-950 antialiased dark:text-sky-200">{`Are you sure you want to remove ${item.name} from ${table} table?`}</h2>
                 <div className="flex place-content-around">
                     <button
-                        onClick={deleteItem}
+                        onClick={() => {
+                            needConfirm(false)
+                            deleteItem()}}
                         className="h-10 w-20 rounded border border-solid border-black bg-slate-200 text-base font-bold text-red-700 antialiased hover:bg-slate-400"
                     >
                         Yes
