@@ -49,7 +49,7 @@ export default function Products({ category }: { category: string }) {
                     className="flex justify-center"
                 />
             )}
-            {products.data.data?.length ? (
+            {products.data?.data.length !== 0 ? (
                 <div className="mb-4 flex justify-end sm:pr-4 lg:pr-20">
                     <ProductSort setSortSignal={setSortSignal} />
                 </div>
