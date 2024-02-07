@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 export default function LoadingHorizontal() {
     const [width, setWidth] = useState(window.innerWidth);
     useEffect(() => {
-        setWidth(window?.innerWidth);
+        typeof window !== "undefined" && setWidth(window.innerWidth);
     }, []);
     const duration = width > 768 ? 1.5 : 1.2;
     return (
