@@ -12,8 +12,7 @@ import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 export default async function RootLayout({
     children,
 }: {
-    children: React.ReactNode;
-    session: any;
+    children: React.ReactNode
 }) {
     const session = await getServerSession(authOptions)
     return (
