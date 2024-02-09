@@ -13,6 +13,7 @@ export default function AddCategoryForm({categories}: {categories: any}) {
         <form
             action={formAction}
             className="flex flex-col items-center dark:text-gray-200"
+            method="post"
         >
             <h1 className="mb-2 font-semibold text-sky-950 antialiased dark:text-sky-100 md:text-lg">
                 Category

@@ -4,12 +4,18 @@ import { ThemeSwitcher } from "./components/client/ThemeSwitcher";
 import Footer from "./components/server/Footer";
 import "./globals.css";
 import { CurrencyProvider } from "./components/context/CurrencyProvider";
+import SessionsProvider from "./components/context/SessionsProvider";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
-export default function RootLayout({
+
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode;
+    session: any;
 }) {
+    const session = await getServerSession(authOptions)
     return (
         <html lang="en">
             <head></head>
@@ -21,9 +27,11 @@ export default function RootLayout({
                     enableSystem
                 >
                     <ThemeSwitcher />
+                    <SessionsProvider session={session}>
                     <CurrencyProvider>
                         <main>{children}</main>
                     </CurrencyProvider>
+                    </SessionsProvider>
                 </ThemeProvider>
             </body>
         </html>
