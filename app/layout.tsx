@@ -6,7 +6,7 @@ import "./globals.css";
 import { CurrencyProvider } from "./components/context/CurrencyProvider";
 import SessionsProvider from "./components/context/SessionsProvider";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 
 
 export default async function RootLayout({
