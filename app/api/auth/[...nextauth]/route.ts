@@ -8,7 +8,7 @@ import { Adapter } from "next-auth/adapters";
 
 const db = drizzle(sql);
 
-export const authOptions: NextAuthOptions ={
+const authOptions: NextAuthOptions ={
     adapter: DrizzleAdapter(db) as Adapter,
     providers: [
         EmailProvider({
