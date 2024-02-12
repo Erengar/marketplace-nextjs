@@ -1,4 +1,4 @@
-export default async function Page(searchParams: URLSearchParams) {
+export default async function Page() {
     return (
         <div className="flex place-content-center pt-12">
             <div className="flex h-44 w-96 place-content-center rounded-full bg-sky-400">
