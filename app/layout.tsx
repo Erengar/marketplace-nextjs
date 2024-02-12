@@ -1,37 +1,38 @@
 import Navbar from "./components/server/Navbar";
 import { ThemeProvider } from "./components/context/ThemeProvider";
-import { ThemeSwitcher } from "./components/client/ThemeSwitcher";
 import Footer from "./components/server/Footer";
 import "./globals.css";
 import { CurrencyProvider } from "./components/context/CurrencyProvider";
 import SessionsProvider from "./components/context/SessionsProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/authOptions";
-
+import DomainProvider from "./components/context/DomainProvider";
 
 export default async function RootLayout({
     children,
 }: {
-    children: React.ReactNode
+    children: React.ReactNode;
 }) {
-    const session = await getServerSession(authOptions)
+    const session = await getServerSession(authOptions);
+    const domain = process.env.NEXTAUTH_URL;
     return (
         <html lang="en">
             <head></head>
             <body className="overflow-scroll bg-slate-50 dark:bg-slate-900">
-                <Navbar />
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                >
-                    <ThemeSwitcher />
+                <DomainProvider domain={domain!}>
                     <SessionsProvider session={session}>
-                    <CurrencyProvider>
-                        <main>{children}</main>
-                    </CurrencyProvider>
+                        <ThemeProvider
+                            attribute="class"
+                            defaultTheme="system"
+                            enableSystem
+                        >
+                            <Navbar />
+                            <CurrencyProvider>
+                                <main>{children}</main>
+                            </CurrencyProvider>
+                        </ThemeProvider>
                     </SessionsProvider>
-                </ThemeProvider>
+                </DomainProvider>
             </body>
         </html>
     );

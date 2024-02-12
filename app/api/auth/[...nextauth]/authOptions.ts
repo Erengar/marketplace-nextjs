@@ -1,13 +1,13 @@
-import { DrizzleAdapter } from "@auth/drizzle-adapter"
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import EmailProvider from "next-auth/providers/email";
 import { sql } from "@vercel/postgres";
 import { drizzle } from "drizzle-orm/vercel-postgres";
-import type { NextAuthOptions } from 'next-auth'
+import type { NextAuthOptions } from "next-auth";
 import { Adapter } from "next-auth/adapters";
 
 const db = drizzle(sql);
 
-export const authOptions: NextAuthOptions ={
+export const authOptions: NextAuthOptions = {
     adapter: DrizzleAdapter(db) as Adapter,
     providers: [
         EmailProvider({
@@ -35,10 +35,9 @@ export const authOptions: NextAuthOptions ={
         error: "/auth/error",
         verifyRequest: "/auth/verify-request",
     },
-    //This is where you add your database connection
     callbacks: {
-        async signIn({ user, account, profile, email, credentials}) {
-            return true
-        }
+        async signIn({ user, account, profile, email, credentials }) {
+            return true;
+        },
     },
 };

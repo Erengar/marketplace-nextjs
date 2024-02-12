@@ -36,10 +36,12 @@ export default function Input({
                 name={name}
                 required={required}
                 placeholder={placeholder}
-                min={type === 'number' ? 0 : undefined}
-                className={`${inputClassName ? inputClassName : "h-6 w-60 rounded border-2 border-black md:h-8 md:w-3/12"} ${typeof error === "object" && error[name] && "border-rose-600"}`}
+                min={type === "number" ? 0 : undefined}
+                className={`${inputClassName ? inputClassName : "h-6 w-60 rounded border-black pl-2 md:h-8 md:w-3/12"} ${typeof error === "object" && error[name] && "border-rose-600"}`}
             />
-            {error && error[name] && <ErrorMessage message={error[name]} small={true}/>}
+            {error && error[name] && (
+                <ErrorMessage message={error[name]} small={true} />
+            )}
         </>
     );
 }

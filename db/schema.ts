@@ -9,9 +9,11 @@ import {
     text,
     timestamp,
     integer,
-    primaryKey
+    primaryKey,
+    jsonb
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
+import { CartItemType } from "@/app/schemas";
 
 export var categories = pgTable(
     "categories",
@@ -49,12 +51,14 @@ export var products = pgTable(
     },
 );
 
+
 export var users = pgTable("user", {
     id: text("id").notNull().primaryKey(),
     name: text("name"),
     email: text("email").notNull(),
     emailVerified: timestamp("emailVerified", { mode: "date" }),
     image: text("image"),
+    cart: jsonb("cart").$type<CartItemType[]>()
 });
 
 export var accounts = pgTable(
@@ -100,21 +104,6 @@ export var verificationTokens = pgTable(
         compoundkey: primaryKey({ columns: [vt.identifier, vt.token] }),
     }),
 );
-/*
-export var location = pgTable(
-  'location', 
-  {
-    id: serial('id').primaryKey(),
-    country: varchar('country', {length: 50}).notNull(),
-    city: varchar('city', {length: 50}).notNull(),
-    address: varchar('address', {length: 100}).notNull()
-  },
-  table => {
-    return {
-      idIdx: index('id_idx').on(table.id)
-    }
-  }
-)*/
 
 export type CategoryType = typeof categories.$inferSelect;
 export type ProductType = typeof products.$inferSelect;

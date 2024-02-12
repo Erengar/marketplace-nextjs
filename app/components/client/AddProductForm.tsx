@@ -15,7 +15,6 @@ export default function AddProductForm({ mutate }: { mutate?: any }) {
     return (
         <form
             action={formAction}
-            method="post"
             className="flex flex-col items-center dark:text-gray-200"
         >
             <h1 className="mb-2 font-semibold text-sky-950 antialiased dark:text-sky-100 md:text-lg">
@@ -41,7 +40,7 @@ export default function AddProductForm({ mutate }: { mutate?: any }) {
                 id="product-category"
                 name="category"
                 required
-                className="w-60 rounded border-2 border-black md:h-8 md:w-3/12"
+                className="w-60 rounded border-black bg-white pl-2 md:h-8 md:w-3/12"
             >
                 {categories.data?.data &&
                     categories.data.data.map((category: CategoryType) => (
@@ -59,7 +58,7 @@ export default function AddProductForm({ mutate }: { mutate?: any }) {
             <textarea
                 id="product-description"
                 name="description"
-                className={`w-60 rounded border-2 border-black md:w-3/12 ${typeof message?.error === "object" && message?.error?.description && "border-rose-600"}`}
+                className={`w-60 rounded border-black pl-2 md:w-3/12 ${typeof message?.error === "object" && message?.error?.description && "border-rose-600"}`}
             />
             {typeof message?.error === "object" &&
                 message?.error?.description && (

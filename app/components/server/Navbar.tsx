@@ -3,6 +3,8 @@
 import Link from "next/link";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ShoppingCartBuble from "../client/ShoppingCartBuble";
+import NavbarSignIn from "../client/NavbarSignIn";
+import { ThemeSwitcher } from "../client/ThemeSwitcher";
 
 const navbarItems = ["Home"];
 
@@ -41,9 +43,9 @@ export default async function Navbar() {
                         </h3>
                     </Link>
                 </li>
-                <li><Link href="/auth/signin">Sign in</Link></li>
-                <li><Link href="/auth/signout">Sign Out</Link></li>
+                <NavbarSignIn/>
                 <li><Link href="/access">Access Test</Link></li>
+                <ThemeSwitcher />
             </ul>
         </nav>
     );

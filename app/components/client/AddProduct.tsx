@@ -68,7 +68,7 @@ export default function Addproduct() {
                     query="products"
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
-                    className="rounded border-2 border-sky-950 text-sm font-semibold text-sky-950 focus:outline-none focus:ring dark:border-sky-200 dark:text-sky-200 md:text-base"
+                    className="rounded border-sky-950 text-sm font-semibold text-sky-950 focus:outline-none focus:ring dark:border-sky-200 dark:text-sky-200 md:text-base"
                 />
             </div>
             <div className="flex place-content-around">
