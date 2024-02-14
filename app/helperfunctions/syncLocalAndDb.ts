@@ -1,11 +1,10 @@
 "use client"
 
-import saveLocalToDb from "../helperfunctions/saveLocalToDb"
-import { useSession } from "next-auth/react"
+import { Session } from "next-auth"
+import saveLocalToDb from "./saveLocalToDb"
 
 
-export default async function useSyncLocalAndDb() {
-    const { data: session, status } = useSession()
+export default async function syncLocalAndDb(session: Session, status: "authenticated" | "unauthenticated" | "loading") {
     if (status === "unauthenticated") return false
     const shoppingCart = localStorage.getItem("shoppingCart")
     if (!shoppingCart) return false

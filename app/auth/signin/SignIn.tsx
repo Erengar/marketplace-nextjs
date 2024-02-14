@@ -29,7 +29,7 @@ export default function SignIn() {
         });
     };
     return (
-        <div className="flex w-96 flex-col items-center gap-4 rounded bg-slate-200 py-4">
+        <div className="flex w-96 flex-col items-center gap-4 rounded bg-slate-200 py-4 dark:bg-gray-700">
             {error && <ErrorMessage message={error}/>}
             <label htmlFor="email" className="font-bold">
                 Email:

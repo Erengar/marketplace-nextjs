@@ -35,9 +35,4 @@ export const authOptions: NextAuthOptions = {
         error: "/auth/error",
         verifyRequest: "/auth/verify-request",
     },
-    callbacks: {
-        async signIn({ user, account, profile, email, credentials }) {
-            return true;
-        },
-    },
 };
