@@ -5,6 +5,10 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import SetImage from "./SetImage";
 import React, { useState } from "react";
 import PriceTag from "./PriceTag";
+import ClearIcon from "@mui/icons-material/Clear";
+import { motion } from "framer-motion";
+import upgradeCartServer from "@/app/serveractions/updateCartServer";
+import { useSession } from "next-auth/react";
 
 type CartProductProps = {
     product: CartItemType;
@@ -17,6 +21,7 @@ export default function CartProduct({
 }: CartProductProps) {
     const [buttonAddPressed, setButtonAddPressed] = useState(false);
     const [buttonRemovePressed, setButtonRemovePressed] = useState(false);
+    const { data: session, status } = useSession();
 
     // This function adds the item to the shopping cart
     async function addItem() {
@@ -31,6 +36,9 @@ export default function CartProduct({
         );
         if (item) {
             item.orderedAmount += 1;
+        }
+        if (status === "authenticated") {
+            upgradeCartServer(cartItems, session?.user?.email!);
         }
         localStorage.setItem("shoppingCart", JSON.stringify(cartItems));
         window.dispatchEvent(new Event("storage"));
@@ -57,6 +65,9 @@ export default function CartProduct({
             if (item.orderedAmount === 0) {
                 const index = cartItems.indexOf(item);
                 cartItems.splice(index, 1);
+            }
+            if (status === "authenticated") {
+                upgradeCartServer(cartItems, session?.user?.email!);
             }
             localStorage.setItem("shoppingCart", JSON.stringify(cartItems));
             window.dispatchEvent(new Event("storage"));
@@ -99,6 +110,16 @@ export default function CartProduct({
                         <RemoveIcon />
                         <span className="sr-only">Deduct Product</span>
                     </button>
+                </div>
+                <div className="flex items-center">
+                    <motion.button
+                        whileHover={{ backgroundColor: "rgb(239 68 68)" }}
+                        transition={{ duration: 0.5 }}
+                        className="h-7 w-7 rounded-full font-semibold antialiased shadow-black dark:bg-red-600"
+                        onClick={() => setRemovingItem(product)}
+                    >
+                        <ClearIcon />
+                    </motion.button>
                 </div>
             </div>
         </li>

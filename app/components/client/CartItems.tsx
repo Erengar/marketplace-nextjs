@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import CartProduct from "./CartProduct";
 import { CartItemType } from "../../schemas";
 import RemoveItemModal from "./RemoveItemModal";

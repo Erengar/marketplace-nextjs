@@ -1,6 +1,8 @@
 "use client";
 
 import { CartItemType } from "../../schemas";
+import upgradeCartServer from "@/app/serveractions/updateCartServer";
+import { useSession } from "next-auth/react";
 
 type RemoveItemModalProps = {
     removingItem: CartItemType;
@@ -11,8 +13,9 @@ export default function RemoveItemModal({
     removingItem,
     setRemovingitem,
 }: RemoveItemModalProps) {
+    const { data: session, status } = useSession();
     // This function removes the item from the shopping cart
-    function removeItem() {
+    async function removeItem() {
         const shoppingCart = localStorage.getItem("shoppingCart");
         const cartItems = shoppingCart ? JSON.parse(shoppingCart) : [];
         const item = cartItems.find(
@@ -21,6 +24,9 @@ export default function RemoveItemModal({
         if (item) {
             const index = cartItems.indexOf(item);
             cartItems.splice(index, 1);
+        }
+        if (status === "authenticated") {
+            upgradeCartServer(cartItems, session?.user?.email!);
         }
         localStorage.setItem("shoppingCart", JSON.stringify(cartItems));
         window.dispatchEvent(new Event("storage"));

@@ -3,6 +3,8 @@ import { ProductType } from "@/db/schema";
 import { CartItemType } from "../../schemas";
 import { motion } from "framer-motion";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { useSession } from "next-auth/react";
+import updateCartServer from "@/app/serveractions/updateCartServer";
 
 type AddToCartProps = {
     product: ProductType;
@@ -15,8 +17,9 @@ export default function AddToCart({
     className,
     icon = false,
 }: AddToCartProps) {
+    const { data: session, status } = useSession();
     // Add item to shopping cart
-    const addItem = () => {
+    const addItem = async () => {
         let shoppingCart: any = localStorage.getItem("shoppingCart");
         if (shoppingCart) {
             shoppingCart = JSON.parse(shoppingCart);
@@ -50,17 +53,22 @@ export default function AddToCart({
             ];
             localStorage.setItem("shoppingCart", JSON.stringify(newProduct));
         }
+        if (status === "authenticated") {
+            updateCartServer(shoppingCart, session?.user?.email!);
+        }
         window.dispatchEvent(new Event("storage"));
     };
 
     if (icon) {
         return (
-            <div className={`flex flex-col self-end ${className} text-sky-600 dark:text-cyan-300`}>
+            <div
+                className={`flex flex-col self-end ${className} text-sky-600 dark:text-cyan-300`}
+            >
                 <motion.button
                     onClick={addItem}
                     whileHover={{ rotate: [0, 10, -10, 10, -10, 0] }}
                 >
-                    <AddShoppingCartIcon/>
+                    <AddShoppingCartIcon />
                     <span className="sr-only">Add to Cart</span>
                 </motion.button>
                 <h4 className="antialised text-xs font-normal">
