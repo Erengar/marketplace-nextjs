@@ -42,7 +42,7 @@ export default function Products({ category }: { category: string }) {
         router.push(url + `?sort=${sortSignal}&currentpage=${currentPage}`);
     }, [currentPage, sortSignal]);
     return (
-        <>
+        <div>
             {products.error && (
                 <ErrorMessage
                     message={products.error.message}
@@ -88,6 +88,6 @@ export default function Products({ category }: { category: string }) {
                     />
                 ) : null}
             </div>
-        </>
+        </div>
     );
 }
