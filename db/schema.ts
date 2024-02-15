@@ -1,6 +1,5 @@
 import {
     pgTable,
-    serial,
     varchar,
     smallint,
     real,
@@ -10,7 +9,8 @@ import {
     timestamp,
     integer,
     primaryKey,
-    jsonb
+    jsonb,
+    pgEnum
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
 import { CartItemType } from "@/app/schemas";
@@ -29,7 +29,6 @@ export var categories = pgTable(
     },
 );
 
-//Remake this with uuid instead of serial
 export var products = pgTable(
     "products",
     {
@@ -51,15 +50,18 @@ export var products = pgTable(
     },
 );
 
+export var groupEnum = pgEnum("group", ["user", "admin", "superadmin"]);
 
 export var users = pgTable("user", {
     id: text("id").notNull().primaryKey(),
     name: text("name"),
     email: text("email").notNull(),
     emailVerified: timestamp("emailVerified", { mode: "date" }),
+    group: groupEnum("group").notNull().default("user"),
     image: text("image"),
     cart: jsonb("cart").$type<CartItemType[]>()
 });
+
 
 export var accounts = pgTable(
     "account",
