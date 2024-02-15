@@ -5,8 +5,10 @@ import SignIn from "@/app/components/client/SignIn";
 
 export default async function Page() {
     return (
-            <Modal className="rounded">
-                Hi
-            </Modal>
+        <h1>
+            Hi
+
+        </h1>
+
     )
 }
