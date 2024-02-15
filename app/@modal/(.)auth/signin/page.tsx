@@ -6,7 +6,7 @@ import SignIn from "@/app/components/client/SignIn";
 export default async function Page() {
     return (
             <Modal className="rounded">
-                <SignIn />
+                Hi
             </Modal>
     )
 }
