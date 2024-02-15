@@ -2,13 +2,12 @@
 
 import { signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import ErrorMessage from "@/app/components/client/ErrorMessage";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
     const [error, setError] = useState<string | null>(null);
-    const router = useRouter();
     const search = useSearchParams()
     
     useEffect(() => {
@@ -22,7 +21,6 @@ export default function SignIn() {
         if (!email) return;
         signIn("email", {
             email: email,
-
         })
     };
     return (
