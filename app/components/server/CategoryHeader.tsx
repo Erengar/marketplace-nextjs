@@ -1,6 +1,6 @@
 "use server";
 
-import getCategories from "@/app/helperfunctions/getCategories";
+import getCategories from "@/helperfunctions/getCategories";
 import { CategoryType } from "@/db/schema";
 import { LoremIpsum } from "react-lorem-ipsum";
 import { capitalize } from "lodash";

@@ -1,7 +1,7 @@
 import Sidebar from "../components/server/Sidebar";
 import React from "react";
 import ExpandableSidebar from "../components/client/ExpandableSidebar";
-import getCategories from "../helperfunctions/getCategories";
+import getCategories from "../../helperfunctions/getCategories";
 
 export default async function Layout({
     params,

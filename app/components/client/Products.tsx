@@ -8,7 +8,7 @@ import ProductSort from "./ProductSort";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import ErrorMessage from "./ErrorMessage";
-import { fetcher } from "../../helperfunctions/fetcher";
+import { fetcher } from "../../../helperfunctions/fetcher";
 import ProductsNothingHere from "./ProductsNothingHere";
 
 export default function Products({ category }: { category: string }) {

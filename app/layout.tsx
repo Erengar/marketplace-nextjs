@@ -10,8 +10,10 @@ import DomainProvider from "./components/context/DomainProvider";
 
 export default async function RootLayout({
     children,
+    modal,
 }: {
     children: React.ReactNode;
+    modal: React.ReactNode;
 }) {
     const session = await getServerSession(authOptions);
     const domain = process.env.NEXTAUTH_URL;
@@ -28,7 +30,10 @@ export default async function RootLayout({
                         >
                             <Navbar />
                             <CurrencyProvider>
-                                <main>{children}</main>
+                                <main>
+                                    {children}
+                                    {modal}
+                                </main>
                             </CurrencyProvider>
                         </ThemeProvider>
                     </SessionsProvider>

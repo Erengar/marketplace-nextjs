@@ -1,4 +1,4 @@
-import FetchError from "../utils/FetchError";
+import FetchError from "../app/utils/FetchError";
 
 export const fetcher = async (url: string) => {
     let tag: string;

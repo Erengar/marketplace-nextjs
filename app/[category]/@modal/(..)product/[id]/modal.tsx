@@ -4,7 +4,7 @@ import { type ElementRef, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import CloseIcon from "@mui/icons-material/Close";
 
-export function Modal({ children }: { children: React.ReactNode }) {
+export function Modal({ children, className }: { children: React.ReactNode, className?: string }) {
     const router = useRouter();
     const dialogRef = useRef<ElementRef<"dialog">>(null);
 
@@ -24,7 +24,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
                 ref={dialogRef}
                 onClose={onDismiss}
                 tabIndex={-1}
-                className="rounded md:w-3/4"
+                className={`${className} h-fit w-fit`}
             >
                 <button onClick={onDismiss} className="absolute">
                     <CloseIcon />

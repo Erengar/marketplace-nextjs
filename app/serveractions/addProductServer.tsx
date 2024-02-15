@@ -6,7 +6,7 @@ import {
     UploadcareSimpleAuthSchema,
     deleteFile,
 } from "@uploadcare/rest-client";
-import revalidateProducts from "../helperfunctions/revalidateProducts";
+import revalidateProducts from "../../helperfunctions/revalidateProducts";
 import { capitalize } from "lodash";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { products } from "@/db/schema";

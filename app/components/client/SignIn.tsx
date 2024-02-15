@@ -22,11 +22,8 @@ export default function SignIn() {
         if (!email) return;
         signIn("email", {
             email: email,
-            redirect: false,
 
-        }).then((data) => {
-            data?.error ? router.replace(`?error=${data.error}`) : router.push(`${data?.url!}}`);
-        });
+        })
     };
     return (
         <div className="flex w-96 flex-col items-center gap-4 rounded bg-slate-200 py-4 dark:bg-gray-700">

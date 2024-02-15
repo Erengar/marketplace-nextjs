@@ -1,7 +1,7 @@
 "use server";
 import { sql } from "@vercel/postgres";
 import { categories, type CategoryType } from "../../db/schema";
-import revalidateCategories from "../helperfunctions/revalidateCategories";
+import revalidateCategories from "../../helperfunctions/revalidateCategories";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { eq } from "drizzle-orm";
 

@@ -1,6 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
-import useSyncLocalAndDb from "../helperfunctions/syncLocalAndDb";
+import useSyncLocalAndDb from "../../helperfunctions/syncLocalAndDb";
 
 export default function ClientTest() {
     const { data: session, status } = useSession();

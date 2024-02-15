@@ -4,7 +4,7 @@ import SetImage from "@/app/components/client/SetImage";
 import LoremIpsum from "react-lorem-ipsum";
 import AddToCart from "@/app/components/client/AddToCart";
 import PriceTag from "../client/PriceTag";
-import getProducts from "@/app/helperfunctions/getProducts";
+import getProducts from "@/helperfunctions/getProducts";
 import { ProductType } from "@/db/schema";
 
 export default async function ProductView({

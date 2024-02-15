@@ -5,7 +5,7 @@ import { useFormState } from "react-dom";
 import ErrorMessage from "./ErrorMessage";
 import SubmitButton from "./SubmitButton";
 import useSWR from "swr";
-import { fetcher } from "../../helperfunctions/fetcher";
+import { fetcher } from "../../../helperfunctions/fetcher";
 import SuccessMessage from "./SuccessMessage";
 import Input from "./Input";
 

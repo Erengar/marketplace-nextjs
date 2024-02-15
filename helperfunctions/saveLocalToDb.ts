@@ -2,7 +2,7 @@
 import { users } from "@/db/schema";
 import { sql } from "@vercel/postgres";
 import { drizzle } from "drizzle-orm/vercel-postgres";
-import { CartItemType } from "../schemas";
+import { CartItemType } from "../app/schemas";
 import { eq } from "drizzle-orm";
 import _ from "lodash";
 

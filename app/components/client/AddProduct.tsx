@@ -10,7 +10,7 @@ import AddProductForm from "./AddProductForm";
 import SearchBar from "./SearchBar";
 import useSWR from "swr";
 import ErrorMessage from "./ErrorMessage";
-import { fetcher } from "../../helperfunctions/fetcher";
+import { fetcher } from "../../../helperfunctions/fetcher";
 import ToggleButton from "./ToggleButton";
 import CategoriesFilter from "./CategoriesFilter";
 import LoadingHorizontal from "./LoadingHorizontal";

@@ -1,7 +1,7 @@
 "use server";
 import Category from "../../components/client/Category";
 import { type CategoryType } from "../../../db/schema";
-import getCategories from "../../helperfunctions/getCategories";
+import getCategories from "../../../helperfunctions/getCategories";
 
 export default async function Categories() {
     const categories: CategoryType[] = await getCategories();

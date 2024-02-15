@@ -1,7 +1,7 @@
-import { type ProductType } from "../../db/schema";
+import { type ProductType } from "../db/schema";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { sql } from "@vercel/postgres";
-import { products } from "../../db/schema";
+import { products } from "../db/schema";
 import { eq } from "drizzle-orm";
 
 type getProductsType = {

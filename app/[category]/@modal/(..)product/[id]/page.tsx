@@ -11,7 +11,7 @@ export default async function PhotoModal({
     params: { id: string };
 }) {
     return (
-        <Modal>
+        <Modal className="md:w-3/4 rounded">
             <Suspense fallback={<ProductViewSkeleton modal={true} />}>
                 <ProductView modal={true} params={params} />
             </Suspense>

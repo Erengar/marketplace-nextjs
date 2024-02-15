@@ -5,7 +5,7 @@ import ErrorMessage from "./ErrorMessage";
 import AdminCategorySkeleton from "../skeletons/SkeletonAdminCategory";
 import { motion } from "framer-motion";
 import useSWR from "swr";
-import { fetcher } from "../../helperfunctions/fetcher";
+import { fetcher } from "../../../helperfunctions/fetcher";
 import { useState } from "react";
 import ToggleButton from "./ToggleButton";
 import AddCategoryForm from "./AddCategoryForm";

@@ -5,7 +5,7 @@ import {
 } from "@uploadcare/rest-client";
 import { sql } from "@vercel/postgres";
 import { products, type ProductType } from "../../db/schema";
-import revalidateProducts from "../helperfunctions/revalidateProducts";
+import revalidateProducts from "../../helperfunctions/revalidateProducts";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { eq } from "drizzle-orm";
 

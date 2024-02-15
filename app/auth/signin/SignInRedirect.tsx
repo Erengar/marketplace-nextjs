@@ -1,6 +1,6 @@
 "use client";
-import syncLocalAndDb from "@/app/helperfunctions/syncLocalAndDb";
-import SignIn from "./SignIn";
+import syncLocalAndDb from "@/helperfunctions/syncLocalAndDb";
+import SignIn from "../../components/client/SignIn";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
