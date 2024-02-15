@@ -1,5 +1,6 @@
 import { sql } from "@vercel/postgres";
 import { drizzle } from "drizzle-orm/vercel-postgres";
+import { eq } from "drizzle-orm";
 
 import "dotenv/config";
 import { users } from "./schema";
@@ -11,9 +12,17 @@ async function createSuperUser() {
     const db = drizzle(sql);
     const prompt = require("prompt-sync")();
     const email = prompt("Email: ");
+    if (!email) {
+        throw new Error("Email is required");
+    }
+    const deleting = prompt("Do you want to delete users with the same email? (y/n): ");
+    if (deleting === "y") {
+        await db.delete(users).where(eq(users.email, email)).execute();
+        console.log("✅ Users with the same email deleted");
+    }
     const crypto = require('crypto');
     const uuid = crypto.randomUUID()
-    db.insert(users).values({id: uuid,email:email, group: "superadmin"})
+    await db.insert(users).values({id: uuid,email:email, group: "superadmin"}).execute()
     console.log("✅ Super user created");
 
     process.exit(0)
