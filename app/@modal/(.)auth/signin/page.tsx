@@ -4,6 +4,7 @@ import SignIn from "@/app/components/client/SignIn";
 
 
 export default async function Page() {
+    console.log("signin page")
     return (
             <Modal className="rounded">
                 <SignIn />
