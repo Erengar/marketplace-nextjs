@@ -11,17 +11,16 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default async function RootLayout({
     children,
-    modalsign,
+    modal,
 }: {
     children: React.ReactNode;
-    modalsign: React.ReactNode;
+    modal: React.ReactNode;
 }) {
     const session = await getServerSession(authOptions);
     const domain = process.env.NEXTAUTH_URL;
     return (
         <html lang="en">
             <head></head>
-            <SpeedInsights />
             <body className="overflow-scroll bg-slate-50 dark:bg-slate-900">
                 <DomainProvider domain={domain!}>
                     <SessionsProvider session={session}>
@@ -34,12 +33,13 @@ export default async function RootLayout({
                             <CurrencyProvider>
                                 <main>
                                     {children}
-                                    {modalsign}
+                                    {modal}
                                 </main>
                             </CurrencyProvider>
                         </ThemeProvider>
                     </SessionsProvider>
                 </DomainProvider>
+                <SpeedInsights />
             </body>
         </html>
     );
