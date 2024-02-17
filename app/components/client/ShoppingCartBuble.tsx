@@ -10,7 +10,13 @@ export default function ShoppingCartBuble() {
     useEffect(() => {
         const handleStorageChange = () => {
             const shoppingCart = localStorage.getItem("shoppingCart");
-            setItems(shoppingCart ? JSON.parse(shoppingCart) : []);
+            if (shoppingCart && shoppingCart !== "undefined") {
+                console.log("INSIDE")
+                console.log(shoppingCart)
+                setItems(JSON.parse(shoppingCart));
+            } else {
+                setItems([]);
+            }
         };
         handleStorageChange();
         window.addEventListener("storage", handleStorageChange);

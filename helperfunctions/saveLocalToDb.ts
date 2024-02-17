@@ -15,7 +15,7 @@ export default async function saveLocalToDb(local: CartItemType[], email: string
     const db = drizzle(sql)
     const dbCart = await db.select({cart : users.cart}).from(users).where(eq(users.email, email)).then((res) => res[0].cart)
     if (_.isEqual(local, dbCart)) return dbCart
-    if (dbCart === null) {
+    if (!dbCart) {
         await db.update(users).set({cart: local}).where(eq(users.email, email))
         return
     }

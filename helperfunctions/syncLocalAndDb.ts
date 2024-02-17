@@ -6,7 +6,7 @@ import saveLocalToDb from "./saveLocalToDb"
 
 export default async function syncLocalAndDb(session: Session, status: "authenticated" | "unauthenticated" | "loading") {
     if (status === "unauthenticated") return false
-    const shoppingCart = localStorage.getItem("shoppingCart")
+    const shoppingCart = localStorage.getItem("shoppingCart") || "[]"
     if (!shoppingCart) return false
     const local = JSON.parse(shoppingCart)
     const cart = await saveLocalToDb(local, session?.user?.email!)

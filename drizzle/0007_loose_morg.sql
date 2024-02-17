@@ -1,0 +1,1 @@
+ALTER TABLE "user" ADD COLUMN "group" "group" DEFAULT 'user' NOT NULL;

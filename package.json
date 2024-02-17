@@ -9,7 +9,8 @@
     "lint": "next lint",
     "test": "jest",
     "migration:generate": "drizzle-kit generate:pg --schema=./db/schema.ts",
-    "migration:push": "node -r esbuild-register db/migrations.ts"
+    "migration:push": "node -r esbuild-register db/migrations.ts",
+    "superuser:create": "node -r esbuild-register db/createSuperUser.ts"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^0.6.3",
@@ -44,6 +45,7 @@
     "nodemailer": "^6.9.9",
     "pg": "^8.11.3",
     "postgres": "^3.4.3",
+    "prompt-sync": "^4.2.0",
     "react": "^18",
     "react-dom": "^18",
     "react-loading-icons": "^1.1.0",
