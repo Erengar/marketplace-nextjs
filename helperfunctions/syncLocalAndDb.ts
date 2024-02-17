@@ -4,6 +4,7 @@ import saveLocalToDb from "./saveLocalToDb"
 
 export default function syncLocalAndDb(session: Session, status: "authenticated" | "unauthenticated" | "loading") {
     if (status === "unauthenticated") return false
+    if (window === undefined) return false
     const shoppingCart = localStorage.getItem("shoppingCart") || "[]"
     if (!shoppingCart) return false
     const local = JSON.parse(shoppingCart)
