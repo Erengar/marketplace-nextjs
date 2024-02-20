@@ -4,6 +4,7 @@ import CartProduct from "./CartProduct";
 import { CartItemType } from "../../schemas";
 import RemoveItemModal from "./RemoveItemModal";
 import { motion } from "framer-motion";
+import Cart from "@/helperfunctions/cart/cart";
 
 type CartItemsProps = {
     items: CartItemType[];
@@ -13,12 +14,12 @@ type CartItemsProps = {
 export default function CartItems({ items, setItems }: CartItemsProps) {
     // This is the state of the item being removed
     const [removingItem, setRemovingItem] = useState<CartItemType | null>(null);
-
+    
     useEffect(() => {
+        const cart = new Cart();
         // This function is called whenever the shopping cart is updated
         const handleStorageChange = () => {
-            const shoppingCart = localStorage.getItem("shoppingCart");
-            setItems(shoppingCart ? JSON.parse(shoppingCart) : []);
+            setItems(cart.getProducts());
         };
         handleStorageChange();
         window.addEventListener("storage", handleStorageChange);

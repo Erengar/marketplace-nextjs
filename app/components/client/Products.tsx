@@ -41,6 +41,7 @@ export default function Products({ category }: { category: string }) {
         //This is ensuring that user can use forward and backwards navigation in browser
         router.push(url + `?sort=${sortSignal}&currentpage=${currentPage}`);
     }, [currentPage, sortSignal]);
+    
     return (
         <div>
             {products.error && (

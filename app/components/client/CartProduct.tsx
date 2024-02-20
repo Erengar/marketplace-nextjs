@@ -9,6 +9,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { motion } from "framer-motion";
 import upgradeCartServer from "@/app/serveractions/updateCartServer";
 import { useSession } from "next-auth/react";
+import Cart from "@/helperfunctions/cart/cart";
 
 type CartProductProps = {
     product: CartItemType;
@@ -29,18 +30,12 @@ export default function CartProduct({
         setButtonAddPressed(true);
         setTimeout(() => setButtonAddPressed(false), 100);
 
-        const shoppingCart = localStorage.getItem("shoppingCart");
-        const cartItems = shoppingCart ? JSON.parse(shoppingCart) : [];
-        const item = cartItems.find(
-            (item: CartItemType) => item.product.id === product.product.id,
-        );
-        if (item) {
-            item.orderedAmount += 1;
-        }
+        const cart = new Cart();
+        cart.addProduct(product);
+
         if (status === "authenticated") {
-            upgradeCartServer(cartItems, session?.user?.email!);
+            upgradeCartServer(cart.getProducts(), session?.user?.email!);
         }
-        localStorage.setItem("shoppingCart", JSON.stringify(cartItems));
         window.dispatchEvent(new Event("storage"));
     }
 
@@ -50,26 +45,19 @@ export default function CartProduct({
         setButtonRemovePressed(true);
         setTimeout(() => setButtonRemovePressed(false), 100);
 
-        const shoppingCart = localStorage.getItem("shoppingCart");
-        const cartItems = shoppingCart ? JSON.parse(shoppingCart) : [];
-        const item = cartItems.find(
+        const cart = new Cart();
+        
+        const item = cart.getProducts().find(
             (item: CartItemType) => item.product.id === product.product.id,
         );
         // If the item is the last one in the cart, the modal is opened
         if (item.orderedAmount === 1) {
             setRemovingItem(item);
         } else {
-            if (item) {
-                item.orderedAmount -= 1;
-            }
-            if (item.orderedAmount === 0) {
-                const index = cartItems.indexOf(item);
-                cartItems.splice(index, 1);
-            }
             if (status === "authenticated") {
-                upgradeCartServer(cartItems, session?.user?.email!);
+                upgradeCartServer(cart.getProducts(), session?.user?.email!);
             }
-            localStorage.setItem("shoppingCart", JSON.stringify(cartItems));
+            cart.removeProduct(product);
             window.dispatchEvent(new Event("storage"));
         }
     }

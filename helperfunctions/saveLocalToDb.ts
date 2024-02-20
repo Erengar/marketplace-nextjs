@@ -14,11 +14,14 @@ import _ from "lodash";
 export default async function saveLocalToDb(local: CartItemType[], email: string) {
     const db = drizzle(sql)
     const dbCart = await db.select({cart : users.cart}).from(users).where(eq(users.email, email)).then((res) => res[0].cart)
+    // If the local storage cart is the same as the db cart, return the db cart
     if (_.isEqual(local, dbCart)) return dbCart
+    // If the db cart is empty, update the db cart with the local storage cart
     if (!dbCart) {
         await db.update(users).set({cart: local}).where(eq(users.email, email))
         return
     }
+    // If the db cart is not empty, merge the local storage cart with the db cart
     for (const item of local) {
         const index = dbCart.findIndex((i) => i.product.id === item.product.id)
         if (index === -1) {
@@ -27,6 +30,7 @@ export default async function saveLocalToDb(local: CartItemType[], email: string
             dbCart[index].orderedAmount += item.orderedAmount
         }
     }
+    // Update the db cart with the merged cart
     await db.update(users).set({cart: dbCart}).where(eq(users.email, email))
     return dbCart
 }

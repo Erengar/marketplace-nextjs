@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useSession } from "next-auth/react";
 import updateCartServer from "@/app/serveractions/updateCartServer";
+import Cart from "@/helperfunctions/cart/cart";
 
 type AddToCartProps = {
     product: ProductType;
@@ -20,41 +21,10 @@ export default function AddToCart({
     const { data: session, status } = useSession();
     // Add item to shopping cart
     const addItem = async () => {
-        let shoppingCart: any = localStorage.getItem("shoppingCart");
-        if (shoppingCart) {
-            shoppingCart = JSON.parse(shoppingCart);
-            if (
-                shoppingCart.some(
-                    (item: CartItemType) => item.product.id === product.id,
-                )
-            ) {
-                let index = shoppingCart.findIndex(
-                    (item: CartItemType) => item.product.id === product.id,
-                );
-                shoppingCart[index].orderedAmount += 1;
-                localStorage.setItem(
-                    "shoppingCart",
-                    JSON.stringify(shoppingCart),
-                );
-            } else {
-                let newProduct: CartItemType = {
-                    product: product,
-                    orderedAmount: 1,
-                };
-                shoppingCart.push(newProduct);
-                localStorage.setItem(
-                    "shoppingCart",
-                    JSON.stringify(shoppingCart),
-                );
-            }
-        } else {
-            let newProduct: CartItemType[] = [
-                { product: product, orderedAmount: 1 },
-            ];
-            localStorage.setItem("shoppingCart", JSON.stringify(newProduct));
-        }
+        const cart = new Cart();
+        cart.addProduct(product);
         if (status === "authenticated") {
-            updateCartServer(shoppingCart, session?.user?.email!);
+            updateCartServer(cart.getProducts(), session?.user?.email!);
         }
         window.dispatchEvent(new Event("storage"));
     };
