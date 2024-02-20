@@ -4,6 +4,7 @@ import { CartItemType } from "../../schemas";
 import upgradeCartServer from "@/app/serveractions/updateCartServer";
 import { useSession } from "next-auth/react";
 import Cart from "@/helperfunctions/cart/cart";
+import { Button } from "@mui/material";
 
 type RemoveItemModalProps = {
     removingItem: CartItemType;
@@ -38,22 +39,12 @@ export default function RemoveItemModal({
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="z-20 flex min-h-min min-w-[200px] max-w-6xl flex-col gap-y-6 rounded border border-solid border-black bg-white p-2 dark:bg-slate-900"
+                className="z-20 flex h-36 min-w-[200px] max-w-6xl flex-col gap-y-6 rounded bg-slate-100 p-2 dark:bg-slate-900 justify-around"
             >
-                <h2 className="text-base font-bold text-sky-950 antialiased dark:text-sky-200">{`Are you sure you want to remove ${removingItem.product.name} from shopping cart?`}</h2>
+                <h2 className="text-base font-bold text-sky-950 antialiased dark:text-sky-200 text-xs md:text-base">{`Are you sure you want to remove ${removingItem.product.name} from shopping cart?`}</h2>
                 <div className="flex place-content-around">
-                    <button
-                        onClick={removeItem}
-                        className="h-10 w-20 rounded border border-solid border-black bg-slate-200 text-base font-bold text-red-700 antialiased hover:bg-slate-400"
-                    >
-                        Yes
-                    </button>
-                    <button
-                        onClick={removeModal}
-                        className="h-10 w-20 rounded border border-solid border-black bg-slate-200 text-base font-bold text-sky-950 antialiased hover:bg-slate-400"
-                    >
-                        No
-                    </button>
+                    <Button variant="contained" color="error" className="bg-red-500 antialiased font-semibold" onClick={removeItem}>Yes</Button>
+                    <Button variant="contained" className="bg-sky-500 antialised font-semibold" onClick={removeModal}>No</Button>
                 </div>
             </div>
         </div>

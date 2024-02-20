@@ -1,38 +1,30 @@
 "use client";
 
+import { MenuItem, Select } from "@mui/material";
+import { SelectChangeEvent } from "@mui/material/Select";
+
 export default function ProductSort({
+    sortSignal,
     setSortSignal,
 }: {
+    sortSignal: string;
     setSortSignal: React.Dispatch<React.SetStateAction<string>>;
 }) {
+    function handleSort(event: SelectChangeEvent<string>) {
+        setSortSignal(event.target.value);
+    }
     return (
-        <>
-            <label htmlFor="categories-filter" className="sr-only">
-                Filter by Category
-            </label>
-            <select
-                id="categories-filter"
-                className="h-6 rounded border border-sky-950 dark:border-sky-200 pl-2 text-xs font-semibold text-sky-950 dark:text-sky-200 hover:shadow md:h-8 md:text-base"
-            >
-                <option value="name" onClick={() => setSortSignal("name")}>
-                    Name A-Z
-                </option>
-                <option
-                    value="name-desc"
-                    onClick={() => setSortSignal("-name")}
-                >
-                    Name Z-A
-                </option>
-                <option value="price" onClick={() => setSortSignal("price")}>
-                    Price From Lowest
-                </option>
-                <option
-                    value="price-desc"
-                    onClick={() => setSortSignal("-price")}
-                >
-                    Price From Highest
-                </option>
-            </select>
-        </>
+        <Select
+            labelId="demo-simple-select-label"
+            label="Sort by"
+            value={sortSignal}
+            className="h-12"
+            onChange={handleSort}
+        >
+            <MenuItem value="name">Name A-Z</MenuItem>
+            <MenuItem value="-name">Name Z-A</MenuItem>
+            <MenuItem value="price">Price From Lowest</MenuItem>
+            <MenuItem value="-price">Price From Highest</MenuItem>
+        </Select>
     );
 }

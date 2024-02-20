@@ -57,7 +57,7 @@ export default function CartProduct({
             if (status === "authenticated") {
                 upgradeCartServer(cart.getProducts(), session?.user?.email!);
             }
-            cart.removeProduct(product);
+            cart.deductProduct(product);
             window.dispatchEvent(new Event("storage"));
         }
     }

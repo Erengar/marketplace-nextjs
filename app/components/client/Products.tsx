@@ -52,7 +52,7 @@ export default function Products({ category }: { category: string }) {
             )}
             {products.data?.data.length !== 0 ? (
                 <div className="mb-4 flex justify-end sm:pr-4 lg:pr-20">
-                    <ProductSort setSortSignal={setSortSignal} />
+                    <ProductSort sortSignal={sortSignal} setSortSignal={setSortSignal} />
                 </div>
             ) : null}
             <ul className="flex flex-wrap gap-3">

@@ -4,44 +4,43 @@ import { signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import ErrorMessage from "@/app/components/client/ErrorMessage";
+import { Button, TextField, Typography } from "@mui/material";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
     const [error, setError] = useState<string | null>(null);
-    const search = useSearchParams()
-    
+    const search = useSearchParams();
+
     useEffect(() => {
-        if (!search.get("error")) return
+        if (!search.get("error")) return;
         if (search.get("error") === "EmailSignin") {
-            setError("Something went wrong")
+            setError("Something went wrong");
         }
-    }, [search])
-    
+    }, [search]);
+
     const handleSignIn = () => {
         if (!email) return;
         signIn("email", {
             email: email,
-        })
+        });
     };
     return (
-        <div className="flex w-96 flex-col items-center gap-4 rounded bg-slate-200 py-4 dark:bg-gray-700">
-            {error && <ErrorMessage message={error}/>}
-            <label htmlFor="email" className="font-bold">
-                Email:
-            </label>
-            <input
-                id="email"
-                className={`h-10 w-80 rounded outline-none ${error && "border-red-500 border"}`}
+        <div className="flex w-96 flex-col items-center gap-4 rounded py-4 dark:bg-gray-700">
+            <Typography variant="h4" className="text-sky-900">Sign in</Typography>
+            <TextField
+                required
+                label="Email"
+                variant="outlined"
+                error={!!error}
+                helperText={error}
+                color="primary"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="w-80 text-white"
             />
-            <button
-                className="h-10 rounded-3xl bg-blue-500 px-6 font-semibold text-white hover:bg-blue-600"
-                onClick={handleSignIn}
-            >
-                Sign In
-            </button>
+            <Button variant="contained" className="bg-sky-500" onClick={handleSignIn}>Sign In</Button>
+
         </div>
     );
 }

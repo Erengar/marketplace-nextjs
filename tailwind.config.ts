@@ -9,7 +9,12 @@ const config: Config = {
   darkMode: ['class'],
   theme: {
     extend: {},
+    ripple: (theme: any) => ({
+      colors: theme('colors'),
+    })
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-ripple')()
+  ],
 }
 export default config

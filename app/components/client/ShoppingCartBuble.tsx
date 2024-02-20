@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CartItemType } from "../../schemas";
+import Cart from "@/helperfunctions/cart/cart";
 
 export default function ShoppingCartBuble() {
     const [items, setItems] = useState<CartItemType[]>([]);
@@ -9,12 +10,8 @@ export default function ShoppingCartBuble() {
     const [addingItem, setAddingItem] = useState<boolean>(true);
     useEffect(() => {
         const handleStorageChange = () => {
-            const shoppingCart = localStorage.getItem("shoppingCart");
-            if (shoppingCart && shoppingCart !== "undefined") {
-                setItems(JSON.parse(shoppingCart));
-            } else {
-                setItems([]);
-            }
+            const cart = new Cart();
+            setItems(cart.getProducts());
         };
         handleStorageChange();
         window.addEventListener("storage", handleStorageChange);
@@ -43,7 +40,7 @@ export default function ShoppingCartBuble() {
         <AnimatePresence>
             {total > 0 ? (
                 <motion.div
-                    className="text-xxs text-semibold absolute left-3 top-3 z-10 inline-flex h-3 w-3 items-center
+                    className="text-xxs text-semibold absolute left-12 top-2 z-10 inline-flex h-3 w-3 items-center
                         justify-center rounded-full bg-blue-500 text-white antialiased
                         dark:bg-blue-700 md:h-4 md:w-4"
                     key={total}

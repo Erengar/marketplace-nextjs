@@ -6,45 +6,27 @@ import ShoppingCartBuble from "../client/ShoppingCartBuble";
 import NavbarSignIn from "../client/NavbarSignIn";
 import { ThemeSwitcher } from "../client/ThemeSwitcher";
 import AdminLink from "./AdminLink";
-
-const navbarItems = ["Home"];
+import {Tabs, Tab } from "@mui/material";
 
 export default async function Navbar() {
     return (
         <nav
-            className="h-7 bg-sky-100 pt-1 dark:bg-blue-300
-        md:h-14
-        md:pt-3"
+            className="h-7 dark:bg-blue-300
+        md:h-14"
         >
-            <ul className="flex flex-row justify-center gap-10 text-xs font-bold text-sky-900 dark:text-sky-950 md:text-base">
-                {navbarItems.map(
-                    (item: string): JSX.Element =>
-                        item === "Home" ? (
-                            <li key={item}>
-                                <Link href="/">
-                                    <h3>{item}</h3>
-                                </Link>
-                            </li>
-                        ) : (
-                            <li key={item}>
-                                <Link href={`/${item.toLowerCase()}`}>
-                                    <h3>{item}</h3>
-                                </Link>
-                            </li>
-                        ),
-                )}
-                <AdminLink/>
-                <li key="cart">
-                    <Link href="/shoppingcart" className="relative">
-                        <ShoppingCartBuble />
-                        <h3>
-                            <ShoppingCartIcon />
-                        </h3>
-                    </Link>
-                </li>
-                <NavbarSignIn/>
-                <ThemeSwitcher />
-            </ul>
+            <Tabs centered value={1}>
+                <Link href="/">
+                    <Tab label="Home" className="font-semibold text-sky-900 opacity-100"/>
+                </Link>
+                <div>
+                    <AdminLink />
+                </div>
+                <NavbarSignIn />
+                <Link href="/shoppingcart" className="relative">
+                    <ShoppingCartBuble />
+                    <Tab icon={<ShoppingCartIcon />} className="font-semibold text-sky-900 opacity-100"/>
+                </Link>
+            </Tabs>
         </nav>
     );
 }
