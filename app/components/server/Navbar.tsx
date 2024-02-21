@@ -16,7 +16,7 @@ export default async function Navbar() {
         >
             <Tabs centered value={1}>
                 <Link href="/">
-                    <Tab label="Home" className="font-semibold text-sky-900 opacity-100"/>
+                    <Tab label="Home" sx={{fontWeight:600, opacity:1, color: "rgb(12 74 110)"}}/>
                 </Link>
                 <div>
                     <AdminLink />
@@ -24,7 +24,7 @@ export default async function Navbar() {
                 <NavbarSignIn />
                 <Link href="/shoppingcart" className="relative">
                     <ShoppingCartBuble />
-                    <Tab icon={<ShoppingCartIcon />} className="font-semibold text-sky-900 opacity-100"/>
+                    <Tab icon={<ShoppingCartIcon />} sx={{fontWeight:600, opacity:1, color: "rgb(12 74 110)"}}/>
                 </Link>
             </Tabs>
         </nav>

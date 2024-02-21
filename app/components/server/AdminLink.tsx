@@ -19,7 +19,7 @@ export default async function AdminLink() {
     if (group[0].group === "user") return null;
     return (
         <Link href="/admin/categories">
-            <Tab label="Admin" className="font-semibold text-sky-900 opacity-100"/>
+            <Tab label="Admin" sx={{fontWeight:600, opacity:1, color: "rgb(12 74 110)"}}/>
         </Link>
     );
 }

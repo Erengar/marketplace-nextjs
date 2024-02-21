@@ -8,11 +8,11 @@ export default function NavbarSignIn() {
 
     return status === "authenticated" ? (
         <Link href="/auth/signout">
-            <Tab label="Sign out" className="font-semibold text-sky-900 opacity-100"/>
+            <Tab label="Sign out" sx={{fontWeight:600, opacity:1, color: "rgb(12 74 110)"}}/>
         </Link>
     ) : (
         <Link href="/auth/signin">
-            <Tab label="Sign in" className="font-semibold text-sky-900 opacity-100"/>
+            <Tab label="Sign in" sx={{fontWeight:600, opacity:1, color: "rgb(12 74 110)"}}/>
         </Link>
     );
 }
