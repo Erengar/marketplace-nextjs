@@ -3,13 +3,14 @@ import { type ProductType } from "@/db/schema";
 import Product from "./Product";
 import { useEffect, useState } from "react";
 import SkeletonProducts from "../skeletons/SkeletonProducts";
-import Pagination from "./Pagination";
+//import Pagination from "./Pagination";
 import ProductSort from "./ProductSort";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import ErrorMessage from "./ErrorMessage";
 import { fetcher } from "../../../helperfunctions/fetcher";
 import ProductsNothingHere from "./ProductsNothingHere";
+import { Pagination } from "@mui/material";
 
 export default function Products({ category }: { category: string }) {
     const [currentPage, setCurrentPage] = useState(1);
@@ -41,7 +42,7 @@ export default function Products({ category }: { category: string }) {
         //This is ensuring that user can use forward and backwards navigation in browser
         router.push(url + `?sort=${sortSignal}&currentpage=${currentPage}`);
     }, [currentPage, sortSignal]);
-    
+
     return (
         <div>
             {products.error && (
@@ -52,7 +53,10 @@ export default function Products({ category }: { category: string }) {
             )}
             {products.data?.data.length !== 0 ? (
                 <div className="mb-4 flex justify-end sm:pr-4 lg:pr-20">
-                    <ProductSort sortSignal={sortSignal} setSortSignal={setSortSignal} />
+                    <ProductSort
+                        sortSignal={sortSignal}
+                        setSortSignal={setSortSignal}
+                    />
                 </div>
             ) : null}
             <ul className="flex flex-wrap gap-3">
@@ -81,14 +85,27 @@ export default function Products({ category }: { category: string }) {
             </ul>
             <div className="mb-6 mt-6 flex justify-center">
                 {products.data?.total ? (
-                    <Pagination
-                        currentPage={currentPage}
-                        setCurrentPage={setCurrentPage}
-                        totalObjects={products.data?.total}
-                        itemsPerPage={itemsPerPage}
-                    />
+                    <>
+                        <Pagination
+                            count={Math.ceil(
+                                products?.data?.total / itemsPerPage,
+                            )}
+                            page={currentPage}
+                            onChange={(e, newValue) => {
+                                setCurrentPage(newValue);
+                            }}
+                            color="primary"
+                        />
+                    </>
                 ) : null}
             </div>
         </div>
     );
 }
+/*
+                        <Pagination
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                            totalObjects={products.data?.total}
+                            itemsPerPage={itemsPerPage}
+                        />*/

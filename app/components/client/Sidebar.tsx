@@ -1,6 +1,6 @@
 "use client";
 import { CategoryType } from "@/db/schema";
-import { Box, Divider, Tab, Tabs } from "@mui/material";
+import { Box, Tab, Tabs } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -18,8 +18,14 @@ export default function Sidebar({
                 {categories.map((category, index) => (
                     <Link href={`${category.slug}`} scroll={false} key={index}>
                         <Tab
-                            className="h-12 w-32 font-semibold text-sky-500 opacity-100"
                             label={category.name}
+                            sx={{
+                                fontWeight: 600,
+                                opacity: 1,
+                                color: "rgb(2 132 199)",
+                                height: "48px",
+                                width: "128px",
+                            }}
                         />
                     </Link>
                 ))}

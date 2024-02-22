@@ -15,11 +15,10 @@ export default function ProductSort({
     }
     return (
         <Select
-            labelId="demo-simple-select-label"
             label="Sort by"
             value={sortSignal}
-            className="h-12"
             onChange={handleSort}
+            sx={{height:"48px"}}
         >
             <MenuItem value="name">Name A-Z</MenuItem>
             <MenuItem value="-name">Name Z-A</MenuItem>

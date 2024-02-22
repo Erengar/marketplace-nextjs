@@ -26,7 +26,7 @@ export default function SignIn() {
     };
     return (
         <div className="flex w-96 flex-col items-center gap-4 rounded py-4 dark:bg-gray-700">
-            <Typography variant="h4" className="text-sky-900">Sign in</Typography>
+            <Typography variant="h4" sx={{color:"rgb(12 74 110)"}}>Sign in</Typography>
             <TextField
                 required
                 label="Email"
